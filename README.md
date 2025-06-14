@@ -80,4 +80,4 @@ Created by [Alex Garcia](https://github.com/gamaware)
 - [LinkedIn Profile](https://www.linkedin.com/in/gamaware/)
 - [Personal Website](https://alexgarcia.info/)
 
-> **Disclaimer**: All views and opinions expressed in these repositories are my own and do not represent the opinions of my employer. I currently work as a DevOps Consultant at Amazon.
+> **Disclaimer**: All views and opinions expressed in these repositories are my own and do not represent the opinions of my employer.
