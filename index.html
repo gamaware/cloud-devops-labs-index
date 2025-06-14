@@ -13,6 +13,12 @@
             --light-color: #f8f9fa;
             --text-color: #333;
             --link-color: #0066cc;
+            
+            /* Dark mode variables */
+            --dark-mode-bg: #121212;
+            --dark-mode-text: #e0e0e0;
+            --dark-mode-card-bg: #1e1e1e;
+            --dark-mode-secondary: #ff9900;
         }
         
         * {
@@ -26,6 +32,93 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--light-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Dark mode styles */
+        body.dark-mode {
+            color: var(--dark-mode-text);
+            background-color: var(--dark-mode-bg);
+        }
+        
+        body.dark-mode .project-card,
+        body.dark-mode .project-tag {
+            background-color: var(--dark-mode-card-bg);
+            color: var(--dark-mode-text);
+        }
+        
+        body.dark-mode h2,
+        body.dark-mode .project-title {
+            color: var(--dark-mode-text);
+        }
+        
+        body.dark-mode .timeline-item .date {
+            color: #aaa;
+        }
+        
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.1);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: background-color 0.3s;
+        }
+        
+        body.dark-mode .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            color: var(--dark-mode-text);
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(0,0,0,0.2);
+        }
+        
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Language selector */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .language-btn {
+            background: rgba(0,0,0,0.1);
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        
+        body.dark-mode .language-btn {
+            background: rgba(255,255,255,0.1);
+            color: var(--dark-mode-text);
+        }
+        
+        .language-btn:hover,
+        .language-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
         }
         
         .container {
@@ -262,10 +355,64 @@
             .education-experience {
                 flex-direction: column;
             }
+            
+            .certifications-banner img {
+                height: 80px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                margin: 5px;
+            }
+            
+            .language-selector {
+                top: 70px;
+                left: 10px;
+            }
+            
+            .theme-toggle {
+                top: 70px;
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .certifications-banner img {
+                height: 60px;
+            }
+            
+            .social-links a {
+                font-size: 1.2rem;
+                margin: 0 5px;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="language-btn active" data-lang="en">EN</button>
+        <button class="language-btn" data-lang="es">ES</button>
+        <button class="language-btn" data-lang="pt">PT</button>
+    </div>
     <header>
         <div class="container">
             <h1>Alex Garcia</h1>
@@ -451,5 +598,115 @@
             <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 1rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
         </div>
     </footer>
+
+    <!-- JavaScript for theme toggle and language switching -->
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+        
+        // Language switching functionality
+        const languageBtns = document.querySelectorAll('.language-btn');
+        
+        // Translation data
+        const translations = {
+            en: {
+                aboutMe: "About Me",
+                experience: "Professional Experience",
+                certifications: "Certifications",
+                projects: "Cloud DevOps Labs",
+                viewResume: "View Resume",
+                exploreLabs: "Explore Labs",
+                disclaimer: "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.",
+                // Add more translations as needed
+            },
+            es: {
+                aboutMe: "Sobre Mí",
+                experience: "Experiencia Profesional",
+                certifications: "Certificaciones",
+                projects: "Laboratorios de DevOps en la Nube",
+                viewResume: "Ver Currículum",
+                exploreLabs: "Explorar Labs",
+                disclaimer: "Aviso: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador.",
+                // Add more translations as needed
+            },
+            pt: {
+                aboutMe: "Sobre Mim",
+                experience: "Experiência Profissional",
+                certifications: "Certificações",
+                projects: "Laboratórios de DevOps na Nuvem",
+                viewResume: "Ver Currículo",
+                exploreLabs: "Explorar Labs",
+                disclaimer: "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador.",
+                // Add more translations as needed
+            }
+        };
+        
+        // Set initial language from localStorage or default to English
+        const currentLang = localStorage.getItem('language') || 'en';
+        setActiveLanguage(currentLang);
+        
+        // Language button click handlers
+        languageBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                setActiveLanguage(lang);
+                translatePage(lang);
+                localStorage.setItem('language', lang);
+            });
+        });
+        
+        function setActiveLanguage(lang) {
+            languageBtns.forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            translatePage(lang);
+        }
+        
+        function translatePage(lang) {
+            // Translate section headings
+            document.querySelector('#about h2').textContent = translations[lang].aboutMe;
+            document.querySelector('#experience h2').textContent = translations[lang].experience;
+            document.querySelector('#certifications h2').textContent = translations[lang].certifications;
+            document.querySelector('#projects h2').textContent = translations[lang].projects;
+            
+            // Translate buttons
+            const buttons = document.querySelectorAll('.cta-button');
+            buttons[0].textContent = translations[lang].viewResume;
+            buttons[1].textContent = translations[lang].exploreLabs;
+            
+            // Translate disclaimer
+            document.querySelector('.disclaimer').textContent = translations[lang].disclaimer;
+            
+            // Add more elements to translate as needed
+        }
+        
+        // Initialize with saved language preference
+        translatePage(currentLang);
+    </script>
 </body>
 </html>
