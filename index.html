@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Garcia - Cloud & DevOps Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #ff9900;
+            --dark-color: #232f3e;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --link-color: #0066cc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e68a00;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .skill-tag {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .certifications-banner img {
+            height: 120px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .certifications-banner img:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .project-tag {
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .education-experience {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .education, .experience {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+            border-left: 2px solid var(--secondary-color);
+        }
+        
+        .timeline-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-item .date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .disclaimer {
+            max-width: 800px;
+            margin: 20px auto;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .education-experience {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Alex Garcia</h1>
+            <p class="tagline">DevOps Consultant | Cloud Architect | Professor</p>
+            <div class="social-links">
+                <a href="https://github.com/gamaware" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/gamaware/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:gamaware@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div>
+                <a href="https://alexgarcia.info/" class="cta-button">View Resume</a>
+                <a href="https://github.com/gamaware/cloud-devops-labs-index" class="cta-button">Explore Labs</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>With over 15 years of diverse IT experience, I am a DevOps Consultant at AWS, where I architect and implement enterprise-grade cloud solutions for clients across various industries.</p>
+                    
+                    <p>I specialize in infrastructure automation, CI/CD pipelines, containerization, and cloud-native architectures. My technical expertise includes AWS services, Terraform, Kubernetes, Docker, and modern DevOps methodologies that enable organizations to achieve operational excellence and accelerate their digital transformation.</p>
+                    
+                    <p>As a professor at <a href="https://iteso.mx/" target="_blank">ITESO</a> (Western Institute of Technology and Higher Education), I teach <strong>Scalable System Design</strong> and <strong>Cloud Architecture</strong> in the Department of Electronics, Systems and Computer Science, bridging academic concepts with real-world industry applications.</p>
+                    
+                    <div class="skills">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Serverless</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Git/GitHub</span>
+                        <span class="skill-tag">System Design</span>
+                        <span class="skill-tag">DevOps</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">CI/CD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2>Professional Experience</h2>
+            <div class="education-experience">
+                <div class="experience">
+                    <div class="timeline-item">
+                        <h3>DevOps Consultant at AWS</h3>
+                        <div class="date">Jan 2023 - Present</div>
+                        <p>Architecting and implementing enterprise-grade CI/CD pipelines and infrastructure automation solutions for Fortune 500 clients. Leveraging GitHub Actions, AWS CodePipeline, and CDK to orchestrate deployments of serverless architectures and containerized microservices. Implementing infrastructure as code with Terraform to provision secure, multi-account environments adhering to AWS Well-Architected principles.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>Senior Site Reliability Engineer at Wizeline</h3>
+                        <div class="date">Mar 2022 - Nov 2022</div>
+                        <p>Led mission-critical on-premises to AWS cloud migration initiatives utilizing AWS Database Migration Service, RDS, and infrastructure as code. Implemented automated deployment pipelines with comprehensive monitoring and alerting, resulting in 99.99% uptime and 40% reduction in operational overhead.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>Linux Customer Success Systems Engineer at Rackspace</h3>
+                        <div class="date">Aug 2021 - Mar 2022</div>
+                        <p>Optimized hybrid cloud infrastructure operations through automation and implementation of SRE practices. Designed and deployed monitoring solutions using Prometheus and Grafana, enabling proactive issue resolution and enhanced system reliability across customer environments.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>DevOps Engineer at Oracle</h3>
+                        <div class="date">Jan 2020 - Jul 2021</div>
+                        <p>Spearheaded Infrastructure as Code initiatives using Terraform and Ansible for Oracle's global demonstration environments. Designed and maintained CI/CD pipelines with Jenkins for automated deployment, testing, and monitoring of mission-critical Oracle products across distributed Linux environments.</p>
+                    </div>
+                </div>
+                
+                <div class="education">
+                    <div class="timeline-item">
+                        <h3>Professor at ITESO</h3>
+                        <div class="date">Current</div>
+                        <p>Teaching advanced courses in Scalable System Design and Cloud Architecture in the Department of Electronics, Systems and Computer Science. Developing curriculum that bridges theoretical concepts with practical industry applications, preparing students for real-world cloud engineering challenges.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>Master's in Computer Science</h3>
+                        <div class="date">Monterrey Institute of Technology and Higher Education</div>
+                        <p>Specialized in distributed systems and cloud computing architectures.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>Bachelor's Degree</h3>
+                        <div class="date">Western Institute of Technology and Higher Education (ITESO)</div>
+                        <p>Computer Systems Engineering with focus on software development.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <h2>Certifications</h2>
+            <div class="certifications-banner" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 30px 0;">
+                <img src="https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png" alt="AWS Cloud Practitioner">
+                <img src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png" alt="AWS Solutions Architect Professional">
+                <img src="https://images.credly.com/size/340x340/images/b9feab85-1a43-4f6c-99a5-631b88d5461b/image.png" alt="AWS Developer Associate">
+                <img src="https://images.credly.com/size/340x340/images/f0d3fbb9-bfa7-4017-9989-7bde8eaf42b1/image.png" alt="AWS SysOps Administrator Associate">
+                <img src="https://images.credly.com/size/340x340/images/99289602-861e-4929-8277-773e63a2fa6f/image.png" alt="HashiCorp Certified: Terraform Associate">
+            </div>
+            <div style="text-align: center;">
+                <a href="https://www.credly.com/users/alex-garcia.5f1a6960" target="_blank" class="cta-button">All My Certifications</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2>Cloud DevOps Labs</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Foundational Labs (100-Level)</h3>
+                        <p>Introductory labs covering AWS basics, simple IaC, Docker fundamentals, and more.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">AWS CLI</span>
+                            <span class="project-tag">CloudFormation</span>
+                            <span class="project-tag">Docker</span>
+                        </div>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-100" class="project-link">Explore Labs →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Intermediate Labs (200-Level)</h3>
+                        <p>Build on foundational knowledge with CI/CD pipelines, containerized apps, and more.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">GitHub Actions</span>
+                            <span class="project-tag">AWS CDK</span>
+                            <span class="project-tag">EKS</span>
+                        </div>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-200" class="project-link">Explore Labs →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Advanced Projects (300-Level)</h3>
+                        <p>Complex architectures, best practices, and production-grade implementations.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">GitOps</span>
+                            <span class="project-tag">Observability</span>
+                            <span class="project-tag">Security</span>
+                        </div>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-300" class="project-link">Explore Projects →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3 class="project-title">Expert Projects (400-Level)</h3>
+                        <p>Enterprise-grade solutions and cutting-edge technologies like GenAI and data mesh.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Bedrock</span>
+                            <span class="project-tag">Platform Engineering</span>
+                            <span class="project-tag">Multi-Region</span>
+                        </div>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-400" class="project-link">Explore Projects →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
+            <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.</p>
+            <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 1rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
+        </div>
+    </footer>
+</body>
+</html>
