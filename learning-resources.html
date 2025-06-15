@@ -355,31 +355,22 @@
             background-color: var(--dark-color);
             color: white;
             text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-        
-        footer a {
-            color: var(--secondary-color);
-            text-decoration: none;
+            padding: 30px 0;
         }
         
         .disclaimer {
-            font-size: 0.8rem;
-            margin-top: 10px;
-            color: #777;
+            max-width: 800px;
+            margin: 20px auto;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
         
-        body.dark-mode .disclaimer {
-            color: #999;
-        }
-        
-        .highlight {
+        .disclaimer .highlight {
             font-weight: bold;
             color: var(--secondary-color);
         }
         
-        body.dark-mode .highlight {
+        body.dark-mode .disclaimer .highlight {
             color: var(--dark-mode-secondary);
         }
         
@@ -1302,6 +1293,24 @@
     </footer>
 
     <script>
+        // Function to handle repository access check
+        function checkRepoAccess(event, repo) {
+            event.preventDefault();
+            
+            // In a real implementation, you would check if the user has access to the repository
+            // For now, we'll redirect to the access request page
+            window.location.href = `access-request.html?repo=${repo}`;
+            
+            return false;
+        }
+        
+        function setRepoParam(event, repo) {
+            // Set a cookie or localStorage item to remember the repo
+            localStorage.setItem('selectedRepo', repo);
+            
+            // Allow the default context menu to appear
+            return true;
+        }
         // Theme toggle functionality
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
@@ -1369,7 +1378,7 @@
                 viewResume: "View Resume",
                 backToHome: "Back to Home",
                 footer: "All rights reserved.",
-            disclaimer: "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer."
+                disclaimer: "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer."
             },
             es: {
                 title: "Recursos de Aprendizaje",
@@ -1386,7 +1395,7 @@
                 viewResume: "Ver Currículum",
                 backToHome: "Volver al Inicio",
                 footer: "Todos los derechos reservados.",
-            disclaimer: "Descargo de responsabilidad: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador."
+                disclaimer: "Descargo de responsabilidad: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador."
             },
             pt: {
                 title: "Recursos de Aprendizagem",
@@ -1403,7 +1412,7 @@
                 viewResume: "Ver Currículo",
                 backToHome: "Voltar ao Início",
                 footer: "Todos os direitos reservados.",
-            disclaimer: "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador."
+                disclaimer: "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador."
             }
         };
         
@@ -1450,12 +1459,24 @@
         languageButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const lang = button.getAttribute('data-lang');
-                translatePage(lang);
+                setActiveLanguage(lang);
             });
         });
         
+        function setActiveLanguage(lang) {
+            languageButtons.forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            translatePage(lang);
+            localStorage.setItem('language', lang);
+        }
+        
         // Initialize with saved language preference
-        translatePage(currentLang);
+        setActiveLanguage(currentLang);
     </script>
 </body>
 </html>
