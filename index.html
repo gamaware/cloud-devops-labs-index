@@ -601,7 +601,7 @@
                             <span class="project-tag">Docker</span>
                             <span class="project-tag">System Design</span>
                         </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-100" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-100')">Explore Labs →</a>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-100" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-100')" oncontextmenu="return setRepoParam(event, 'cloud-devops-labs-100')">Explore Labs →</a>
                     </div>
                 </div>
                 
@@ -615,7 +615,7 @@
                             <span class="project-tag">EKS</span>
                             <span class="project-tag">System Design</span>
                         </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-200" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-200')">Explore Labs →</a>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-200" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-200')" oncontextmenu="return setRepoParam(event, 'cloud-devops-labs-200')">Explore Labs →</a>
                     </div>
                 </div>
                 
@@ -629,7 +629,7 @@
                             <span class="project-tag">Security</span>
                             <span class="project-tag">System Design</span>
                         </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-300" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-300')">Explore Projects →</a>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-300" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-300')" oncontextmenu="return setRepoParam(event, 'cloud-devops-labs-300')">Explore Projects →</a>
                     </div>
                 </div>
                 
@@ -643,7 +643,7 @@
                             <span class="project-tag">Multi-Region</span>
                             <span class="project-tag">System Design</span>
                         </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-400" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-400')">Explore Projects →</a>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-400" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-400')" oncontextmenu="return setRepoParam(event, 'cloud-devops-labs-400')">Explore Projects →</a>
                     </div>
                 </div>
             </div>
@@ -955,6 +955,14 @@
             window.location.href = `access-request.html?repo=${repo}`;
             
             return false;
+        }
+        
+        function setRepoParam(event, repo) {
+            // Set a cookie or localStorage item to remember the repo
+            localStorage.setItem('selectedRepo', repo);
+            
+            // Allow the default context menu to appear
+            return true;
         }
     </script>
 </body>

@@ -694,7 +694,7 @@
         // Get repository name from URL if available
         function getRepoFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
-            const repo = urlParams.get('repo');
+            const repo = urlParams.get('repo') || localStorage.getItem('selectedRepo');
             
             if (repo) {
                 const repoSelect = document.getElementById('repo');
@@ -704,6 +704,9 @@
                         break;
                     }
                 }
+                
+                // Clear the stored repo selection
+                localStorage.removeItem('selectedRepo');
             }
         }
         
