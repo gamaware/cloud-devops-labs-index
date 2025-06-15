@@ -364,8 +364,23 @@
             text-decoration: none;
         }
         
-        footer a:hover {
-            text-decoration: underline;
+        .disclaimer {
+            font-size: 0.8rem;
+            margin-top: 10px;
+            color: #777;
+        }
+        
+        body.dark-mode .disclaimer {
+            color: #999;
+        }
+        
+        .highlight {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        body.dark-mode .highlight {
+            color: var(--dark-mode-secondary);
         }
         
         @media (max-width: 768px) {
@@ -1281,6 +1296,8 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
+            <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are <span class="highlight">my own</span> and do <span class="highlight">not represent</span> the opinions of my employer.</p>
+            <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
         </div>
     </footer>
 
@@ -1351,7 +1368,8 @@
                 independentHeader: "Independent Learning Resources",
                 viewResume: "View Resume",
                 backToHome: "Back to Home",
-                footer: "All rights reserved."
+                footer: "All rights reserved.",
+            disclaimer: "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer."
             },
             es: {
                 title: "Recursos de Aprendizaje",
@@ -1367,7 +1385,8 @@
                 independentHeader: "Recursos de Aprendizaje Independientes",
                 viewResume: "Ver Currículum",
                 backToHome: "Volver al Inicio",
-                footer: "Todos los derechos reservados."
+                footer: "Todos los derechos reservados.",
+            disclaimer: "Descargo de responsabilidad: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador."
             },
             pt: {
                 title: "Recursos de Aprendizagem",
@@ -1383,7 +1402,8 @@
                 independentHeader: "Recursos de Aprendizagem Independentes",
                 viewResume: "Ver Currículo",
                 backToHome: "Voltar ao Início",
-                footer: "Todos os direitos reservados."
+                footer: "Todos os direitos reservados.",
+            disclaimer: "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador."
             }
         };
         
@@ -1415,6 +1435,7 @@
             document.querySelectorAll('.cta-button')[1].textContent = translations[lang].backToHome;
             
             document.querySelector('footer p').textContent = `© 2025 Alex Garcia. ${translations[lang].footer}`;
+            document.querySelector('.disclaimer').innerHTML = translations[lang].disclaimer.replace('my own', '<span class="highlight">my own</span>').replace('not represent', '<span class="highlight">not represent</span>');
             
             // Save language preference
             localStorage.setItem('language', lang);
