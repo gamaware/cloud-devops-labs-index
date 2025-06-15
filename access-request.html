@@ -13,12 +13,15 @@
             --light-color: #f8f9fa;
             --text-color: #333;
             --link-color: #0066cc;
+            --visited-link-color: #551A8B;
             
-            /* Dark mode variables */
-            --dark-mode-bg: #121212;
-            --dark-mode-text: #e0e0e0;
-            --dark-mode-card-bg: #1e1e1e;
-            --dark-mode-secondary: #ff9900;
+            /* Dark mode variables - OneDark theme */
+            --dark-mode-bg: #282c34;
+            --dark-mode-text: #abb2bf;
+            --dark-mode-card-bg: #21252b;
+            --dark-mode-secondary: #e5c07b;
+            --dark-mode-link: #61afef;
+            --dark-mode-visited-link: #c678dd;
         }
         
         * {
@@ -60,7 +63,12 @@
         /* Dark mode link color adjustment for better contrast - only for text links */
         body.dark-mode a:not(.cta-button):not(.social-links a):not(.language-btn),
         body.dark-mode .project-link {
-            color: #4d9eff;
+            color: var(--dark-mode-link);
+        }
+        
+        body.dark-mode a:not(.cta-button):not(.social-links a):not(.language-btn):visited,
+        body.dark-mode .project-link:visited {
+            color: var(--dark-mode-visited-link);
         }
         
         /* Theme toggle */
@@ -303,6 +311,10 @@
             opacity: 0.8;
         }
         
+        body.dark-mode .amazon-q-credit img {
+            content: url("https://d1.awsstatic.com/logos/aws/Q/Amazon%20Q_Dark.c7c7d4d5e2810ba4a2aad3c1a4b10254bd53b4ac.png");
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -365,10 +377,9 @@
             <div class="social-links">
                 <a href="https://github.com/gamaware" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/gamaware/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:alejandrogarcia@iteso.mx"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:alejandrogarcia@iteso.mx" onclick="window.location.href='mailto:alejandrogarcia@iteso.mx'; return false;"><i class="fas fa-envelope"></i></a>
                 <a href="https://discord.gg/GpuUyg5g" target="_blank"><i class="fab fa-discord"></i></a>
                 <a href="https://medium.com/@gamaware" target="_blank"><i class="fab fa-medium"></i></a>
-                <a href="https://aws.amazon.com/q/" target="_blank" title="This website was created with Amazon Q"><i class="fab fa-aws"></i></a>
             </div>
             <div>
                 <a href="https://alexgarcia.info/" class="cta-button">View Resume</a>
@@ -412,7 +423,17 @@
                     
                     <div class="form-group">
                         <label for="reason" id="reason-label">Reason for Access</label>
-                        <textarea id="reason" name="reason" required></textarea>
+                        <select id="reason" name="reason" required>
+                            <option value="" id="select-reason">-- Select Reason --</option>
+                            <option value="Student - Spring 2025">Student - Spring 2025</option>
+                            <option value="Student - Summer 2025">Student - Summer 2025</option>
+                            <option value="Student - Fall 2025">Student - Fall 2025</option>
+                            <option value="Discord Server Member">Discord Server Member</option>
+                            <option value="Industry Professional">Industry Professional</option>
+                            <option value="Academic Researcher">Academic Researcher</option>
+                            <option value="AWS Community Builder">AWS Community Builder</option>
+                            <option value="Open Source Contributor">Open Source Contributor</option>
+                        </select>
                     </div>
                     
                     <div style="text-align: center;">
@@ -434,6 +455,12 @@
         <div class="container">
             <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
             <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.</p>
+            <div class="amazon-q-credit" style="margin-top: 15px;">
+                <p style="margin-bottom: 10px; font-size: 0.9rem;">This website was created with</p>
+                <a href="https://aws.amazon.com/q/" target="_blank">
+                    <img src="https://d1.awsstatic.com/logos/aws/Q/Amazon%20Q_Light.c7c7d4d5e2810ba4a2aad3c1a4b10254bd53b4ac.png" alt="Amazon Q" style="height: 30px;">
+                </a>
+            </div>
             <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 1rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
         </div>
     </footer>
@@ -477,6 +504,7 @@
                 githubLabel: "GitHub Username",
                 repoLabel: "Repository",
                 selectOption: "-- Select Repository --",
+                selectReason: "-- Select Reason --",
                 reasonLabel: "Reason for Access",
                 submitBtn: "Submit Request",
                 thankYouMessage: "Thank you! Your access request has been submitted.",
@@ -496,6 +524,7 @@
                 githubLabel: "Nombre de Usuario de GitHub",
                 repoLabel: "Repositorio",
                 selectOption: "-- Seleccionar Repositorio --",
+                selectReason: "-- Seleccionar Motivo --",
                 reasonLabel: "Motivo de Acceso",
                 submitBtn: "Enviar Solicitud",
                 thankYouMessage: "¡Gracias! Su solicitud de acceso ha sido enviada.",
@@ -515,6 +544,7 @@
                 githubLabel: "Nome de Usuário do GitHub",
                 repoLabel: "Repositório",
                 selectOption: "-- Selecionar Repositório --",
+                selectReason: "-- Selecionar Motivo --",
                 reasonLabel: "Motivo do Acesso",
                 submitBtn: "Enviar Solicitação",
                 thankYouMessage: "Obrigado! Sua solicitação de acesso foi enviada.",
@@ -562,6 +592,7 @@
             document.getElementById('github-label').textContent = translations[lang].githubLabel;
             document.getElementById('repo-label').textContent = translations[lang].repoLabel;
             document.getElementById('select-option').textContent = translations[lang].selectOption;
+            document.getElementById('select-reason').textContent = translations[lang].selectReason;
             document.getElementById('reason-label').textContent = translations[lang].reasonLabel;
             document.getElementById('submit-btn').textContent = translations[lang].submitBtn;
             document.getElementById('thank-you-message').textContent = translations[lang].thankYouMessage;
@@ -593,25 +624,48 @@
             const repo = document.getElementById('repo').value;
             const reason = document.getElementById('reason').value;
             
-            // In a real implementation, you would send this data to a server
-            // For now, we'll just simulate a successful submission
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return false;
+            }
             
-            // Create email link with pre-filled content
-            const subject = `Repository Access Request: ${repo}`;
-            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AGitHub Username: ${github}%0D%0ARepository: ${repo}%0D%0AReason: ${reason}`;
-            const mailtoLink = `mailto:alejandrogarcia@iteso.mx?subject=${encodeURIComponent(subject)}&body=${body}`;
-            
-            // Open email client
-            window.location.href = mailtoLink;
-            
-            // Show success message
-            form.style.display = 'none';
-            successMessage.style.display = 'block';
-            
-            // Hide error message
-            document.getElementById('error-message').style.display = 'none';
+            // Validate GitHub username (check if it exists)
+            validateGitHubUsername(github).then(isValid => {
+                if (!isValid) {
+                    alert('GitHub username does not exist. Please enter a valid username.');
+                    return;
+                }
+                
+                // Create email link with pre-filled content
+                const subject = `Repository Access Request: ${repo}`;
+                const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AGitHub Username: ${github}%0D%0ARepository: ${repo}%0D%0AReason: ${reason}`;
+                const mailtoLink = `mailto:alejandrogarcia@iteso.mx?subject=${encodeURIComponent(subject)}&body=${body}`;
+                
+                // Open email client
+                window.location.href = mailtoLink;
+                
+                // Show success message
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Hide error message
+                document.getElementById('error-message').style.display = 'none';
+            });
             
             return false;
+        }
+        
+        // Function to validate GitHub username
+        async function validateGitHubUsername(username) {
+            try {
+                const response = await fetch(`https://api.github.com/users/${username}`);
+                return response.status === 200;
+            } catch (error) {
+                console.error('Error validating GitHub username:', error);
+                return true; // Return true on error to allow form submission
+            }
         }
         
         // Get repository name from URL if available
