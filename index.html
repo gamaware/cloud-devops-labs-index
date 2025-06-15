@@ -362,8 +362,17 @@
             opacity: 0.8;
         }
         
+        .disclaimer .highlight {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        body.dark-mode .disclaimer .highlight {
+            color: var(--dark-mode-secondary);
+        }
+        
         body.dark-mode .amazon-q-credit img {
-            content: url("https://d1.awsstatic.com/logos/aws/Q/Amazon%20Q_Dark.c7c7d4d5e2810ba4a2aad3c1a4b10254bd53b4ac.png");
+            content: url("https://logowik.com/content/uploads/images/amazon-q-dark-mode5177.jpg");
         }
         
         @media (max-width: 768px) {
@@ -621,14 +630,14 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
-            <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.</p>
+            <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are <span class="highlight">my own</span> and do <span class="highlight">not represent</span> the opinions of my employer.</p>
             <div class="amazon-q-credit" style="margin-top: 15px;">
                 <p style="margin-bottom: 10px; font-size: 0.9rem;">This website was created with</p>
                 <a href="https://aws.amazon.com/q/" target="_blank">
-                    <img src="https://d1.awsstatic.com/logos/aws/Q/Amazon%20Q_Light.c7c7d4d5e2810ba4a2aad3c1a4b10254bd53b4ac.png" alt="Amazon Q" style="height: 30px;">
+                    <img src="https://logowik.com/content/uploads/images/amazon-q2446.logowik.com.webp" alt="Amazon Q" style="height: 30px;">
                 </a>
             </div>
-            <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 1rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
+            <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
         </div>
     </footer>
 
