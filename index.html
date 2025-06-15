@@ -256,6 +256,11 @@
             font-size: 0.9rem;
         }
         
+        body.dark-mode .skill-tag {
+            background-color: var(--dark-mode-secondary);
+            color: var(--dark-mode-bg);
+        }
+        
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -307,6 +312,11 @@
             padding: 5px 10px;
             border-radius: 15px;
             font-size: 0.8rem;
+        }
+        
+        body.dark-mode .project-tag {
+            background-color: var(--dark-mode-secondary);
+            color: var(--dark-mode-bg);
         }
         
         .project-link {
@@ -566,7 +576,7 @@
     
     <section id="projects">
         <div class="container">
-            <h2>Cloud DevOps Labs</h2>
+            <h2>Cloud DevOps and System Design Labs</h2>
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-content">
@@ -631,12 +641,6 @@
         <div class="container">
             <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
             <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are <span class="highlight">my own</span> and do <span class="highlight">not represent</span> the opinions of my employer.</p>
-            <div class="amazon-q-credit" style="margin-top: 15px;">
-                <p style="margin-bottom: 10px; font-size: 0.9rem;">This website was created with</p>
-                <a href="https://aws.amazon.com/q/" target="_blank">
-                    <img src="https://logowik.com/content/uploads/images/amazon-q2446.logowik.com.webp" alt="Amazon Q" style="height: 30px;">
-                </a>
-            </div>
             <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
         </div>
     </footer>

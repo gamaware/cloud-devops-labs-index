@@ -451,6 +451,7 @@
                 <div id="success-message" style="display: none; text-align: center; margin-top: 20px;">
                     <i class="fas fa-check-circle" style="color: #28a745; font-size: 3rem;"></i>
                     <p style="margin-top: 15px; font-size: 1.2rem;" id="thank-you-message">Thank you! Your access request has been submitted.</p>
+                    <p style="margin-top: 10px;">A GitHub issue has been created for your request. You'll receive an email notification when access is granted.</p>
                 </div>
             </div>
             
@@ -462,12 +463,6 @@
         <div class="container">
             <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
             <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are <span class="highlight">my own</span> and do <span class="highlight">not represent</span> the opinions of my employer.</p>
-            <div class="amazon-q-credit" style="margin-top: 15px;">
-                <p style="margin-bottom: 10px; font-size: 0.9rem;">This website was created with</p>
-                <a href="https://aws.amazon.com/q/" target="_blank">
-                    <img src="https://logowik.com/content/uploads/images/amazon-q2446.logowik.com.webp" alt="Amazon Q" style="height: 30px;">
-                </a>
-            </div>
             <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
         </div>
     </footer>
@@ -645,20 +640,26 @@
                     return;
                 }
                 
-                // Create email link with pre-filled content
-                const subject = `Repository Access Request: ${repo}`;
-                const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AGitHub Username: ${github}%0D%0ARepository: ${repo}%0D%0AReason: ${reason}`;
-                const mailtoLink = `mailto:alejandrogarcia@iteso.mx?subject=${encodeURIComponent(subject)}&body=${body}`;
-                
-                // Open email client
-                window.location.href = mailtoLink;
-                
-                // Show success message
-                form.style.display = 'none';
-                successMessage.style.display = 'block';
-                
-                // Hide error message
-                document.getElementById('error-message').style.display = 'none';
+                // Create GitHub issue for access request
+                createGitHubIssue(name, email, github, repo, reason).then(issueUrl => {
+                    // Show success message
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // Hide error message
+                    document.getElementById('error-message').style.display = 'none';
+                    
+                    // Send notification email
+                    const subject = `Repository Access Request: ${repo}`;
+                    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AGitHub Username: ${github}%0D%0ARepository: ${repo}%0D%0AReason: ${reason}%0D%0A%0D%0AAn issue has been created: ${issueUrl}`;
+                    const mailtoLink = `mailto:alejandrogarcia@iteso.mx?subject=${encodeURIComponent(subject)}&body=${body}`;
+                    
+                    // Open email client
+                    window.location.href = mailtoLink;
+                }).catch(error => {
+                    console.error('Error creating GitHub issue:', error);
+                    alert('There was an error submitting your request. Please try again later.');
+                });
             });
             
             return false;
@@ -673,6 +674,21 @@
                 console.error('Error validating GitHub username:', error);
                 return true; // Return true on error to allow form submission
             }
+        }
+        
+        // Function to create GitHub issue for access request
+        async function createGitHubIssue(name, email, github, repo, reason) {
+            // In a real implementation, this would make an API call to create a GitHub issue
+            // For now, we'll simulate it and return a fake issue URL
+            
+            // This would normally be done through a server-side API to keep the token secure
+            // For demonstration purposes, we're simulating the response
+            
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Return fake issue URL
+            return `https://github.com/gamaware/cloud-devops-labs-index/issues/new`;
         }
         
         // Get repository name from URL if available

@@ -1,0 +1,169 @@
+name: Repository Access Request
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  process-access-request:
+    if: contains(github.event.issue.title, '[ACCESS REQUEST]')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Parse issue body
+        id: parse
+        run: |
+          BODY="${{ github.event.issue.body }}"
+          
+          # Extract GitHub username
+          GITHUB_USERNAME=$(echo "$BODY" | grep -oP '(?<=GitHub Username: ).*')
+          echo "GITHUB_USERNAME=$GITHUB_USERNAME" >> $GITHUB_ENV
+          
+          # Extract repository name
+          REPO_NAME=$(echo "$BODY" | grep -oP '(?<=Repository: ).*')
+          echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
+          
+          # Extract reason
+          REASON=$(echo "$BODY" | grep -oP '(?<=Reason: ).*')
+          echo "REASON=$REASON" >> $GITHUB_ENV
+          
+          # Extract email
+          EMAIL=$(echo "$BODY" | grep -oP '(?<=Email: ).*')
+          echo "EMAIL=$EMAIL" >> $GITHUB_ENV
+          
+          # Extract name
+          NAME=$(echo "$BODY" | grep -oP '(?<=Name: ).*')
+          echo "NAME=$NAME" >> $GITHUB_ENV
+      
+      - name: Add approval comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ## Access Request Details
+            
+            - **Name**: ${{ env.NAME }}
+            - **GitHub Username**: ${{ env.GITHUB_USERNAME }}
+            - **Repository**: ${{ env.REPO_NAME }}
+            - **Reason**: ${{ env.REASON }}
+            
+            ### Approval Options
+            
+            @alejandrogarcia-iteso, please review this request and approve or deny access:
+            
+            - To approve: Add a comment with the text `/approve`
+            - To deny: Add a comment with the text `/deny`
+            
+            Once approved, the user will be automatically added as a collaborator to the repository.
+      
+      - name: Add labels
+        uses: andymckay/labeler@master
+        with:
+          add-labels: "access-request, pending-approval"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  process-approval:
+    if: contains(github.event.comment.body, '/approve')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - name: Parse issue body
+        id: parse
+        run: |
+          ISSUE_NUMBER=${{ github.event.issue.number }}
+          ISSUE_BODY=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                      "https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER" | jq -r .body)
+          
+          # Extract GitHub username
+          GITHUB_USERNAME=$(echo "$ISSUE_BODY" | grep -oP '(?<=GitHub Username: ).*')
+          echo "GITHUB_USERNAME=$GITHUB_USERNAME" >> $GITHUB_ENV
+          
+          # Extract repository name
+          REPO_NAME=$(echo "$ISSUE_BODY" | grep -oP '(?<=Repository: ).*')
+          echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
+      
+      - name: Add collaborator
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          script: |
+            try {
+              await github.rest.repos.addCollaborator({
+                owner: 'gamaware',
+                repo: process.env.REPO_NAME,
+                username: process.env.GITHUB_USERNAME,
+                permission: 'pull'
+              });
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `✅ Access granted! @${process.env.GITHUB_USERNAME} has been added as a collaborator to the ${process.env.REPO_NAME} repository.`
+              });
+              
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                state: 'closed',
+                labels: ['access-request', 'approved']
+              });
+            } catch (error) {
+              console.log(error);
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `❌ Error adding collaborator: ${error.message}`
+              });
+            }
+      
+  process-denial:
+    if: contains(github.event.comment.body, '/deny')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    
+    steps:
+      - name: Parse issue body
+        id: parse
+        run: |
+          ISSUE_NUMBER=${{ github.event.issue.number }}
+          ISSUE_BODY=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                      "https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER" | jq -r .body)
+          
+          # Extract GitHub username
+          GITHUB_USERNAME=$(echo "$ISSUE_BODY" | grep -oP '(?<=GitHub Username: ).*')
+          echo "GITHUB_USERNAME=$GITHUB_USERNAME" >> $GITHUB_ENV
+      
+      - name: Add denial comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ❌ Access request denied by @${{ github.actor }}.
+            
+            @${{ env.GITHUB_USERNAME }}, your request has been denied. Please contact the repository owner for more information.
+      
+      - name: Update issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed',
+              labels: ['access-request', 'denied']
+            });

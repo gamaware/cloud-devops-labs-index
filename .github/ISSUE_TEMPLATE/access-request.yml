@@ -1,0 +1,87 @@
+name: Repository Access Request
+description: Request access to a private repository
+title: "[ACCESS REQUEST] Repository access for "
+labels: ["access-request", "pending-approval"]
+assignees:
+  - gamaware
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Repository Access Request
+        
+        Please fill out this form to request access to a private repository.
+        
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: Your full name
+      placeholder: John Doe
+    validations:
+      required: true
+      
+  - type: input
+    id: email
+    attributes:
+      label: Email
+      description: Your email address
+      placeholder: john.doe@example.com
+    validations:
+      required: true
+      
+  - type: input
+    id: github
+    attributes:
+      label: GitHub Username
+      description: Your GitHub username
+      placeholder: johndoe
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: repository
+    attributes:
+      label: Repository
+      description: Which repository do you need access to?
+      options:
+        - cloud-devops-labs-100
+        - cloud-devops-labs-200
+        - cloud-devops-labs-300
+        - cloud-devops-labs-400
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: reason
+    attributes:
+      label: Reason
+      description: Why do you need access to this repository?
+      options:
+        - Student - Spring 2025
+        - Student - Fall 2025
+        - Discord Server Member
+        - Industry Professional
+        - Academic Researcher
+        - AWS Community Builder
+    validations:
+      required: true
+      
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: Any additional information that might be relevant to your request
+      placeholder: I'm a student in the Cloud Architecture course and need access to complete the assignments...
+    validations:
+      required: false
+      
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this request, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow the repository's code of conduct and usage guidelines
+          required: true
