@@ -56,8 +56,8 @@
             color: #aaa;
         }
         
-        /* Dark mode link color adjustment for better contrast */
-        body.dark-mode a,
+        /* Dark mode link color adjustment for better contrast - only for text links */
+        body.dark-mode a:not(.cta-button):not(.social-links a):not(.language-btn),
         body.dark-mode .project-link {
             color: #4d9eff;
         }
@@ -123,6 +123,11 @@
         
         .language-btn:hover,
         .language-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        body.dark-mode .language-btn.active {
             background-color: var(--secondary-color);
             color: white;
         }
