@@ -51,7 +51,8 @@
         }
         
         body.dark-mode h2,
-        body.dark-mode .project-title {
+        body.dark-mode .project-title,
+        body.dark-mode .section-subtitle {
             color: var(--dark-mode-text);
         }
         
@@ -358,6 +359,16 @@
             margin-bottom: 10px;
         }
         
+        .section-subtitle {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        body.dark-mode .section-subtitle {
+            color: var(--dark-mode-secondary);
+        }
+        
         footer {
             background-color: var(--dark-color);
             color: white;
@@ -509,6 +520,7 @@
             <h2>Professional Experience</h2>
             <div class="education-experience">
                 <div class="experience">
+                    <h3 class="section-subtitle">Current & Past Professional Roles</h3>
                     <div class="timeline-item">
                         <h3>DevOps Consultant at AWS</h3>
                         <div class="date">Jan 2023 - Present</div>
@@ -535,22 +547,23 @@
                 </div>
                 
                 <div class="education">
+                    <h3 class="section-subtitle">Current Teaching & Academic Background</h3>
                     <div class="timeline-item">
                         <h3>Professor at ITESO</h3>
-                        <div class="date">Current</div>
+                        <div class="date">Jan 2022 - Present</div>
                         <p>Teaching advanced courses in Scalable System Design and Cloud Architecture in the Department of Electronics, Systems and Computer Science. Developing curriculum that bridges theoretical concepts with practical industry applications, preparing students for real-world cloud engineering challenges.</p>
                     </div>
                     
                     <div class="timeline-item">
                         <h3>Master's in Computer Science</h3>
-                        <div class="date">Monterrey Institute of Technology and Higher Education</div>
-                        <p>Specialized in distributed systems and cloud computing architectures.</p>
+                        <div class="date">Monterrey Institute of Technology and Higher Education (2018)</div>
+                        <p>Specialized in distributed systems and cloud computing architectures. Completed thesis on scalable microservice architectures.</p>
                     </div>
                     
                     <div class="timeline-item">
                         <h3>Bachelor's Degree</h3>
-                        <div class="date">Western Institute of Technology and Higher Education (ITESO)</div>
-                        <p>Computer Systems Engineering with focus on software development.</p>
+                        <div class="date">Western Institute of Technology and Higher Education (ITESO) (2015)</div>
+                        <p>Computer Systems Engineering with focus on software development. Graduated with honors.</p>
                     </div>
                 </div>
             </div>
