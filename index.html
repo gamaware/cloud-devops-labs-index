@@ -106,19 +106,19 @@
         }
         
         .language-btn {
-            background: rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.2);
             border: none;
             border-radius: 4px;
             padding: 5px 10px;
             cursor: pointer;
-            color: var(--text-color);
+            color: white;
             transition: background-color 0.3s;
             font-weight: bold;
         }
         
         body.dark-mode .language-btn {
-            background: rgba(255,255,255,0.1);
-            color: var(--dark-mode-text);
+            background: rgba(255,255,255,0.2);
+            color: white;
         }
         
         .language-btn:hover,
@@ -431,7 +431,7 @@
             <div class="social-links">
                 <a href="https://github.com/gamaware" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/gamaware/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:gamaware@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:alejandrogarcia@iteso.mx"><i class="fas fa-envelope"></i></a>
                 <a href="https://discord.gg/GpuUyg5g" target="_blank"><i class="fab fa-discord"></i></a>
                 <a href="https://medium.com/@gamaware" target="_blank"><i class="fab fa-medium"></i></a>
                 <a href="https://aws.amazon.com/q/" target="_blank" title="This website was created with Amazon Q"><i class="fab fa-aws"></i></a>
@@ -558,7 +558,7 @@
                             <span class="project-tag">Docker</span>
                             <span class="project-tag">System Design</span>
                         </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-100" class="project-link">Explore Labs →</a>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-100" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-100')">Explore Labs →</a>
                     </div>
                 </div>
                 
@@ -572,7 +572,7 @@
                             <span class="project-tag">EKS</span>
                             <span class="project-tag">System Design</span>
                         </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-200" class="project-link">Explore Labs →</a>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-200" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-200')">Explore Labs →</a>
                     </div>
                 </div>
                 
@@ -586,7 +586,7 @@
                             <span class="project-tag">Security</span>
                             <span class="project-tag">System Design</span>
                         </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-300" class="project-link">Explore Projects →</a>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-300" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-300')">Explore Projects →</a>
                     </div>
                 </div>
                 
@@ -600,7 +600,7 @@
                             <span class="project-tag">Multi-Region</span>
                             <span class="project-tag">System Design</span>
                         </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-400" class="project-link">Explore Projects →</a>
+                        <a href="https://github.com/gamaware/cloud-devops-labs-400" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-400')">Explore Projects →</a>
                     </div>
                 </div>
             </div>
@@ -611,7 +611,6 @@
         <div class="container">
             <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
             <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.</p>
-            <p class="amazon-q-credit" style="margin-top: 15px; font-size: 0.9rem;">This website was created with <a href="https://aws.amazon.com/q/" target="_blank">Amazon Q</a></p>
             <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 1rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
         </div>
     </footer>
@@ -898,12 +897,22 @@
             // Translate footer
             document.querySelector('footer p:first-child').textContent = translations[lang].copyright;
             document.querySelector('.disclaimer').textContent = translations[lang].disclaimer;
-            document.querySelector('.amazon-q-credit').innerHTML = translations[lang].amazonQCredit + ' <a href="https://aws.amazon.com/q/" target="_blank">Amazon Q</a>';
             document.querySelector('.carpe-diem').textContent = translations[lang].carpeDiem;
         }
         
         // Initialize with saved language preference
         translatePage(currentLang);
+        
+        // Function to check repository access
+        function checkRepoAccess(event, repo) {
+            event.preventDefault();
+            
+            // In a real implementation, you would check if the user has access to the repository
+            // For now, we'll redirect to the access request page
+            window.location.href = `access-request.html?repo=${repo}`;
+            
+            return false;
+        }
     </script>
 </body>
 </html>

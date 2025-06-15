@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repository Access Request - Alex Garcia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #ff9900;
+            --dark-color: #232f3e;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --link-color: #0066cc;
+            
+            /* Dark mode variables */
+            --dark-mode-bg: #121212;
+            --dark-mode-text: #e0e0e0;
+            --dark-mode-card-bg: #1e1e1e;
+            --dark-mode-secondary: #ff9900;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Dark mode styles */
+        body.dark-mode {
+            color: var(--dark-mode-text);
+            background-color: var(--dark-mode-bg);
+        }
+        
+        body.dark-mode .project-card,
+        body.dark-mode .project-tag,
+        body.dark-mode .access-form {
+            background-color: var(--dark-mode-card-bg);
+            color: var(--dark-mode-text);
+        }
+        
+        body.dark-mode h2,
+        body.dark-mode .project-title {
+            color: var(--dark-mode-text);
+        }
+        
+        body.dark-mode .timeline-item .date {
+            color: #aaa;
+        }
+        
+        /* Dark mode link color adjustment for better contrast - only for text links */
+        body.dark-mode a:not(.cta-button):not(.social-links a):not(.language-btn),
+        body.dark-mode .project-link {
+            color: #4d9eff;
+        }
+        
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.1);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: background-color 0.3s;
+        }
+        
+        body.dark-mode .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            color: var(--dark-mode-text);
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(0,0,0,0.2);
+        }
+        
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Language selector */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .language-btn {
+            background: rgba(0,0,0,0.2);
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        
+        body.dark-mode .language-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        
+        .language-btn:hover,
+        .language-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        body.dark-mode .language-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e68a00;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .access-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            background-color: white;
+        }
+        
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea,
+        body.dark-mode .form-group select {
+            background-color: #333;
+            color: white;
+            border-color: #555;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+        }
+        
+        .submit-btn:hover {
+            background-color: #e68a00;
+        }
+        
+        .error-message {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #d93025;
+        }
+        
+        body.dark-mode .error-message {
+            color: #ff6b6b;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .disclaimer {
+            max-width: 800px;
+            margin: 20px auto;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                margin: 5px;
+            }
+            
+            .language-selector {
+                top: 70px;
+                left: 10px;
+            }
+            
+            .theme-toggle {
+                top: 70px;
+                right: 10px;
+            }
+            
+            .access-form {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .social-links a {
+                font-size: 1.2rem;
+                margin: 0 5px;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="language-btn active" data-lang="en">EN</button>
+        <button class="language-btn" data-lang="es">ES</button>
+        <button class="language-btn" data-lang="pt">PT</button>
+    </div>
+    
+    <header>
+        <div class="container">
+            <h1>Alex Garcia</h1>
+            <p class="tagline">DevOps Consultant | Cloud Architect | Professor</p>
+            <div class="social-links">
+                <a href="https://github.com/gamaware" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/gamaware/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:alejandrogarcia@iteso.mx"><i class="fas fa-envelope"></i></a>
+                <a href="https://discord.gg/GpuUyg5g" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="https://medium.com/@gamaware" target="_blank"><i class="fab fa-medium"></i></a>
+                <a href="https://aws.amazon.com/q/" target="_blank" title="This website was created with Amazon Q"><i class="fab fa-aws"></i></a>
+            </div>
+            <div>
+                <a href="https://alexgarcia.info/" class="cta-button">View Resume</a>
+                <a href="https://github.com/gamaware/cloud-devops-labs-index" class="cta-button">Explore Labs</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="access-request">
+        <div class="container">
+            <h2 id="request-heading">Repository Access Request</h2>
+            <p class="error-message" id="error-message">This repository is private. Please fill out the form below to request access.</p>
+            
+            <div class="access-form">
+                <form id="access-form" onsubmit="sendAccessRequest(event)">
+                    <div class="form-group">
+                        <label for="name" id="name-label">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" id="email-label">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="github" id="github-label">GitHub Username</label>
+                        <input type="text" id="github" name="github" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="repo" id="repo-label">Repository</label>
+                        <select id="repo" name="repo" required>
+                            <option value="" id="select-option">-- Select Repository --</option>
+                            <option value="cloud-devops-labs-100">Cloud DevOps Labs 100</option>
+                            <option value="cloud-devops-labs-200">Cloud DevOps Labs 200</option>
+                            <option value="cloud-devops-labs-300">Cloud DevOps Labs 300</option>
+                            <option value="cloud-devops-labs-400">Cloud DevOps Labs 400</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reason" id="reason-label">Reason for Access</label>
+                        <textarea id="reason" name="reason" required></textarea>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button type="submit" class="submit-btn" id="submit-btn">Submit Request</button>
+                    </div>
+                </form>
+                
+                <div id="success-message" style="display: none; text-align: center; margin-top: 20px;">
+                    <i class="fas fa-check-circle" style="color: #28a745; font-size: 3rem;"></i>
+                    <p style="margin-top: 15px; font-size: 1.2rem;" id="thank-you-message">Thank you! Your access request has been submitted.</p>
+                </div>
+            </div>
+            
+            <a href="index.html" class="back-link" id="back-link">← Back to Home</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
+            <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.</p>
+            <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 1rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for theme toggle, language switching, and form submission -->
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+        
+        // Language switching functionality
+        const languageBtns = document.querySelectorAll('.language-btn');
+        
+        // Translation data
+        const translations = {
+            en: {
+                requestHeading: "Repository Access Request",
+                errorMessage: "This repository is private. Please fill out the form below to request access.",
+                nameLabel: "Full Name",
+                emailLabel: "Email Address",
+                githubLabel: "GitHub Username",
+                repoLabel: "Repository",
+                selectOption: "-- Select Repository --",
+                reasonLabel: "Reason for Access",
+                submitBtn: "Submit Request",
+                thankYouMessage: "Thank you! Your access request has been submitted.",
+                backLink: "← Back to Home",
+                tagline: "DevOps Consultant | Cloud Architect | Professor",
+                disclaimer: "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.",
+                copyright: "© 2025 Alex Garcia. All rights reserved.",
+                carpeDiem: "Carpe Diem",
+                viewResume: "View Resume",
+                exploreLabs: "Explore Labs"
+            },
+            es: {
+                requestHeading: "Solicitud de Acceso al Repositorio",
+                errorMessage: "Este repositorio es privado. Por favor complete el formulario a continuación para solicitar acceso.",
+                nameLabel: "Nombre Completo",
+                emailLabel: "Correo Electrónico",
+                githubLabel: "Nombre de Usuario de GitHub",
+                repoLabel: "Repositorio",
+                selectOption: "-- Seleccionar Repositorio --",
+                reasonLabel: "Motivo de Acceso",
+                submitBtn: "Enviar Solicitud",
+                thankYouMessage: "¡Gracias! Su solicitud de acceso ha sido enviada.",
+                backLink: "← Volver al Inicio",
+                tagline: "Consultor DevOps | Arquitecto Cloud | Profesor",
+                disclaimer: "Aviso: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador.",
+                copyright: "© 2025 Alex Garcia. Todos los derechos reservados.",
+                carpeDiem: "Carpe Diem",
+                viewResume: "Ver Currículum",
+                exploreLabs: "Explorar Labs"
+            },
+            pt: {
+                requestHeading: "Solicitação de Acesso ao Repositório",
+                errorMessage: "Este repositório é privado. Por favor, preencha o formulário abaixo para solicitar acesso.",
+                nameLabel: "Nome Completo",
+                emailLabel: "Endereço de Email",
+                githubLabel: "Nome de Usuário do GitHub",
+                repoLabel: "Repositório",
+                selectOption: "-- Selecionar Repositório --",
+                reasonLabel: "Motivo do Acesso",
+                submitBtn: "Enviar Solicitação",
+                thankYouMessage: "Obrigado! Sua solicitação de acesso foi enviada.",
+                backLink: "← Voltar para a Página Inicial",
+                tagline: "Consultor DevOps | Arquiteto Cloud | Professor",
+                disclaimer: "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador.",
+                copyright: "© 2025 Alex Garcia. Todos os direitos reservados.",
+                carpeDiem: "Carpe Diem",
+                viewResume: "Ver Currículo",
+                exploreLabs: "Explorar Labs"
+            }
+        };
+        
+        // Set initial language from localStorage or default to English
+        const currentLang = localStorage.getItem('language') || 'en';
+        setActiveLanguage(currentLang);
+        
+        // Language button click handlers
+        languageBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                setActiveLanguage(lang);
+                translatePage(lang);
+                localStorage.setItem('language', lang);
+            });
+        });
+        
+        function setActiveLanguage(lang) {
+            languageBtns.forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            translatePage(lang);
+        }
+        
+        function translatePage(lang) {
+            // Translate form elements
+            document.getElementById('request-heading').textContent = translations[lang].requestHeading;
+            document.getElementById('error-message').textContent = translations[lang].errorMessage;
+            document.getElementById('name-label').textContent = translations[lang].nameLabel;
+            document.getElementById('email-label').textContent = translations[lang].emailLabel;
+            document.getElementById('github-label').textContent = translations[lang].githubLabel;
+            document.getElementById('repo-label').textContent = translations[lang].repoLabel;
+            document.getElementById('select-option').textContent = translations[lang].selectOption;
+            document.getElementById('reason-label').textContent = translations[lang].reasonLabel;
+            document.getElementById('submit-btn').textContent = translations[lang].submitBtn;
+            document.getElementById('thank-you-message').textContent = translations[lang].thankYouMessage;
+            document.getElementById('back-link').textContent = translations[lang].backLink;
+            
+            // Translate header and footer
+            document.querySelector('.tagline').textContent = translations[lang].tagline;
+            document.querySelector('.disclaimer').textContent = translations[lang].disclaimer;
+            document.querySelector('footer p:first-child').textContent = translations[lang].copyright;
+            document.querySelector('.carpe-diem').textContent = translations[lang].carpeDiem;
+            
+            // Translate buttons
+            const buttons = document.querySelectorAll('header .cta-button');
+            buttons[0].textContent = translations[lang].viewResume;
+            buttons[1].textContent = translations[lang].exploreLabs;
+        }
+        
+        // Form submission handler
+        function sendAccessRequest(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('access-form');
+            const successMessage = document.getElementById('success-message');
+            
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const github = document.getElementById('github').value;
+            const repo = document.getElementById('repo').value;
+            const reason = document.getElementById('reason').value;
+            
+            // In a real implementation, you would send this data to a server
+            // For now, we'll just simulate a successful submission
+            
+            // Create email link with pre-filled content
+            const subject = `Repository Access Request: ${repo}`;
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AGitHub Username: ${github}%0D%0ARepository: ${repo}%0D%0AReason: ${reason}`;
+            const mailtoLink = `mailto:alejandrogarcia@iteso.mx?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+            
+            // Hide error message
+            document.getElementById('error-message').style.display = 'none';
+            
+            return false;
+        }
+        
+        // Get repository name from URL if available
+        function getRepoFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const repo = urlParams.get('repo');
+            
+            if (repo) {
+                const repoSelect = document.getElementById('repo');
+                for (let i = 0; i < repoSelect.options.length; i++) {
+                    if (repoSelect.options[i].value === repo) {
+                        repoSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // Initialize with saved language preference
+        translatePage(currentLang);
+        
+        // Check for repository in URL
+        getRepoFromUrl();
+    </script>
+</body>
+</html>
