@@ -3,1024 +3,512 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Garcia - Cloud & DevOps Engineer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #0066cc;
-            --secondary-color: #ff9900;
-            --dark-color: #232f3e;
-            --light-color: #f8f9fa;
-            --text-color: #333;
-            --link-color: #0066cc;
-            --visited-link-color: #551A8B;
-            
-            /* Dark mode variables - OneDark theme */
-            --dark-mode-bg: #282c34;
-            --dark-mode-text: #abb2bf;
-            --dark-mode-card-bg: #21252b;
-            --dark-mode-secondary: #e5c07b;
-            --dark-mode-link: #61afef;
-            --dark-mode-visited-link: #c678dd;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-color);
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        /* Dark mode styles */
-        body.dark-mode {
-            color: var(--dark-mode-text);
-            background-color: var(--dark-mode-bg);
-        }
-        
-        body.dark-mode .project-card,
-        body.dark-mode .project-tag {
-            background-color: var(--dark-mode-card-bg);
-            color: var(--dark-mode-text);
-        }
-        
-        body.dark-mode h2,
-        body.dark-mode .project-title,
-        body.dark-mode .section-subtitle {
-            color: var(--dark-mode-text);
-        }
-        
-        body.dark-mode .timeline-item .date {
-            color: #aaa;
-        }
-        
-        /* Dark mode link color adjustment for better contrast - only for text links */
-        body.dark-mode a:not(.cta-button):not(.social-links a):not(.language-btn),
-        body.dark-mode .project-link {
-            color: var(--dark-mode-link);
-        }
-        
-        body.dark-mode a:not(.cta-button):not(.social-links a):not(.language-btn):visited,
-        body.dark-mode .project-link:visited {
-            color: var(--dark-mode-visited-link);
-        }
-        
-        /* Theme toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(0,0,0,0.1);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--text-color);
-            transition: background-color 0.3s;
-        }
-        
-        body.dark-mode .theme-toggle {
-            background: rgba(255,255,255,0.1);
-            color: var(--dark-mode-text);
-        }
-        
-        .theme-toggle:hover {
-            background: rgba(0,0,0,0.2);
-        }
-        
-        body.dark-mode .theme-toggle:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        
-        /* Language selector */
-        .language-selector {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .language-btn {
-            background: rgba(0,0,0,0.2);
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-            cursor: pointer;
-            color: white;
-            transition: background-color 0.3s;
-            font-weight: bold;
-        }
-        
-        body.dark-mode .language-btn {
-            background: rgba(255,255,255,0.2);
-            color: white;
-        }
-        
-        .language-btn:hover,
-        .language-btn.active {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        body.dark-mode .language-btn.active {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-        
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--secondary-color);
-            margin-bottom: 20px;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-        
-        .social-links {
-            margin: 20px 0;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .cta-button:hover {
-            background-color: #e68a00;
-        }
-        
-        section {
-            padding: 60px 0;
-        }
-        
-        h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--dark-color);
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--secondary-color);
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            padding: 20px;
-        }
-        
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .skill-tag {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-        
-        body.dark-mode .skill-tag {
-            background-color: var(--dark-mode-secondary);
-            color: var(--dark-mode-bg);
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .certifications-banner img {
-            height: 120px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .certifications-banner img:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        
-        .certifications-banner a {
-            text-decoration: none;
-            position: relative;
-        }
-        
-        .certifications-banner a::after {
-            content: attr(title);
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0,0,0,0.8);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-        
-        body.dark-mode .certifications-banner a::after {
-            background-color: rgba(255,255,255,0.9);
-            color: var(--dark-mode-bg);
-        }
-        
-        .certifications-banner a:hover::after {
-            opacity: 1;
-        }
-        
-        .project-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .project-content {
-            padding: 20px;
-        }
-        
-        .project-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--dark-color);
-        }
-        
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 15px 0;
-        }
-        
-        .project-tag {
-            background-color: #f0f0f0;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-        
-        body.dark-mode .project-tag {
-            background-color: var(--dark-mode-secondary);
-            color: var(--dark-mode-bg);
-        }
-        
-        .project-link {
-            display: inline-block;
-            color: var(--link-color);
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        
-        .education-experience {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-top: 40px;
-        }
-        
-        .education, .experience {
-            flex: 1;
-            min-width: 300px;
-            padding: 20px;
-        }
-        
-        .timeline-item {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 30px;
-            border-left: 2px solid var(--secondary-color);
-        }
-        
-        .timeline-item h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-        
-        .timeline-item .date {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        
-        .section-subtitle {
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-        
-        body.dark-mode .section-subtitle {
-            color: var(--dark-mode-secondary);
-        }
-        
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-        }
-        
-        .disclaimer {
-            max-width: 800px;
-            margin: 20px auto;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .disclaimer .highlight {
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-        
-        body.dark-mode .disclaimer .highlight {
-            color: var(--dark-mode-secondary);
-        }
-        
-        body.dark-mode .amazon-q-credit img {
-            content: url("https://logowik.com/content/uploads/images/amazon-q-dark-mode5177.jpg");
-        }
-        
-        @media (max-width: 768px) {
-            .about-content {
-                flex-direction: column;
+    <title>Alex Garcia - Cloud &amp; DevOps Engineer</title>
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src https://cdnjs.cloudflare.com; img-src 'self' https://images.credly.com data:; connect-src https://api.github.com">
+
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Alex Garcia - Cloud &amp; DevOps Engineer">
+    <meta property="og:description" content="Cloud DevOps Labs Index - Educational lab repositories for AWS, IaC, Containers, CI/CD, and GenAI">
+    <meta property="og:url" content="https://gamaware.github.io/cloud-devops-labs-index/">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://gamaware.github.io/cloud-devops-labs-index/">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Alex Garcia",
+        "jobTitle": "DevOps Consultant",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "AWS"
+        },
+        "alumniOf": [
+            {
+                "@type": "CollegeOrUniversity",
+                "name": "ITESO"
+            },
+            {
+                "@type": "CollegeOrUniversity",
+                "name": "Monterrey Institute of Technology"
             }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .education-experience {
-                flex-direction: column;
-            }
-            
-            .certifications-banner img {
-                height: 80px;
-            }
-            
-            .certifications-banner a::after {
-                font-size: 0.7rem;
-                bottom: -25px;
-                padding: 3px 8px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-            }
-            
-            .cta-button {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-                margin: 5px;
-            }
-            
-            .language-selector {
-                top: 70px;
-                left: 10px;
-            }
-            
-            .theme-toggle {
-                top: 70px;
-                right: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .certifications-banner img {
-                height: 60px;
-            }
-            
-            .certifications-banner a::after {
-                font-size: 0.6rem;
-                bottom: -20px;
-                padding: 2px 6px;
-            }
-            
-            .social-links a {
-                font-size: 1.2rem;
-                margin: 0 5px;
-            }
-            
-            section {
-                padding: 40px 0;
-            }
-        }
-    </style>
+        ],
+        "url": "https://gamaware.github.io/cloud-devops-labs-index/",
+        "sameAs": [
+            "https://github.com/gamaware",
+            "https://www.linkedin.com/in/gamaware/",
+            "https://medium.com/@gamaware"
+        ]
+    }
+    </script>
+
+    <!-- Preconnect hints -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://images.credly.com" crossorigin>
+
+    <!-- Font Awesome with SRI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3HjDXM6+AOJyxQ2TDhmYQBFR/GIZqiAp+QXtfS+I3GhZw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
-    
-    <!-- Language Selector -->
-    <div class="language-selector">
-        <button class="language-btn active" data-lang="en">EN</button>
-        <button class="language-btn" data-lang="es">ES</button>
-        <button class="language-btn" data-lang="pt">PT</button>
-    </div>
-    <header>
-        <div class="container">
-            <h1>Alex Garcia</h1>
-            <p class="tagline">DevOps Consultant | Cloud Architect | Professor</p>
-            <div class="social-links">
-                <a href="https://github.com/gamaware" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/gamaware/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:alejandrogarcia@iteso.mx" onclick="window.location.href='mailto:alejandrogarcia@iteso.mx'; return false;"><i class="fas fa-envelope"></i></a>
-                <a href="https://discord.gg/GpuUyg5g" target="_blank"><i class="fab fa-discord"></i></a>
-                <a href="https://medium.com/@gamaware" target="_blank"><i class="fab fa-medium"></i></a>
-            </div>
-            <div>
-                <a href="https://alexgarcia.info/" class="cta-button">View Resume</a>
-                <a href="https://github.com/gamaware/cloud-devops-labs-index" class="cta-button">Explore Labs</a>
-                <a href="learning-resources.html" class="cta-button">Learning Resources</a>
-            </div>
-        </div>
-    </header>
+    <!-- Skip Navigation Link -->
+    <a href="#main-content" class="skip-link" data-i18n="skipToContent">Skip to main content</a>
 
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>With over 15 years of diverse IT experience, I am a DevOps Consultant at AWS, where I architect and implement enterprise-grade cloud solutions for clients across various industries.</p>
-                    
-                    <p>I specialize in infrastructure automation, CI/CD pipelines, containerization, and cloud-native architectures. My technical expertise includes AWS services, Terraform, Kubernetes, Docker, and modern DevOps methodologies that enable organizations to achieve operational excellence and accelerate their digital transformation.</p>
-                    
-                    <p>As a professor at <a href="https://iteso.mx/" target="_blank">ITESO</a> (Western Institute of Technology and Higher Education), I teach <strong>Scalable System Design</strong> and <strong>Cloud Architecture</strong> in the Department of Electronics, Systems and Computer Science, bridging academic concepts with real-world industry applications.</p>
-                    
-                    <p>Join my <a href="https://discord.gg/GpuUyg5g" target="_blank">Discord server</a> for discussions on cloud technologies and DevOps practices, and follow my technical blog posts on <a href="https://medium.com/@gamaware" target="_blank">Medium</a>.</p>
-                    
-                    <div class="skills">
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">Serverless</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Git/GitHub</span>
-                        <span class="skill-tag">System Design</span>
-                        <span class="skill-tag">DevOps</span>
-                        <span class="skill-tag">Linux</span>
-                        <span class="skill-tag">Terraform</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">CI/CD</span>
-                    </div>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar__container">
+            <a href="index.html" class="navbar__brand">Alex Garcia</a>
+            <button class="navbar__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+                <span class="navbar__toggle-icon"></span>
+            </button>
+            <div class="navbar__menu" id="nav-menu" role="menubar">
+                <a href="#about" data-i18n="nav.about">About</a>
+                <a href="#experience" data-i18n="nav.experience">Experience</a>
+                <a href="#certifications" data-i18n="nav.certifications">Certifications</a>
+                <a href="#labs" data-i18n="nav.labs">Labs</a>
+                <a href="#skills" data-i18n="nav.skills">Skills</a>
+                <a href="#contact" data-i18n="nav.contact">Contact</a>
+                <a href="learning-resources.html" data-i18n="nav.resources">Resources</a>
+                <a href="access-request.html" data-i18n="nav.accessRequest">Access Request</a>
+                <button class="navbar__theme-toggle" aria-label="Toggle theme" onclick="ThemeEngine.toggle()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="navbar__lang-selector">
+                    <button class="navbar__lang-btn" data-lang="en" onclick="LocaleEngine.setLocale('en')">EN</button>
+                    <button class="navbar__lang-btn" data-lang="es" onclick="LocaleEngine.setLocale('es')">ES</button>
+                    <button class="navbar__lang-btn" data-lang="pt" onclick="LocaleEngine.setLocale('pt')">PT</button>
                 </div>
             </div>
         </div>
-    </section>
+    </nav>
 
-    <section id="experience">
-        <div class="container">
-            <h2>Professional Experience</h2>
-            <div class="education-experience">
-                <div class="experience">
-                    <h3 class="section-subtitle">Current & Past Professional Roles</h3>
-                    <div class="timeline-item">
-                        <h3>DevOps Consultant at AWS</h3>
-                        <div class="date">Jan 2023 - Present</div>
-                        <p>Architecting and implementing enterprise-grade CI/CD pipelines and infrastructure automation solutions for Fortune 500 clients. Leveraging GitHub Actions, AWS CodePipeline, and CDK to orchestrate deployments of serverless architectures and containerized microservices. Implementing infrastructure as code with Terraform to provision secure, multi-account environments adhering to AWS Well-Architected principles.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <h3>Senior Site Reliability Engineer at Wizeline</h3>
-                        <div class="date">Mar 2022 - Nov 2022</div>
-                        <p>Led mission-critical on-premises to AWS cloud migration initiatives utilizing AWS Database Migration Service, RDS, and infrastructure as code. Implemented automated deployment pipelines with comprehensive monitoring and alerting, resulting in 99.99% uptime and 40% reduction in operational overhead.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <h3>Linux Customer Success Systems Engineer at Rackspace</h3>
-                        <div class="date">Aug 2021 - Mar 2022</div>
-                        <p>Optimized hybrid cloud infrastructure operations through automation and implementation of SRE practices. Designed and deployed monitoring solutions using Prometheus and Grafana, enabling proactive issue resolution and enhanced system reliability across customer environments.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <h3>DevOps Engineer at Oracle</h3>
-                        <div class="date">Jan 2020 - Jul 2021</div>
-                        <p>Spearheaded Infrastructure as Code initiatives using Terraform and Ansible for Oracle's global demonstration environments. Designed and maintained CI/CD pipelines with Jenkins for automated deployment, testing, and monitoring of mission-critical Oracle products across distributed Linux environments.</p>
-                    </div>
-                </div>
-                
-                <div class="education">
-                    <h3 class="section-subtitle">Current Teaching & Academic Background</h3>
-                    <div class="timeline-item">
-                        <h3>Professor at ITESO</h3>
-                        <div class="date">Aug 2024 - Present</div>
-                        <p>Teaching advanced courses in Scalable System Design and Cloud Architecture in the Department of Electronics, Systems and Computer Science. Developing curriculum that bridges theoretical concepts with practical industry applications, preparing students for real-world cloud engineering challenges.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <h3>Master's in Computer Science</h3>
-                        <div class="date">Monterrey Institute of Technology and Higher Education (2018)</div>
-                        <p>Specialized in distributed systems and cloud computing architectures. Completed thesis on scalable microservice architectures.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <h3>Bachelor's Degree</h3>
-                        <div class="date">Western Institute of Technology and Higher Education (ITESO) (2015)</div>
-                        <p>Computer Systems Engineering with focus on software development. Graduated with honors.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main id="main-content">
 
-    <section id="certifications">
-        <div class="container">
-            <h2>Certifications</h2>
-            <div class="certifications-banner" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 30px 0;">
-                <a href="https://www.credly.com/badges/72d62ed5-7e9c-4fd8-b288-a6b29bb51aff" target="_blank" title="AWS Certified Cloud Practitioner">
-                    <img src="https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png" alt="AWS Cloud Practitioner" class="cert-badge">
-                </a>
-                <a href="https://www.credly.com/badges/0bdbe174-65aa-4510-9205-ebbee0874c89" target="_blank" title="AWS Certified Solutions Architect – Associate">
-                    <img src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png" alt="AWS Solutions Architect Professional" class="cert-badge">
-                </a>
-                <a href="https://www.credly.com/badges/8610b61c-e172-4673-a6dd-2e618065394b" target="_blank" title="AWS Certified Developer – Associate">
-                    <img src="https://images.credly.com/size/340x340/images/b9feab85-1a43-4f6c-99a5-631b88d5461b/image.png" alt="AWS Developer Associate" class="cert-badge">
-                </a>
-                <a href="https://www.credly.com/badges/ab19fab5-ea52-4792-acab-cd3e0998ca0b" target="_blank" title="AWS Certified SysOps Administrator – Associate">
-                    <img src="https://images.credly.com/size/340x340/images/f0d3fbb9-bfa7-4017-9989-7bde8eaf42b1/image.png" alt="AWS SysOps Administrator Associate" class="cert-badge">
-                </a>
-                <a href="https://www.credly.com/badges/10f6d1a4-34cd-487b-b6da-49442dc5c0c7" target="_blank" title="AWS Academy Certified Educator">
-                    <img src="https://images.credly.com/size/340x340/images/a8a0c0e1-8682-4f1e-9758-7453882f84cf/image.png" alt="AWS Academy Certified Educator" class="cert-badge">
-                </a>
-                <a href="https://www.credly.com/badges/f2abd438-dab4-4572-a3a6-65938394c876" target="_blank" title="HashiCorp Certified: Terraform Associate (003)">
-                    <img src="https://images.credly.com/size/340x340/images/99289602-861e-4929-8277-773e63a2fa6f/image.png" alt="HashiCorp Certified: Terraform Associate" class="cert-badge">
-                </a>
-            </div>
-            <div style="text-align: center;">
-                <a href="https://www.credly.com/users/alex-garcia.5f1a6960" target="_blank" class="cta-button">All My Certifications</a>
-            </div>
-        </div>
-    </section>
-    
-    <section id="projects">
-        <div class="container">
-            <h2>Cloud DevOps and System Design Labs</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Foundational Labs (100-Level)</h3>
-                        <p>Introductory labs covering AWS basics, simple IaC, Docker fundamentals, and System Design concepts.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">AWS CLI</span>
-                            <span class="project-tag">CloudFormation</span>
-                            <span class="project-tag">Docker</span>
-                            <span class="project-tag">System Design</span>
-                        </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-100" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-100')" oncontextmenu="return setRepoParam(event, 'cloud-devops-labs-100')">Explore Labs →</a>
-                    </div>
+        <!-- Hero Section -->
+        <header class="hero section animate-on-scroll" id="hero">
+            <div class="container">
+                <h1>Alex Garcia</h1>
+                <p class="tagline" data-i18n="hero.tagline">DevOps Consultant | Cloud Architect | Professor</p>
+                <div class="social-links">
+                    <a href="https://github.com/gamaware" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/gamaware/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:alejandrogarcia@iteso.mx" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://discord.gg/GpuUyg5g" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://medium.com/@gamaware" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+                        <i class="fab fa-medium"></i>
+                    </a>
                 </div>
-                
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Intermediate Labs (200-Level)</h3>
-                        <p>Build on foundational knowledge with CI/CD pipelines, containerized apps, and System Design patterns.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">GitHub Actions</span>
-                            <span class="project-tag">AWS CDK</span>
-                            <span class="project-tag">EKS</span>
-                            <span class="project-tag">System Design</span>
-                        </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-200" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-200')" oncontextmenu="return setRepoParam(event, 'cloud-devops-labs-200')">Explore Labs →</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Advanced Projects (300-Level)</h3>
-                        <p>Complex architectures, best practices, and production-grade System Design implementations.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">GitOps</span>
-                            <span class="project-tag">Observability</span>
-                            <span class="project-tag">Security</span>
-                            <span class="project-tag">System Design</span>
-                        </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-300" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-300')" oncontextmenu="return setRepoParam(event, 'cloud-devops-labs-300')">Explore Projects →</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Expert Projects (400-Level)</h3>
-                        <p>Enterprise-grade solutions and cutting-edge technologies like GenAI and System Design for data mesh.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Bedrock</span>
-                            <span class="project-tag">Platform Engineering</span>
-                            <span class="project-tag">Multi-Region</span>
-                            <span class="project-tag">System Design</span>
-                        </div>
-                        <a href="https://github.com/gamaware/cloud-devops-labs-400" class="project-link" onclick="checkRepoAccess(event, 'cloud-devops-labs-400')" oncontextmenu="return setRepoParam(event, 'cloud-devops-labs-400')">Explore Projects →</a>
-                    </div>
+                <div>
+                    <a href="https://alexgarcia.info/" class="btn btn--primary" target="_blank" rel="noopener noreferrer" data-i18n="hero.viewResume">View Resume</a>
+                    <a href="#labs" class="btn btn--secondary" data-i18n="hero.exploreLabs">Explore Labs</a>
+                    <a href="learning-resources.html" class="btn btn--secondary" data-i18n="hero.learningResources">Learning Resources</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <footer>
+        <!-- About Section -->
+        <section id="about" class="section animate-on-scroll">
+            <div class="container">
+                <h2 class="section__title" data-i18n="about.title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p data-i18n="about.text1">With over 15 years of diverse IT experience, I am a DevOps Consultant at AWS, where I architect and implement enterprise-grade cloud solutions for clients across various industries.</p>
+                        <p data-i18n="about.text2">I specialize in infrastructure automation, CI/CD pipelines, containerization, and cloud-native architectures. My technical expertise includes AWS services, Terraform, Kubernetes, Docker, and modern DevOps methodologies that enable organizations to achieve operational excellence and accelerate their digital transformation.</p>
+                        <p data-i18n="about.text3">As a professor at ITESO (Western Institute of Technology and Higher Education), I teach Scalable System Design and Cloud Architecture in the Department of Electronics, Systems and Computer Science, bridging academic concepts with real-world industry applications.</p>
+                        <p data-i18n="about.text4">Join my Discord server for discussions on cloud technologies and DevOps practices, and follow my technical blog posts on Medium.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section animate-on-scroll">
+            <div class="container">
+                <h2 class="section__title" data-i18n="experience.title">Professional Experience</h2>
+                <div class="experience-grid">
+                    <div class="experience-column">
+                        <h3 class="section__subtitle" data-i18n="experience.rolesTitle">Current &amp; Past Professional Roles</h3>
+                        <div class="timeline">
+                            <div class="timeline-item animate-on-scroll">
+                                <h3 data-i18n="experience.devopsConsultant">DevOps Consultant at AWS</h3>
+                                <div class="date" data-i18n="experience.devopsConsultantDate">Jan 2023 - Present</div>
+                                <p data-i18n="experience.devopsConsultantDesc">Architecting and implementing enterprise-grade CI/CD pipelines and infrastructure automation solutions for Fortune 500 clients. Leveraging GitHub Actions, AWS CodePipeline, and CDK to orchestrate deployments of serverless architectures and containerized microservices. Implementing infrastructure as code with Terraform to provision secure, multi-account environments adhering to AWS Well-Architected principles.</p>
+                            </div>
+                            <div class="timeline-item animate-on-scroll">
+                                <h3 data-i18n="experience.sreWizeline">Senior Site Reliability Engineer at Wizeline</h3>
+                                <div class="date" data-i18n="experience.sreWizelineDate">Mar 2022 - Nov 2022</div>
+                                <p data-i18n="experience.sreWizelineDesc">Led mission-critical on-premises to AWS cloud migration initiatives utilizing AWS Database Migration Service, RDS, and infrastructure as code. Implemented automated deployment pipelines with comprehensive monitoring and alerting, resulting in 99.99% uptime and 40% reduction in operational overhead.</p>
+                            </div>
+                            <div class="timeline-item animate-on-scroll">
+                                <h3 data-i18n="experience.linuxRackspace">Linux Customer Success Systems Engineer at Rackspace</h3>
+                                <div class="date" data-i18n="experience.linuxRackspaceDate">Aug 2021 - Mar 2022</div>
+                                <p data-i18n="experience.linuxRackspaceDesc">Optimized hybrid cloud infrastructure operations through automation and implementation of SRE practices. Designed and deployed monitoring solutions using Prometheus and Grafana, enabling proactive issue resolution and enhanced system reliability across customer environments.</p>
+                            </div>
+                            <div class="timeline-item animate-on-scroll">
+                                <h3 data-i18n="experience.devopsOracle">DevOps Engineer at Oracle</h3>
+                                <div class="date" data-i18n="experience.devopsOracleDate">Jan 2020 - Jul 2021</div>
+                                <p data-i18n="experience.devopsOracleDesc">Spearheaded Infrastructure as Code initiatives using Terraform and Ansible for Oracle's global demonstration environments. Designed and maintained CI/CD pipelines with Jenkins for automated deployment, testing, and monitoring of mission-critical Oracle products across distributed Linux environments.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="education-column">
+                        <h3 class="section__subtitle" data-i18n="experience.educationTitle">Current Teaching &amp; Academic Background</h3>
+                        <div class="timeline">
+                            <div class="timeline-item animate-on-scroll">
+                                <h3 data-i18n="experience.professorIteso">Professor at ITESO</h3>
+                                <div class="date" data-i18n="experience.professorItesoDate">Aug 2024 - Present</div>
+                                <p data-i18n="experience.professorItesoDesc">Teaching advanced courses in Scalable System Design and Cloud Architecture in the Department of Electronics, Systems and Computer Science. Developing curriculum that bridges theoretical concepts with practical industry applications, preparing students for real-world cloud engineering challenges.</p>
+                            </div>
+                            <div class="timeline-item animate-on-scroll">
+                                <h3 data-i18n="experience.mastersDegree">Master's in Computer Science</h3>
+                                <div class="date" data-i18n="experience.mastersSchool">Monterrey Institute of Technology and Higher Education (2018)</div>
+                                <p data-i18n="experience.mastersDesc">Specialized in distributed systems and cloud computing architectures. Completed thesis on scalable microservice architectures.</p>
+                            </div>
+                            <div class="timeline-item animate-on-scroll">
+                                <h3 data-i18n="experience.bachelorDegree">Bachelor's Degree</h3>
+                                <div class="date" data-i18n="experience.bachelorSchool">Western Institute of Technology and Higher Education (ITESO) (2015)</div>
+                                <p data-i18n="experience.bachelorDesc">Computer Systems Engineering with focus on software development. Graduated with honors.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="section animate-on-scroll">
+            <div class="container">
+                <h2 class="section__title" data-i18n="certifications.title">Certifications</h2>
+                <div class="cert-grid">
+                    <a href="https://www.credly.com/badges/72d62ed5-7e9c-4fd8-b288-a6b29bb51aff" target="_blank" rel="noopener noreferrer" title="AWS Certified Cloud Practitioner">
+                        <img src="https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png" alt="AWS Certified Cloud Practitioner badge" class="cert-badge" loading="lazy">
+                    </a>
+                    <a href="https://www.credly.com/badges/0bdbe174-65aa-4510-9205-ebbee0874c89" target="_blank" rel="noopener noreferrer" title="AWS Certified Solutions Architect – Associate">
+                        <img src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png" alt="AWS Certified Solutions Architect Associate badge" class="cert-badge" loading="lazy">
+                    </a>
+                    <a href="https://www.credly.com/badges/8610b61c-e172-4673-a6dd-2e618065394b" target="_blank" rel="noopener noreferrer" title="AWS Certified Developer – Associate">
+                        <img src="https://images.credly.com/size/340x340/images/b9feab85-1a43-4f6c-99a5-631b88d5461b/image.png" alt="AWS Certified Developer Associate badge" class="cert-badge" loading="lazy">
+                    </a>
+                    <a href="https://www.credly.com/badges/ab19fab5-ea52-4792-acab-cd3e0998ca0b" target="_blank" rel="noopener noreferrer" title="AWS Certified SysOps Administrator – Associate">
+                        <img src="https://images.credly.com/size/340x340/images/f0d3fbb9-bfa7-4017-9989-7bde8eaf42b1/image.png" alt="AWS Certified SysOps Administrator Associate badge" class="cert-badge" loading="lazy">
+                    </a>
+                    <a href="https://www.credly.com/badges/10f6d1a4-34cd-487b-b6da-49442dc5c0c7" target="_blank" rel="noopener noreferrer" title="AWS Academy Certified Educator">
+                        <img src="https://images.credly.com/size/340x340/images/a8a0c0e1-8682-4f1e-9758-7453882f84cf/image.png" alt="AWS Academy Certified Educator badge" class="cert-badge" loading="lazy">
+                    </a>
+                    <a href="https://www.credly.com/badges/f2abd438-dab4-4572-a3a6-65938394c876" target="_blank" rel="noopener noreferrer" title="HashiCorp Certified: Terraform Associate (003)">
+                        <img src="https://images.credly.com/size/340x340/images/99289602-861e-4929-8277-773e63a2fa6f/image.png" alt="HashiCorp Certified Terraform Associate badge" class="cert-badge" loading="lazy">
+                    </a>
+                </div>
+                <div style="text-align: center; margin-top: var(--space-lg);">
+                    <a href="https://www.credly.com/users/alex-garcia.5f1a6960" target="_blank" rel="noopener noreferrer" class="btn btn--primary" data-i18n="certifications.viewAll">All My Certifications</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Labs Section -->
+        <section id="labs" class="section animate-on-scroll">
+            <div class="container">
+                <h2 class="section__title" data-i18n="labs.title">Cloud DevOps and System Design Labs</h2>
+                <div class="labs-grid">
+                    <div class="lab-card animate-on-scroll">
+                        <div class="lab-card__content">
+                            <span class="lab-card__level">100</span>
+                            <h3 class="lab-card__title" data-i18n="labs.foundationalTitle">Foundational Labs (100-Level)</h3>
+                            <p data-i18n="labs.foundationalDesc">Introductory labs covering AWS basics, simple IaC, Docker fundamentals, and System Design concepts.</p>
+                            <div class="lab-card__tags">
+                                <span class="skill-tag">AWS CLI</span>
+                                <span class="skill-tag">CloudFormation</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">System Design</span>
+                            </div>
+                            <a href="https://github.com/gamaware/cloud-devops-labs-100" class="lab-card__link" target="_blank" rel="noopener noreferrer" data-i18n="labs.exploreLabs">Explore Labs →</a>
+                        </div>
+                    </div>
+                    <div class="lab-card animate-on-scroll">
+                        <div class="lab-card__content">
+                            <span class="lab-card__level">200</span>
+                            <h3 class="lab-card__title" data-i18n="labs.intermediateTitle">Intermediate Labs (200-Level)</h3>
+                            <p data-i18n="labs.intermediateDesc">Build on foundational knowledge with CI/CD pipelines, containerized apps, and System Design patterns.</p>
+                            <div class="lab-card__tags">
+                                <span class="skill-tag">GitHub Actions</span>
+                                <span class="skill-tag">AWS CDK</span>
+                                <span class="skill-tag">EKS</span>
+                                <span class="skill-tag">System Design</span>
+                            </div>
+                            <a href="https://github.com/gamaware/cloud-devops-labs-200" class="lab-card__link" target="_blank" rel="noopener noreferrer" data-i18n="labs.exploreLabs2">Explore Labs →</a>
+                        </div>
+                    </div>
+                    <div class="lab-card animate-on-scroll">
+                        <div class="lab-card__content">
+                            <span class="lab-card__level">300</span>
+                            <h3 class="lab-card__title" data-i18n="labs.advancedTitle">Advanced Projects (300-Level)</h3>
+                            <p data-i18n="labs.advancedDesc">Complex architectures, best practices, and production-grade System Design implementations.</p>
+                            <div class="lab-card__tags">
+                                <span class="skill-tag">GitOps</span>
+                                <span class="skill-tag">Observability</span>
+                                <span class="skill-tag">Security</span>
+                                <span class="skill-tag">System Design</span>
+                            </div>
+                            <a href="https://github.com/gamaware/cloud-devops-labs-300" class="lab-card__link" target="_blank" rel="noopener noreferrer" data-i18n="labs.exploreProjects">Explore Projects →</a>
+                        </div>
+                    </div>
+                    <div class="lab-card animate-on-scroll">
+                        <div class="lab-card__content">
+                            <span class="lab-card__level">400</span>
+                            <h3 class="lab-card__title" data-i18n="labs.expertTitle">Expert Projects (400-Level)</h3>
+                            <p data-i18n="labs.expertDesc">Enterprise-grade solutions and cutting-edge technologies like GenAI and System Design for data mesh.</p>
+                            <div class="lab-card__tags">
+                                <span class="skill-tag">Bedrock</span>
+                                <span class="skill-tag">Platform Engineering</span>
+                                <span class="skill-tag">Multi-Region</span>
+                                <span class="skill-tag">System Design</span>
+                            </div>
+                            <a href="https://github.com/gamaware/cloud-devops-labs-400" class="lab-card__link" target="_blank" rel="noopener noreferrer" data-i18n="labs.exploreProjects2">Explore Projects →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section animate-on-scroll">
+            <div class="container">
+                <h2 class="section__title" data-i18n="skills.title">Skills</h2>
+                <div class="skills" style="justify-content: center;">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Serverless</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Git/GitHub</span>
+                    <span class="skill-tag">System Design</span>
+                    <span class="skill-tag">DevOps</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">Terraform</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">CI/CD</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
         <div class="container">
-            <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
-            <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are <span class="highlight">my own</span> and do <span class="highlight">not represent</span> the opinions of my employer.</p>
-            <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
+            <p data-i18n="footer.copyright">&copy; 2025 Alex Garcia. All rights reserved.</p>
+            <p class="footer__disclaimer" data-i18n="footer.disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are <span class="highlight">my own</span> and do <span class="highlight">not represent</span> the opinions of my employer.</p>
+            <p style="font-style: italic; margin-top: var(--space-md); font-size: var(--font-size-xs); letter-spacing: 2px; opacity: 0.8;" data-i18n="footer.carpeDiem">Carpe Diem</p>
         </div>
     </footer>
 
-    <!-- JavaScript for theme toggle and language switching -->
+    <!-- Page-specific translations (must come BEFORE main.js) -->
     <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        // Check for saved theme preference or respect OS preference
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
-            document.body.classList.add('dark-mode');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-            } else {
-                localStorage.setItem('theme', 'light');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-            }
-        });
-        
-        // Language switching functionality
-        const languageBtns = document.querySelectorAll('.language-btn');
-        
-        // Translation data
-        const translations = {
+        const PAGE_TRANSLATIONS = {
             en: {
-                aboutMe: "About Me",
-                experience: "Professional Experience",
-                certifications: "Certifications",
-                projects: "Cloud DevOps Labs",
-                viewResume: "View Resume",
-                exploreLabs: "Explore Labs",
-                disclaimer: "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.",
-                tagline: "DevOps Consultant | Cloud Architect | Professor",
-                aboutText1: "With over 15 years of diverse IT experience, I am a DevOps Consultant at AWS, where I architect and implement enterprise-grade cloud solutions for clients across various industries.",
-                aboutText2: "I specialize in infrastructure automation, CI/CD pipelines, containerization, and cloud-native architectures. My technical expertise includes AWS services, Terraform, Kubernetes, Docker, and modern DevOps methodologies that enable organizations to achieve operational excellence and accelerate their digital transformation.",
-                aboutText3: "As a professor at ITESO (Western Institute of Technology and Higher Education), I teach Scalable System Design and Cloud Architecture in the Department of Electronics, Systems and Computer Science, bridging academic concepts with real-world industry applications.",
-                aboutText4: "Join my Discord server for discussions on cloud technologies and DevOps practices, and follow my technical blog posts on Medium.",
-                devopsConsultant: "DevOps Consultant at AWS",
-                devopsConsultantDate: "Jan 2023 - Present",
-                devopsConsultantDesc: "Architecting and implementing enterprise-grade CI/CD pipelines and infrastructure automation solutions for Fortune 500 clients. Leveraging GitHub Actions, AWS CodePipeline, and CDK to orchestrate deployments of serverless architectures and containerized microservices. Implementing infrastructure as code with Terraform to provision secure, multi-account environments adhering to AWS Well-Architected principles.",
-                sreWizeline: "Senior Site Reliability Engineer at Wizeline",
-                sreWizelineDate: "Mar 2022 - Nov 2022",
-                sreWizelineDesc: "Led mission-critical on-premises to AWS cloud migration initiatives utilizing AWS Database Migration Service, RDS, and infrastructure as code. Implemented automated deployment pipelines with comprehensive monitoring and alerting, resulting in 99.99% uptime and 40% reduction in operational overhead.",
-                linuxRackspace: "Linux Customer Success Systems Engineer at Rackspace",
-                linuxRackspaceDate: "Aug 2021 - Mar 2022",
-                linuxRackspaceDesc: "Optimized hybrid cloud infrastructure operations through automation and implementation of SRE practices. Designed and deployed monitoring solutions using Prometheus and Grafana, enabling proactive issue resolution and enhanced system reliability across customer environments.",
-                devopsOracle: "DevOps Engineer at Oracle",
-                devopsOracleDate: "Jan 2020 - Jul 2021",
-                devopsOracleDesc: "Spearheaded Infrastructure as Code initiatives using Terraform and Ansible for Oracle's global demonstration environments. Designed and maintained CI/CD pipelines with Jenkins for automated deployment, testing, and monitoring of mission-critical Oracle products across distributed Linux environments.",
-                professorIteso: "Professor at ITESO",
-                professorItesoDate: "Current",
-                professorItesoDesc: "Teaching advanced courses in Scalable System Design and Cloud Architecture in the Department of Electronics, Systems and Computer Science. Developing curriculum that bridges theoretical concepts with practical industry applications, preparing students for real-world cloud engineering challenges.",
-                mastersDegree: "Master's in Computer Science",
-                mastersSchool: "Monterrey Institute of Technology and Higher Education",
-                mastersDesc: "Specialized in distributed systems and cloud computing architectures.",
-                bachelorDegree: "Bachelor's Degree",
-                bachelorSchool: "Western Institute of Technology and Higher Education (ITESO)",
-                bachelorDesc: "Computer Systems Engineering with focus on software development.",
-                foundationalLabs: "Foundational Labs (100-Level)",
-                foundationalLabsDesc: "Introductory labs covering AWS basics, simple IaC, Docker fundamentals, and more.",
-                intermediateLabs: "Intermediate Labs (200-Level)",
-                intermediateLabsDesc: "Build on foundational knowledge with CI/CD pipelines, containerized apps, and more.",
-                advancedProjects: "Advanced Projects (300-Level)",
-                advancedProjectsDesc: "Complex architectures, best practices, and production-grade implementations.",
-                expertProjects: "Expert Projects (400-Level)",
-                expertProjectsDesc: "Enterprise-grade solutions and cutting-edge technologies like GenAI and data mesh.",
-                exploreLabs: "Explore Labs →",
-                exploreProjects: "Explore Projects →",
-                copyright: "© 2025 Alex Garcia. All rights reserved.",
-                carpeDiem: "Carpe Diem",
-                amazonQCredit: "This website was created with Amazon Q"
+                "skipToContent": "Skip to main content",
+                "nav.about": "About",
+                "nav.experience": "Experience",
+                "nav.certifications": "Certifications",
+                "nav.labs": "Labs",
+                "nav.skills": "Skills",
+                "nav.contact": "Contact",
+                "nav.resources": "Resources",
+                "nav.accessRequest": "Access Request",
+                "hero.tagline": "DevOps Consultant | Cloud Architect | Professor",
+                "hero.viewResume": "View Resume",
+                "hero.exploreLabs": "Explore Labs",
+                "hero.learningResources": "Learning Resources",
+                "about.title": "About Me",
+                "about.text1": "With over 15 years of diverse IT experience, I am a DevOps Consultant at AWS, where I architect and implement enterprise-grade cloud solutions for clients across various industries.",
+                "about.text2": "I specialize in infrastructure automation, CI/CD pipelines, containerization, and cloud-native architectures. My technical expertise includes AWS services, Terraform, Kubernetes, Docker, and modern DevOps methodologies that enable organizations to achieve operational excellence and accelerate their digital transformation.",
+                "about.text3": "As a professor at ITESO (Western Institute of Technology and Higher Education), I teach Scalable System Design and Cloud Architecture in the Department of Electronics, Systems and Computer Science, bridging academic concepts with real-world industry applications.",
+                "about.text4": "Join my Discord server for discussions on cloud technologies and DevOps practices, and follow my technical blog posts on Medium.",
+                "experience.title": "Professional Experience",
+                "experience.rolesTitle": "Current & Past Professional Roles",
+                "experience.educationTitle": "Current Teaching & Academic Background",
+                "experience.devopsConsultant": "DevOps Consultant at AWS",
+                "experience.devopsConsultantDate": "Jan 2023 - Present",
+                "experience.devopsConsultantDesc": "Architecting and implementing enterprise-grade CI/CD pipelines and infrastructure automation solutions for Fortune 500 clients. Leveraging GitHub Actions, AWS CodePipeline, and CDK to orchestrate deployments of serverless architectures and containerized microservices. Implementing infrastructure as code with Terraform to provision secure, multi-account environments adhering to AWS Well-Architected principles.",
+                "experience.sreWizeline": "Senior Site Reliability Engineer at Wizeline",
+                "experience.sreWizelineDate": "Mar 2022 - Nov 2022",
+                "experience.sreWizelineDesc": "Led mission-critical on-premises to AWS cloud migration initiatives utilizing AWS Database Migration Service, RDS, and infrastructure as code. Implemented automated deployment pipelines with comprehensive monitoring and alerting, resulting in 99.99% uptime and 40% reduction in operational overhead.",
+                "experience.linuxRackspace": "Linux Customer Success Systems Engineer at Rackspace",
+                "experience.linuxRackspaceDate": "Aug 2021 - Mar 2022",
+                "experience.linuxRackspaceDesc": "Optimized hybrid cloud infrastructure operations through automation and implementation of SRE practices. Designed and deployed monitoring solutions using Prometheus and Grafana, enabling proactive issue resolution and enhanced system reliability across customer environments.",
+                "experience.devopsOracle": "DevOps Engineer at Oracle",
+                "experience.devopsOracleDate": "Jan 2020 - Jul 2021",
+                "experience.devopsOracleDesc": "Spearheaded Infrastructure as Code initiatives using Terraform and Ansible for Oracle's global demonstration environments. Designed and maintained CI/CD pipelines with Jenkins for automated deployment, testing, and monitoring of mission-critical Oracle products across distributed Linux environments.",
+                "experience.professorIteso": "Professor at ITESO",
+                "experience.professorItesoDate": "Aug 2024 - Present",
+                "experience.professorItesoDesc": "Teaching advanced courses in Scalable System Design and Cloud Architecture in the Department of Electronics, Systems and Computer Science. Developing curriculum that bridges theoretical concepts with practical industry applications, preparing students for real-world cloud engineering challenges.",
+                "experience.mastersDegree": "Master's in Computer Science",
+                "experience.mastersSchool": "Monterrey Institute of Technology and Higher Education (2018)",
+                "experience.mastersDesc": "Specialized in distributed systems and cloud computing architectures. Completed thesis on scalable microservice architectures.",
+                "experience.bachelorDegree": "Bachelor's Degree",
+                "experience.bachelorSchool": "Western Institute of Technology and Higher Education (ITESO) (2015)",
+                "experience.bachelorDesc": "Computer Systems Engineering with focus on software development. Graduated with honors.",
+                "certifications.title": "Certifications",
+                "certifications.viewAll": "All My Certifications",
+                "labs.title": "Cloud DevOps and System Design Labs",
+                "labs.foundationalTitle": "Foundational Labs (100-Level)",
+                "labs.foundationalDesc": "Introductory labs covering AWS basics, simple IaC, Docker fundamentals, and System Design concepts.",
+                "labs.intermediateTitle": "Intermediate Labs (200-Level)",
+                "labs.intermediateDesc": "Build on foundational knowledge with CI/CD pipelines, containerized apps, and System Design patterns.",
+                "labs.advancedTitle": "Advanced Projects (300-Level)",
+                "labs.advancedDesc": "Complex architectures, best practices, and production-grade System Design implementations.",
+                "labs.expertTitle": "Expert Projects (400-Level)",
+                "labs.expertDesc": "Enterprise-grade solutions and cutting-edge technologies like GenAI and System Design for data mesh.",
+                "labs.exploreLabs": "Explore Labs →",
+                "labs.exploreLabs2": "Explore Labs →",
+                "labs.exploreProjects": "Explore Projects →",
+                "labs.exploreProjects2": "Explore Projects →",
+                "skills.title": "Skills",
+                "footer.copyright": "© 2025 Alex Garcia. All rights reserved.",
+                "footer.disclaimer": "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.",
+                "footer.carpeDiem": "Carpe Diem"
             },
             es: {
-                aboutMe: "Sobre Mí",
-                experience: "Experiencia Profesional",
-                certifications: "Certificaciones",
-                projects: "Laboratorios de DevOps en la Nube",
-                viewResume: "Ver Currículum",
-                exploreLabs: "Explorar Labs",
-                disclaimer: "Aviso: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador.",
-                tagline: "Consultor DevOps | Arquitecto Cloud | Profesor",
-                aboutText1: "Con más de 15 años de experiencia diversa en TI, soy Consultor DevOps en AWS, donde diseño e implemento soluciones cloud de nivel empresarial para clientes de diversas industrias.",
-                aboutText2: "Me especializo en automatización de infraestructura, pipelines CI/CD, containerización y arquitecturas cloud-native. Mi experiencia técnica incluye servicios AWS, Terraform, Kubernetes, Docker y metodologías DevOps modernas que permiten a las organizaciones lograr excelencia operativa y acelerar su transformación digital.",
-                aboutText3: "Como profesor en ITESO (Instituto Tecnológico y de Estudios Superiores de Occidente), enseño Diseño de Sistemas Escalables y Arquitectura Cloud en el Departamento de Electrónica, Sistemas e Informática, conectando conceptos académicos con aplicaciones reales de la industria.",
-                aboutText4: "Únete a mi servidor de Discord para discusiones sobre tecnologías cloud y prácticas DevOps, y sigue mis publicaciones técnicas en Medium.",
-                devopsConsultant: "Consultor DevOps en AWS",
-                devopsConsultantDate: "Ene 2023 - Presente",
-                devopsConsultantDesc: "Diseño e implementación de pipelines CI/CD de nivel empresarial y soluciones de automatización de infraestructura para clientes Fortune 500. Utilizando GitHub Actions, AWS CodePipeline y CDK para orquestar despliegues de arquitecturas serverless y microservicios en contenedores. Implementando infraestructura como código con Terraform para provisionar entornos multi-cuenta seguros siguiendo los principios de AWS Well-Architected.",
-                sreWizeline: "Ingeniero Senior de Confiabilidad de Sitios en Wizeline",
-                sreWizelineDate: "Mar 2022 - Nov 2022",
-                sreWizelineDesc: "Lideré iniciativas críticas de migración de on-premises a AWS utilizando AWS Database Migration Service, RDS e infraestructura como código. Implementé pipelines de despliegue automatizados con monitoreo y alertas completas, resultando en un 99.99% de disponibilidad y 40% de reducción en gastos operativos.",
-                linuxRackspace: "Ingeniero de Sistemas de Éxito del Cliente Linux en Rackspace",
-                linuxRackspaceDate: "Ago 2021 - Mar 2022",
-                linuxRackspaceDesc: "Optimicé operaciones de infraestructura híbrida en la nube mediante automatización e implementación de prácticas SRE. Diseñé y desplegué soluciones de monitoreo usando Prometheus y Grafana, permitiendo resolución proactiva de problemas y mejorando la confiabilidad del sistema en entornos de clientes.",
-                devopsOracle: "Ingeniero DevOps en Oracle",
-                devopsOracleDate: "Ene 2020 - Jul 2021",
-                devopsOracleDesc: "Lideré iniciativas de Infraestructura como Código utilizando Terraform y Ansible para entornos de demostración globales de Oracle. Diseñé y mantuve pipelines CI/CD con Jenkins para despliegue automatizado, pruebas y monitoreo de productos críticos de Oracle en entornos Linux distribuidos.",
-                professorIteso: "Profesor en ITESO",
-                professorItesoDate: "Actual",
-                professorItesoDesc: "Enseñando cursos avanzados en Diseño de Sistemas Escalables y Arquitectura Cloud en el Departamento de Electrónica, Sistemas e Informática. Desarrollando plan de estudios que conecta conceptos teóricos con aplicaciones prácticas de la industria, preparando a los estudiantes para desafíos reales de ingeniería cloud.",
-                mastersDegree: "Maestría en Ciencias de la Computación",
-                mastersSchool: "Instituto Tecnológico y de Estudios Superiores de Monterrey",
-                mastersDesc: "Especializado en sistemas distribuidos y arquitecturas de computación en la nube.",
-                bachelorDegree: "Licenciatura",
-                bachelorSchool: "Instituto Tecnológico y de Estudios Superiores de Occidente (ITESO)",
-                bachelorDesc: "Ingeniería en Sistemas Computacionales con enfoque en desarrollo de software.",
-                foundationalLabs: "Laboratorios Fundamentales (Nivel 100)",
-                foundationalLabsDesc: "Laboratorios introductorios que cubren conceptos básicos de AWS, IaC simple, fundamentos de Docker y más.",
-                intermediateLabs: "Laboratorios Intermedios (Nivel 200)",
-                intermediateLabsDesc: "Construye sobre conocimientos fundamentales con pipelines CI/CD, aplicaciones en contenedores y más.",
-                advancedProjects: "Proyectos Avanzados (Nivel 300)",
-                advancedProjectsDesc: "Arquitecturas complejas, mejores prácticas e implementaciones de nivel producción.",
-                expertProjects: "Proyectos Expertos (Nivel 400)",
-                expertProjectsDesc: "Soluciones de nivel empresarial y tecnologías de vanguardia como GenAI y data mesh.",
-                exploreLabs: "Explorar Labs →",
-                exploreProjects: "Explorar Proyectos →",
-                copyright: "© 2025 Alex Garcia. Todos los derechos reservados.",
-                carpeDiem: "Carpe Diem",
-                amazonQCredit: "Este sitio web fue creado con Amazon Q"
+                "skipToContent": "Saltar al contenido principal",
+                "nav.about": "Sobre Mí",
+                "nav.experience": "Experiencia",
+                "nav.certifications": "Certificaciones",
+                "nav.labs": "Laboratorios",
+                "nav.skills": "Habilidades",
+                "nav.contact": "Contacto",
+                "nav.resources": "Recursos",
+                "nav.accessRequest": "Solicitar Acceso",
+                "hero.tagline": "Consultor DevOps | Arquitecto Cloud | Profesor",
+                "hero.viewResume": "Ver Currículum",
+                "hero.exploreLabs": "Explorar Labs",
+                "hero.learningResources": "Recursos de Aprendizaje",
+                "about.title": "Sobre Mí",
+                "about.text1": "Con más de 15 años de experiencia diversa en TI, soy Consultor DevOps en AWS, donde diseño e implemento soluciones cloud de nivel empresarial para clientes de diversas industrias.",
+                "about.text2": "Me especializo en automatización de infraestructura, pipelines CI/CD, containerización y arquitecturas cloud-native. Mi experiencia técnica incluye servicios AWS, Terraform, Kubernetes, Docker y metodologías DevOps modernas que permiten a las organizaciones lograr excelencia operativa y acelerar su transformación digital.",
+                "about.text3": "Como profesor en ITESO (Instituto Tecnológico y de Estudios Superiores de Occidente), enseño Diseño de Sistemas Escalables y Arquitectura Cloud en el Departamento de Electrónica, Sistemas e Informática, conectando conceptos académicos con aplicaciones reales de la industria.",
+                "about.text4": "Únete a mi servidor de Discord para discusiones sobre tecnologías cloud y prácticas DevOps, y sigue mis publicaciones técnicas en Medium.",
+                "experience.title": "Experiencia Profesional",
+                "experience.rolesTitle": "Roles Profesionales Actuales y Anteriores",
+                "experience.educationTitle": "Docencia Actual y Formación Académica",
+                "experience.devopsConsultant": "Consultor DevOps en AWS",
+                "experience.devopsConsultantDate": "Ene 2023 - Presente",
+                "experience.devopsConsultantDesc": "Diseño e implementación de pipelines CI/CD de nivel empresarial y soluciones de automatización de infraestructura para clientes Fortune 500. Utilizando GitHub Actions, AWS CodePipeline y CDK para orquestar despliegues de arquitecturas serverless y microservicios en contenedores. Implementando infraestructura como código con Terraform para provisionar entornos multi-cuenta seguros siguiendo los principios de AWS Well-Architected.",
+                "experience.sreWizeline": "Ingeniero Senior de Confiabilidad de Sitios en Wizeline",
+                "experience.sreWizelineDate": "Mar 2022 - Nov 2022",
+                "experience.sreWizelineDesc": "Lideré iniciativas críticas de migración de on-premises a AWS utilizando AWS Database Migration Service, RDS e infraestructura como código. Implementé pipelines de despliegue automatizados con monitoreo y alertas completas, resultando en un 99.99% de disponibilidad y 40% de reducción en gastos operativos.",
+                "experience.linuxRackspace": "Ingeniero de Sistemas de Éxito del Cliente Linux en Rackspace",
+                "experience.linuxRackspaceDate": "Ago 2021 - Mar 2022",
+                "experience.linuxRackspaceDesc": "Optimicé operaciones de infraestructura híbrida en la nube mediante automatización e implementación de prácticas SRE. Diseñé y desplegué soluciones de monitoreo usando Prometheus y Grafana, permitiendo resolución proactiva de problemas y mejorando la confiabilidad del sistema en entornos de clientes.",
+                "experience.devopsOracle": "Ingeniero DevOps en Oracle",
+                "experience.devopsOracleDate": "Ene 2020 - Jul 2021",
+                "experience.devopsOracleDesc": "Lideré iniciativas de Infraestructura como Código utilizando Terraform y Ansible para entornos de demostración globales de Oracle. Diseñé y mantuve pipelines CI/CD con Jenkins para despliegue automatizado, pruebas y monitoreo de productos críticos de Oracle en entornos Linux distribuidos.",
+                "experience.professorIteso": "Profesor en ITESO",
+                "experience.professorItesoDate": "Ago 2024 - Presente",
+                "experience.professorItesoDesc": "Enseñando cursos avanzados en Diseño de Sistemas Escalables y Arquitectura Cloud en el Departamento de Electrónica, Sistemas e Informática. Desarrollando plan de estudios que conecta conceptos teóricos con aplicaciones prácticas de la industria, preparando a los estudiantes para desafíos reales de ingeniería cloud.",
+                "experience.mastersDegree": "Maestría en Ciencias de la Computación",
+                "experience.mastersSchool": "Instituto Tecnológico y de Estudios Superiores de Monterrey (2018)",
+                "experience.mastersDesc": "Especializado en sistemas distribuidos y arquitecturas de computación en la nube. Tesis sobre arquitecturas de microservicios escalables.",
+                "experience.bachelorDegree": "Licenciatura",
+                "experience.bachelorSchool": "Instituto Tecnológico y de Estudios Superiores de Occidente (ITESO) (2015)",
+                "experience.bachelorDesc": "Ingeniería en Sistemas Computacionales con enfoque en desarrollo de software. Graduado con honores.",
+                "certifications.title": "Certificaciones",
+                "certifications.viewAll": "Todas Mis Certificaciones",
+                "labs.title": "Laboratorios de DevOps en la Nube y Diseño de Sistemas",
+                "labs.foundationalTitle": "Laboratorios Fundamentales (Nivel 100)",
+                "labs.foundationalDesc": "Laboratorios introductorios que cubren conceptos básicos de AWS, IaC simple, fundamentos de Docker y conceptos de Diseño de Sistemas.",
+                "labs.intermediateTitle": "Laboratorios Intermedios (Nivel 200)",
+                "labs.intermediateDesc": "Construye sobre conocimientos fundamentales con pipelines CI/CD, aplicaciones en contenedores y patrones de Diseño de Sistemas.",
+                "labs.advancedTitle": "Proyectos Avanzados (Nivel 300)",
+                "labs.advancedDesc": "Arquitecturas complejas, mejores prácticas e implementaciones de Diseño de Sistemas de nivel producción.",
+                "labs.expertTitle": "Proyectos Expertos (Nivel 400)",
+                "labs.expertDesc": "Soluciones de nivel empresarial y tecnologías de vanguardia como GenAI y Diseño de Sistemas para data mesh.",
+                "labs.exploreLabs": "Explorar Labs →",
+                "labs.exploreLabs2": "Explorar Labs →",
+                "labs.exploreProjects": "Explorar Proyectos →",
+                "labs.exploreProjects2": "Explorar Proyectos →",
+                "skills.title": "Habilidades",
+                "footer.copyright": "© 2025 Alex Garcia. Todos los derechos reservados.",
+                "footer.disclaimer": "Aviso: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador.",
+                "footer.carpeDiem": "Carpe Diem"
             },
             pt: {
-                aboutMe: "Sobre Mim",
-                experience: "Experiência Profissional",
-                certifications: "Certificações",
-                projects: "Laboratórios de DevOps na Nuvem",
-                viewResume: "Ver Currículo",
-                exploreLabs: "Explorar Labs",
-                disclaimer: "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador.",
-                tagline: "Consultor DevOps | Arquiteto Cloud | Professor",
-                aboutText1: "Com mais de 15 anos de experiência diversificada em TI, sou Consultor DevOps na AWS, onde projeto e implemento soluções cloud de nível empresarial para clientes de várias indústrias.",
-                aboutText2: "Sou especializado em automação de infraestrutura, pipelines CI/CD, conteinerização e arquiteturas cloud-native. Minha experiência técnica inclui serviços AWS, Terraform, Kubernetes, Docker e metodologias DevOps modernas que permitem às organizações alcançar excelência operacional e acelerar sua transformação digital.",
-                aboutText3: "Como professor no ITESO (Instituto Tecnológico e de Estudos Superiores do Ocidente), ensino Design de Sistemas Escaláveis e Arquitetura Cloud no Departamento de Eletrônica, Sistemas e Ciência da Computação, conectando conceitos acadêmicos com aplicações reais da indústria.",
-                aboutText4: "Junte-se ao meu servidor Discord para discussões sobre tecnologias cloud e práticas DevOps, e siga minhas publicações técnicas no Medium.",
-                devopsConsultant: "Consultor DevOps na AWS",
-                devopsConsultantDate: "Jan 2023 - Presente",
-                devopsConsultantDesc: "Projetando e implementando pipelines CI/CD de nível empresarial e soluções de automação de infraestrutura para clientes Fortune 500. Utilizando GitHub Actions, AWS CodePipeline e CDK para orquestrar implantações de arquiteturas serverless e microsserviços em contêineres. Implementando infraestrutura como código com Terraform para provisionar ambientes multi-conta seguros seguindo os princípios AWS Well-Architected.",
-                sreWizeline: "Engenheiro Sênior de Confiabilidade de Site na Wizeline",
-                sreWizelineDate: "Mar 2022 - Nov 2022",
-                sreWizelineDesc: "Liderei iniciativas críticas de migração de on-premises para AWS utilizando AWS Database Migration Service, RDS e infraestrutura como código. Implementei pipelines de implantação automatizados com monitoramento e alertas abrangentes, resultando em 99,99% de disponibilidade e 40% de redução em despesas operacionais.",
-                linuxRackspace: "Engenheiro de Sistemas de Sucesso do Cliente Linux na Rackspace",
-                linuxRackspaceDate: "Ago 2021 - Mar 2022",
-                linuxRackspaceDesc: "Otimizei operações de infraestrutura híbrida na nuvem através de automação e implementação de práticas SRE. Projetei e implantei soluções de monitoramento usando Prometheus e Grafana, permitindo resolução proativa de problemas e melhorando a confiabilidade do sistema em ambientes de clientes.",
-                devopsOracle: "Engenheiro DevOps na Oracle",
-                devopsOracleDate: "Jan 2020 - Jul 2021",
-                devopsOracleDesc: "Liderei iniciativas de Infraestrutura como Código usando Terraform e Ansible para ambientes de demonstração globais da Oracle. Projetei e mantive pipelines CI/CD com Jenkins para implantação automatizada, testes e monitoramento de produtos críticos da Oracle em ambientes Linux distribuídos.",
-                professorIteso: "Professor no ITESO",
-                professorItesoDate: "Atual",
-                professorItesoDesc: "Lecionando cursos avançados em Design de Sistemas Escaláveis e Arquitetura Cloud no Departamento de Eletrônica, Sistemas e Ciência da Computação. Desenvolvendo currículo que conecta conceitos teóricos com aplicações práticas da indústria, preparando os estudantes para desafios reais de engenharia cloud.",
-                mastersDegree: "Mestrado em Ciência da Computação",
-                mastersSchool: "Instituto Tecnológico e de Estudos Superiores de Monterrey",
-                mastersDesc: "Especializado em sistemas distribuídos e arquiteturas de computação em nuvem.",
-                bachelorDegree: "Bacharelado",
-                bachelorSchool: "Instituto Tecnológico e de Estudos Superiores do Ocidente (ITESO)",
-                bachelorDesc: "Engenharia de Sistemas Computacionais com foco em desenvolvimento de software.",
-                foundationalLabs: "Laboratórios Fundamentais (Nível 100)",
-                foundationalLabsDesc: "Laboratórios introdutórios cobrindo conceitos básicos de AWS, IaC simples, fundamentos de Docker e mais.",
-                intermediateLabs: "Laboratórios Intermediários (Nível 200)",
-                intermediateLabsDesc: "Construa sobre conhecimentos fundamentais com pipelines CI/CD, aplicações em contêineres e mais.",
-                advancedProjects: "Projetos Avançados (Nível 300)",
-                advancedProjectsDesc: "Arquiteturas complexas, melhores práticas e implementações de nível de produção.",
-                expertProjects: "Projetos Especialistas (Nível 400)",
-                expertProjectsDesc: "Soluções de nível empresarial e tecnologias de ponta como GenAI e data mesh.",
-                exploreLabs: "Explorar Labs →",
-                exploreProjects: "Explorar Projetos →",
-                copyright: "© 2025 Alex Garcia. Todos os direitos reservados.",
-                carpeDiem: "Carpe Diem",
-                amazonQCredit: "Este site foi criado com Amazon Q"
+                "skipToContent": "Pular para o conteúdo principal",
+                "nav.about": "Sobre Mim",
+                "nav.experience": "Experiência",
+                "nav.certifications": "Certificações",
+                "nav.labs": "Laboratórios",
+                "nav.skills": "Habilidades",
+                "nav.contact": "Contato",
+                "nav.resources": "Recursos",
+                "nav.accessRequest": "Solicitar Acesso",
+                "hero.tagline": "Consultor DevOps | Arquiteto Cloud | Professor",
+                "hero.viewResume": "Ver Currículo",
+                "hero.exploreLabs": "Explorar Labs",
+                "hero.learningResources": "Recursos de Aprendizagem",
+                "about.title": "Sobre Mim",
+                "about.text1": "Com mais de 15 anos de experiência diversificada em TI, sou Consultor DevOps na AWS, onde projeto e implemento soluções cloud de nível empresarial para clientes de várias indústrias.",
+                "about.text2": "Sou especializado em automação de infraestrutura, pipelines CI/CD, conteinerização e arquiteturas cloud-native. Minha experiência técnica inclui serviços AWS, Terraform, Kubernetes, Docker e metodologias DevOps modernas que permitem às organizações alcançar excelência operacional e acelerar sua transformação digital.",
+                "about.text3": "Como professor no ITESO (Instituto Tecnológico e de Estudos Superiores do Ocidente), ensino Design de Sistemas Escaláveis e Arquitetura Cloud no Departamento de Eletrônica, Sistemas e Ciência da Computação, conectando conceitos acadêmicos com aplicações reais da indústria.",
+                "about.text4": "Junte-se ao meu servidor Discord para discussões sobre tecnologias cloud e práticas DevOps, e siga minhas publicações técnicas no Medium.",
+                "experience.title": "Experiência Profissional",
+                "experience.rolesTitle": "Funções Profissionais Atuais e Anteriores",
+                "experience.educationTitle": "Docência Atual e Formação Acadêmica",
+                "experience.devopsConsultant": "Consultor DevOps na AWS",
+                "experience.devopsConsultantDate": "Jan 2023 - Presente",
+                "experience.devopsConsultantDesc": "Projetando e implementando pipelines CI/CD de nível empresarial e soluções de automação de infraestrutura para clientes Fortune 500. Utilizando GitHub Actions, AWS CodePipeline e CDK para orquestrar implantações de arquiteturas serverless e microsserviços em contêineres. Implementando infraestrutura como código com Terraform para provisionar ambientes multi-conta seguros seguindo os princípios AWS Well-Architected.",
+                "experience.sreWizeline": "Engenheiro Sênior de Confiabilidade de Site na Wizeline",
+                "experience.sreWizelineDate": "Mar 2022 - Nov 2022",
+                "experience.sreWizelineDesc": "Liderei iniciativas críticas de migração de on-premises para AWS utilizando AWS Database Migration Service, RDS e infraestrutura como código. Implementei pipelines de implantação automatizados com monitoramento e alertas abrangentes, resultando em 99,99% de disponibilidade e 40% de redução em despesas operacionais.",
+                "experience.linuxRackspace": "Engenheiro de Sistemas de Sucesso do Cliente Linux na Rackspace",
+                "experience.linuxRackspaceDate": "Ago 2021 - Mar 2022",
+                "experience.linuxRackspaceDesc": "Otimizei operações de infraestrutura híbrida na nuvem através de automação e implementação de práticas SRE. Projetei e implantei soluções de monitoramento usando Prometheus e Grafana, permitindo resolução proativa de problemas e melhorando a confiabilidade do sistema em ambientes de clientes.",
+                "experience.devopsOracle": "Engenheiro DevOps na Oracle",
+                "experience.devopsOracleDate": "Jan 2020 - Jul 2021",
+                "experience.devopsOracleDesc": "Liderei iniciativas de Infraestrutura como Código usando Terraform e Ansible para ambientes de demonstração globais da Oracle. Projetei e mantive pipelines CI/CD com Jenkins para implantação automatizada, testes e monitoramento de produtos críticos da Oracle em ambientes Linux distribuídos.",
+                "experience.professorIteso": "Professor no ITESO",
+                "experience.professorItesoDate": "Ago 2024 - Presente",
+                "experience.professorItesoDesc": "Lecionando cursos avançados em Design de Sistemas Escaláveis e Arquitetura Cloud no Departamento de Eletrônica, Sistemas e Ciência da Computação. Desenvolvendo currículo que conecta conceitos teóricos com aplicações práticas da indústria, preparando os estudantes para desafios reais de engenharia cloud.",
+                "experience.mastersDegree": "Mestrado em Ciência da Computação",
+                "experience.mastersSchool": "Instituto Tecnológico e de Estudos Superiores de Monterrey (2018)",
+                "experience.mastersDesc": "Especializado em sistemas distribuídos e arquiteturas de computação em nuvem. Tese sobre arquiteturas de microsserviços escaláveis.",
+                "experience.bachelorDegree": "Bacharelado",
+                "experience.bachelorSchool": "Instituto Tecnológico e de Estudos Superiores do Ocidente (ITESO) (2015)",
+                "experience.bachelorDesc": "Engenharia de Sistemas Computacionais com foco em desenvolvimento de software. Graduado com honras.",
+                "certifications.title": "Certificações",
+                "certifications.viewAll": "Todas as Minhas Certificações",
+                "labs.title": "Laboratórios de DevOps na Nuvem e Design de Sistemas",
+                "labs.foundationalTitle": "Laboratórios Fundamentais (Nível 100)",
+                "labs.foundationalDesc": "Laboratórios introdutórios cobrindo conceitos básicos de AWS, IaC simples, fundamentos de Docker e conceitos de Design de Sistemas.",
+                "labs.intermediateTitle": "Laboratórios Intermediários (Nível 200)",
+                "labs.intermediateDesc": "Construa sobre conhecimentos fundamentais com pipelines CI/CD, aplicações em contêineres e padrões de Design de Sistemas.",
+                "labs.advancedTitle": "Projetos Avançados (Nível 300)",
+                "labs.advancedDesc": "Arquiteturas complexas, melhores práticas e implementações de Design de Sistemas de nível de produção.",
+                "labs.expertTitle": "Projetos Especialistas (Nível 400)",
+                "labs.expertDesc": "Soluções de nível empresarial e tecnologias de ponta como GenAI e Design de Sistemas para data mesh.",
+                "labs.exploreLabs": "Explorar Labs →",
+                "labs.exploreLabs2": "Explorar Labs →",
+                "labs.exploreProjects": "Explorar Projetos →",
+                "labs.exploreProjects2": "Explorar Projetos →",
+                "skills.title": "Habilidades",
+                "footer.copyright": "© 2025 Alex Garcia. Todos os direitos reservados.",
+                "footer.disclaimer": "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador.",
+                "footer.carpeDiem": "Carpe Diem"
             }
         };
-        
-        // Set initial language from localStorage or default to English
-        const currentLang = localStorage.getItem('language') || 'en';
-        setActiveLanguage(currentLang);
-        
-        // Language button click handlers
-        languageBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lang = btn.getAttribute('data-lang');
-                setActiveLanguage(lang);
-                translatePage(lang);
-                localStorage.setItem('language', lang);
-            });
-        });
-        
-        function setActiveLanguage(lang) {
-            languageBtns.forEach(btn => {
-                if (btn.getAttribute('data-lang') === lang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            translatePage(lang);
-        }
-        
-        function translatePage(lang) {
-            // Translate section headings
-            document.querySelector('#about h2').textContent = translations[lang].aboutMe;
-            document.querySelector('#experience h2').textContent = translations[lang].experience;
-            document.querySelector('#certifications h2').textContent = translations[lang].certifications;
-            document.querySelector('#projects h2').textContent = translations[lang].projects;
-            
-            // Translate tagline
-            document.querySelector('.tagline').textContent = translations[lang].tagline;
-            
-            // Translate about section
-            const aboutParagraphs = document.querySelectorAll('.about-text p');
-            aboutParagraphs[0].textContent = translations[lang].aboutText1;
-            aboutParagraphs[1].textContent = translations[lang].aboutText2;
-            
-            // Handle the third paragraph with the ITESO link
-            const itesoLink = aboutParagraphs[2].querySelector('a');
-            aboutParagraphs[2].innerHTML = translations[lang].aboutText3;
-            aboutParagraphs[2].innerHTML = aboutParagraphs[2].innerHTML.replace('ITESO', `<a href="https://iteso.mx/" target="_blank">ITESO</a>`);
-            
-            // Handle the fourth paragraph with Discord and Medium links
-            const discordLink = aboutParagraphs[3].querySelector('a[href*="discord"]');
-            const mediumLink = aboutParagraphs[3].querySelector('a[href*="medium"]');
-            aboutParagraphs[3].innerHTML = translations[lang].aboutText4;
-            
-            // Translate experience section
-            document.querySelector('.experience .timeline-item:nth-child(1) h3').textContent = translations[lang].devopsConsultant;
-            document.querySelector('.experience .timeline-item:nth-child(1) .date').textContent = translations[lang].devopsConsultantDate;
-            document.querySelector('.experience .timeline-item:nth-child(1) p').textContent = translations[lang].devopsConsultantDesc;
-            
-            document.querySelector('.experience .timeline-item:nth-child(2) h3').textContent = translations[lang].sreWizeline;
-            document.querySelector('.experience .timeline-item:nth-child(2) .date').textContent = translations[lang].sreWizelineDate;
-            document.querySelector('.experience .timeline-item:nth-child(2) p').textContent = translations[lang].sreWizelineDesc;
-            
-            document.querySelector('.experience .timeline-item:nth-child(3) h3').textContent = translations[lang].linuxRackspace;
-            document.querySelector('.experience .timeline-item:nth-child(3) .date').textContent = translations[lang].linuxRackspaceDate;
-            document.querySelector('.experience .timeline-item:nth-child(3) p').textContent = translations[lang].linuxRackspaceDesc;
-            
-            document.querySelector('.experience .timeline-item:nth-child(4) h3').textContent = translations[lang].devopsOracle;
-            document.querySelector('.experience .timeline-item:nth-child(4) .date').textContent = translations[lang].devopsOracleDate;
-            document.querySelector('.experience .timeline-item:nth-child(4) p').textContent = translations[lang].devopsOracleDesc;
-            
-            // Translate education section
-            document.querySelector('.education .timeline-item:nth-child(1) h3').textContent = translations[lang].professorIteso;
-            document.querySelector('.education .timeline-item:nth-child(1) .date').textContent = translations[lang].professorItesoDate;
-            document.querySelector('.education .timeline-item:nth-child(1) p').textContent = translations[lang].professorItesoDesc;
-            
-            document.querySelector('.education .timeline-item:nth-child(2) h3').textContent = translations[lang].mastersDegree;
-            document.querySelector('.education .timeline-item:nth-child(2) .date').textContent = translations[lang].mastersSchool;
-            document.querySelector('.education .timeline-item:nth-child(2) p').textContent = translations[lang].mastersDesc;
-            
-            document.querySelector('.education .timeline-item:nth-child(3) h3').textContent = translations[lang].bachelorDegree;
-            document.querySelector('.education .timeline-item:nth-child(3) .date').textContent = translations[lang].bachelorSchool;
-            document.querySelector('.education .timeline-item:nth-child(3) p').textContent = translations[lang].bachelorDesc;
-            
-            // Translate projects section
-            document.querySelector('.projects-grid .project-card:nth-child(1) .project-title').textContent = translations[lang].foundationalLabs;
-            document.querySelector('.projects-grid .project-card:nth-child(1) p').textContent = translations[lang].foundationalLabsDesc;
-            document.querySelector('.projects-grid .project-card:nth-child(1) .project-link').textContent = translations[lang].exploreLabs;
-            
-            document.querySelector('.projects-grid .project-card:nth-child(2) .project-title').textContent = translations[lang].intermediateLabs;
-            document.querySelector('.projects-grid .project-card:nth-child(2) p').textContent = translations[lang].intermediateLabsDesc;
-            document.querySelector('.projects-grid .project-card:nth-child(2) .project-link').textContent = translations[lang].exploreLabs;
-            
-            document.querySelector('.projects-grid .project-card:nth-child(3) .project-title').textContent = translations[lang].advancedProjects;
-            document.querySelector('.projects-grid .project-card:nth-child(3) p').textContent = translations[lang].advancedProjectsDesc;
-            document.querySelector('.projects-grid .project-card:nth-child(3) .project-link').textContent = translations[lang].exploreProjects;
-            
-            document.querySelector('.projects-grid .project-card:nth-child(4) .project-title').textContent = translations[lang].expertProjects;
-            document.querySelector('.projects-grid .project-card:nth-child(4) p').textContent = translations[lang].expertProjectsDesc;
-            document.querySelector('.projects-grid .project-card:nth-child(4) .project-link').textContent = translations[lang].exploreProjects;
-            
-            // Translate buttons
-            const buttons = document.querySelectorAll('header .cta-button');
-            buttons[0].textContent = translations[lang].viewResume;
-            buttons[1].textContent = translations[lang].exploreLabs;
-            
-            // Translate footer
-            document.querySelector('footer p:first-child').textContent = translations[lang].copyright;
-            document.querySelector('.disclaimer').textContent = translations[lang].disclaimer;
-            document.querySelector('.carpe-diem').textContent = translations[lang].carpeDiem;
-        }
-        
-        // Initialize with saved language preference
-        translatePage(currentLang);
-        
-        // Function to check repository access
-        function checkRepoAccess(event, repo) {
-            event.preventDefault();
-            
-            // In a real implementation, you would check if the user has access to the repository
-            // For now, we'll redirect to the access request page
-            window.location.href = `access-request.html?repo=${repo}`;
-            
-            return false;
-        }
-        
-        function setRepoParam(event, repo) {
-            // Set a cookie or localStorage item to remember the repo
-            localStorage.setItem('selectedRepo', repo);
-            
-            // Allow the default context menu to appear
-            return true;
-        }
     </script>
+    <script src="main.js" defer></script>
 </body>
 </html>

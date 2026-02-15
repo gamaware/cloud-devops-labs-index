@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Sync Translations",
+  "description": "Monitors HTML files containing inline translation objects (index.html, access-request.html, learning-resources.html) for changes to user-facing text. When changes are detected, identifies new or modified English (en) translation keys and generates corresponding Spanish (es) and Portuguese (pt) translations, maintaining proper context, meaning, and locale-specific conventions.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.html"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A user-facing HTML file was just edited. This project uses inline JavaScript translation objects (`const translations = { en: {...}, es: {...}, pt: {...} }`) inside each HTML file for i18n support across English, Spanish, and Portuguese.\n\nPlease do the following:\n1. Locate the `translations` object in the edited file.\n2. Compare the `en` (English) keys and values against the `es` (Spanish) and `pt` (Portuguese) sections.\n3. If any keys exist in `en` but are missing from `es` or `pt`, or if an English value has been modified (suggesting the translation is now stale), generate accurate translations for the missing or outdated entries.\n4. Ensure translations:\n   - Maintain the original meaning and context\n   - Follow locale-specific conventions (e.g., formal/informal tone consistency, date formats, punctuation)\n   - Match the existing translation style and tone already used in that file\n5. Insert the new or updated translations into the `es` and `pt` sections of the same file.\n6. If all translations are already in sync, do nothing and confirm they are up to date."
+  }
+}

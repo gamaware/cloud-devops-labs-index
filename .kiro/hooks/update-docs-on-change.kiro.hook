@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Update Docs on Source Change",
+  "description": "When source files (HTML, CSS, YAML workflows, or issue templates) are edited, automatically update the relevant documentation in docs/ and README.md to reflect the changes.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.html",
+      "*.css",
+      ".github/workflows/*.yml",
+      ".github/ISSUE_TEMPLATE/*.yml"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A source file was just edited. Review the change and determine if the documentation in docs/ (especially docs/README.md and docs/website-architecture.md) or the root README.md needs to be updated to stay in sync. If so, make the minimal necessary documentation updates. Focus on accuracy — only update docs that are actually affected by the change."
+  }
+}

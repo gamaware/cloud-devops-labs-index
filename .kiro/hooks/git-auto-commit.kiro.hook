@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Auto Git Commit & Push",
+  "description": "When the agent finishes a task, automatically runs git status, stages changes, creates a structured bilingual commit message (English/Spanish), and pushes to main.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run the following git workflow in order. Do NOT skip any step:\n\n1. Run `git status` to see what changed.\n2. Run `git diff --stat` to get a summary of modifications.\n3. Run `git add -A` to stage all changes.\n4. Create a commit with a structured message following this EXACT template every time:\n\n```\n🔧 <type>(<scope>): <short summary in English>\n\n📝 Descripción / Description:\n- EN: <bullet points describing what changed in English>\n- ES: <bullet points describing what changed in Spanish>\n\n📁 Files changed:\n- <list each file changed>\n\n🏷️ Type: <feat|fix|refactor|style|docs|chore|test>\n```\n\nWhere:\n- `type` is one of: feat, fix, refactor, style, docs, chore, test\n- `scope` is the area affected (e.g., index, access-request, styles, docs, config)\n- The short summary is max 50 chars, imperative mood\n- Description bullets should be concise and match between EN and ES\n\n5. Run `git push origin main` to push the commit.\n\nAlways follow this exact structure. Never deviate from the template."
+  }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gamaware.github.io/cloud-devops-labs-index/sitemap.xml

@@ -3,1480 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Resources - Alex Garcia</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #0066cc;
-            --secondary-color: #ff9900;
-            --dark-color: #232f3e;
-            --light-color: #f8f9fa;
-            --text-color: #333;
-            --link-color: #0066cc;
-            --visited-link-color: #551A8B;
-            
-            /* Dark mode variables - OneDark theme */
-            --dark-mode-bg: #282c34;
-            --dark-mode-text: #abb2bf;
-            --dark-mode-secondary: #ff9900;
-            --dark-mode-card-bg: #2c313a;
-            --dark-mode-link: #61afef;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-color);
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        body.dark-mode {
-            background-color: var(--dark-mode-bg);
-            color: var(--dark-mode-text);
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        header {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-        
-        .social-links {
-            margin-bottom: 20px;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .cta-button:hover {
-            background-color: #e68a00;
-        }
-        
-        section {
-            padding: 60px 0;
-        }
-        
-        h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--dark-color);
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--secondary-color);
-        }
-        
-        body.dark-mode h2 {
-            color: var(--dark-mode-text);
-        }
-        
-        .section-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-size: 1.1rem;
-            color: #666;
-        }
-        
-        body.dark-mode .section-intro {
-            color: #aaa;
-        }
-        
-        .resources-tabs {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-        
-        .tab-btn {
-            background-color: #f0f0f0;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .tab-btn:hover {
-            background-color: #e0e0e0;
-        }
-        
-        .tab-btn.active {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        body.dark-mode .tab-btn {
-            background-color: #2c303a;
-            color: #ddd;
-        }
-        
-        body.dark-mode .tab-btn:hover {
-            background-color: #3a3f4b;
-        }
-        
-        body.dark-mode .tab-btn.active {
-            background-color: var(--dark-mode-secondary);
-            color: var(--dark-mode-bg);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .resource-card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
-            height: 100%;
-        }
-        
-        body.dark-mode .resource-card {
-            background-color: var(--dark-mode-card-bg);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        
-        .wide-card {
-            grid-column: 1 / -1;
-        }
-        
-        .resource-header {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .resource-header i {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-        }
-        
-        .resource-header h3 {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-        
-        .resource-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-        
-        .two-column {
-            column-count: 2;
-            column-gap: 20px;
-        }
-        
-        .resource-list li {
-            border-bottom: 1px solid #eee;
-        }
-        
-        body.dark-mode .resource-list li {
-            border-bottom: 1px solid #333;
-        }
-        
-        .resource-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .resource-list a {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 20px;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: background-color 0.3s;
-        }
-        
-        .resource-list a:hover {
-            background-color: #f5f5f5;
-        }
-        
-        body.dark-mode .resource-list a {
-            color: var(--dark-mode-text);
-        }
-        
-        body.dark-mode .resource-list a:hover {
-            background-color: #2a2e38;
-        }
-        
-        .resource-name {
-            font-weight: 500;
-        }
-        
-        .resource-meta {
-            font-size: 0.85rem;
-            color: #777;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        body.dark-mode .resource-meta {
-            color: #999;
-        }
-        
-        .resource-meta i {
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-        }
-        
-        body.dark-mode .resource-meta i {
-            color: var(--dark-mode-secondary);
-        }
-        
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--dark-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s;
-        }
-        
-        .theme-toggle:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .language-selector {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            display: flex;
-            gap: 5px;
-        }
-        
-        .language-btn {
-            background-color: var(--dark-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: background-color 0.3s;
-        }
-        
-        .language-btn:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .language-btn.active {
-            background-color: var(--secondary-color);
-        }
-        
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-        }
-        
-        .disclaimer {
-            max-width: 800px;
-            margin: 20px auto;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .disclaimer .highlight {
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-        
-        body.dark-mode .disclaimer .highlight {
-            color: var(--dark-mode-secondary);
-        }
-        
-        @media (max-width: 768px) {
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .two-column {
-                column-count: 1;
-            }
-            
-            .tab-btn {
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
-            
-            section {
-                padding: 40px 0;
-            }
-        }
-    </style>
+    <title>Learning Resources - Cloud DevOps Labs</title>
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src https://cdnjs.cloudflare.com; img-src 'self' https://images.credly.com data:; connect-src https://api.github.com">
+
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Learning Resources - Cloud DevOps Labs">
+    <meta property="og:description" content="Curated learning resources for Cloud Computing, DevOps, System Design, and more">
+    <meta property="og:url" content="https://gamaware.github.io/cloud-devops-labs-index/learning-resources.html">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://gamaware.github.io/cloud-devops-labs-index/learning-resources.html">
+
+    <!-- Preconnect hints -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Font Awesome with SRI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3HjDXM6+AOJyxQ2TDhmYQBFR/GIZqiAp+QXtfS+I3GhZw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
-    
-    <!-- Language Selector -->
-    <div class="language-selector">
-        <button class="language-btn active" data-lang="en">EN</button>
-        <button class="language-btn" data-lang="es">ES</button>
-        <button class="language-btn" data-lang="pt">PT</button>
-    </div>
-    
-    <header>
-        <div class="container">
-            <h1>Alex Garcia</h1>
-            <p class="tagline">DevOps Consultant | Cloud Architect | Professor</p>
-            <div class="social-links">
-                <a href="https://github.com/gamaware" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/gamaware/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:alejandrogarcia@iteso.mx" onclick="window.location.href='mailto:alejandrogarcia@iteso.mx'; return false;"><i class="fas fa-envelope"></i></a>
-                <a href="https://discord.gg/GpuUyg5g" target="_blank"><i class="fab fa-discord"></i></a>
-                <a href="https://medium.com/@gamaware" target="_blank"><i class="fab fa-medium"></i></a>
-            </div>
-            <div>
-                <a href="https://alexgarcia.info/" class="cta-button">View Resume</a>
-                <a href="index.html" class="cta-button">Back to Home</a>
-            </div>
-        </div>
-    </header>
+    <!-- Skip Navigation Link -->
+    <a href="#main-content" class="skip-link" data-i18n="skipToContent">Skip to main content</a>
 
-    <section id="learning-resources">
-        <div class="container">
-            <h2>Learning Resources</h2>
-            <p class="section-intro">Curated resources to accelerate your cloud, DevOps, and system design journey.</p>
-            
-            <div class="resources-tabs">
-                <button class="tab-btn active" data-tab="cloud">Cloud Computing</button>
-                <button class="tab-btn" data-tab="devops">DevOps</button>
-                <button class="tab-btn" data-tab="spanish">Spanish Content</button>
-                <button class="tab-btn" data-tab="independent">Independent Resources</button>
-            </div>
-            
-            <div class="tab-content active" id="cloud-tab">
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="fas fa-globe"></i>
-                            <h3>Websites</h3>
-                        </div>
-                        <ul class="resource-list">
-                            <li>
-                                <a href="https://digitalcloud.training/" target="_blank">
-                                    <span class="resource-name">Digital Cloud Training</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 500K+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://rishabkumar.com/" target="_blank">
-                                    <span class="resource-name">Rishab Kumar</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Cloud Career</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.techworld-with-nana.com/" target="_blank">
-                                    <span class="resource-name">TechWorld with Nana</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 1M+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://learn.cantrill.io/" target="_blank">
-                                    <span class="resource-name">Adrian Cantrill</span>
-                                    <span class="resource-meta"><i class="fas fa-award"></i> Deep AWS Content</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://courses.datacumulus.com/" target="_blank">
-                                    <span class="resource-name">DataCumulus</span>
-                                    <span class="resource-meta"><i class="fas fa-certificate"></i> Certification Prep</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://tutorialsdojo.com/" target="_blank">
-                                    <span class="resource-name">Tutorials Dojo</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 250K+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.cloudbites.ai/" target="_blank">
-                                    <span class="resource-name">Cloud Bites</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Bite-sized Learning</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.madebygps.com/" target="_blank">
-                                    <span class="resource-name">Made by GPS</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Career Guidance</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.exampro.co/" target="_blank">
-                                    <span class="resource-name">ExamPro</span>
-                                    <span class="resource-meta"><i class="fas fa-certificate"></i> Practice Exams</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://savilltech.com/" target="_blank">
-                                    <span class="resource-name">Savill Tech</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Azure Focus</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://beabetterdev.com/" target="_blank">
-                                    <span class="resource-name">Be A Better Dev</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> AWS Tutorials</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://analogiescloud.com/" target="_blank">
-                                    <span class="resource-name">Analogies Cloud</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Simple Explanations</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.cloudwithraj.com/" target="_blank">
-                                    <span class="resource-name">Cloud with Raj</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> AWS Projects</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://bytebytego.com/" target="_blank">
-                                    <span class="resource-name">ByteByteGo</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 800K+ followers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://blog.levelupcoding.com/" target="_blank">
-                                    <span class="resource-name">Level Up Coding</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Coding Tutorials</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="fab fa-youtube"></i>
-                            <h3>YouTube Channels</h3>
-                        </div>
-                        <ul class="resource-list">
-                            <li>
-                                <a href="https://www.youtube.com/@DigitalCloudTraining" target="_blank">
-                                    <span class="resource-name">Digital Cloud Training</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 180K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@rishabincloud" target="_blank">
-                                    <span class="resource-name">Rishab in Cloud</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 25K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@TechWorldwithNana" target="_blank">
-                                    <span class="resource-name">TechWorld with Nana</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 450K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@LearnCantrill" target="_blank">
-                                    <span class="resource-name">Learn Cantrill</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 40K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@StephaneMaarek" target="_blank">
-                                    <span class="resource-name">Stephane Maarek</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 200K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@tutorialsdojo28" target="_blank">
-                                    <span class="resource-name">Tutorials Dojo</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 60K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@TechwithLucy" target="_blank">
-                                    <span class="resource-name">Tech with Lucy</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 30K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@MadeByGPS" target="_blank">
-                                    <span class="resource-name">Made By GPS</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 15K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@ExamProChannel" target="_blank">
-                                    <span class="resource-name">ExamPro</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 100K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@NTFAQGuy" target="_blank">
-                                    <span class="resource-name">John Savill</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 150K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@ThoughtfulTechyCloud" target="_blank">
-                                    <span class="resource-name">Thoughtful Techy Cloud</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 10K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@BeABetterDev" target="_blank">
-                                    <span class="resource-name">Be A Better Dev</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 80K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@AnalogiesCloud" target="_blank">
-                                    <span class="resource-name">Analogies Cloud</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 5K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@cloudwithraj" target="_blank">
-                                    <span class="resource-name">Cloud with Raj</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 20K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@ByteByteGo" target="_blank">
-                                    <span class="resource-name">ByteByteGo</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 500K subscribers</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="fab fa-linkedin"></i>
-                            <h3>LinkedIn Profiles</h3>
-                        </div>
-                        <ul class="resource-list">
-                            <li>
-                                <a href="https://linkedin.com/in/nealkdavis/" target="_blank">
-                                    <span class="resource-name">Neal K. Davis</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Digital Cloud Training</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/rishabkumar7/" target="_blank">
-                                    <span class="resource-name">Rishab Kumar</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Community Builder</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/nana-janashia/" target="_blank">
-                                    <span class="resource-name">Nana Janashia</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> TechWorld with Nana</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/adriancantrill/" target="_blank">
-                                    <span class="resource-name">Adrian Cantrill</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Trainer</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/stephanemaarek/" target="_blank">
-                                    <span class="resource-name">Stéphane Maarek</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Hero</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/jonbonso/" target="_blank">
-                                    <span class="resource-name">Jon Bonso</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Tutorials Dojo</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/lucywang-/" target="_blank">
-                                    <span class="resource-name">Lucy Wang</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Tech with Lucy</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/madebygps/" target="_blank">
-                                    <span class="resource-name">Gwyneth Peña-Siguenza</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Microsoft MVP</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/andrew-wc-brown/" target="_blank">
-                                    <span class="resource-name">Andrew Brown</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> ExamPro</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/john-savill/" target="_blank">
-                                    <span class="resource-name">John Savill</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Microsoft MVP</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/thoughtfultechy/" target="_blank">
-                                    <span class="resource-name">Greg Powell</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Community Builder</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/daniel-galati-0aa4827a/" target="_blank">
-                                    <span class="resource-name">Daniel Galati</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Be A Better Dev</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/ash-tech/" target="_blank">
-                                    <span class="resource-name">Ashish Prajapati</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Analogies Cloud</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/cloudwithraj/" target="_blank">
-                                    <span class="resource-name">Rajdeep Saha</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Cloud with Raj</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/alexxubyte/" target="_blank">
-                                    <span class="resource-name">Alex Xu</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> ByteByteGo</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/nikkisiapno/" target="_blank">
-                                    <span class="resource-name">Nikki Siapno</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Level Up Coding</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-content" id="devops-tab">
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="fas fa-globe"></i>
-                            <h3>Websites</h3>
-                        </div>
-                        <ul class="resource-list">
-                            <li>
-                                <a href="https://kodekloud.com/" target="_blank">
-                                    <span class="resource-name">KodeKloud</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 700K+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.techworld-with-nana.com/" target="_blank">
-                                    <span class="resource-name">TechWorld with Nana</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 1M+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://devopstoolkit.live/" target="_blank">
-                                    <span class="resource-name">DevOps Toolkit</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Kubernetes Focus</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://devopsdirective.com/" target="_blank">
-                                    <span class="resource-name">DevOps Directive</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Practical Guides</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.devopsshack.com/" target="_blank">
-                                    <span class="resource-name">DevOps Shack</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> DevOps Tutorials</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.bretfisher.com/" target="_blank">
-                                    <span class="resource-name">Bret Fisher</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Docker Expert</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.in28minutes.com/" target="_blank">
-                                    <span class="resource-name">in28minutes</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 500K+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://sandipdas.medium.com/" target="_blank">
-                                    <span class="resource-name">Sandip Das</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> DevOps Articles</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://medium.com/@piyush.sachdeva055" target="_blank">
-                                    <span class="resource-name">Piyush Sachdeva</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Tech Tutorials</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://rishabkumar.com/" target="_blank">
-                                    <span class="resource-name">Rishab Kumar</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Cloud Career</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://tutorialinux.com/" target="_blank">
-                                    <span class="resource-name">Tutorial Linux</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Linux Tutorials</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://morethancertified.com/" target="_blank">
-                                    <span class="resource-name">More Than Certified</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Practical Skills</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.trainwithshubham.com/" target="_blank">
-                                    <span class="resource-name">Train with Shubham</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 100K+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://anaisurl.com/" target="_blank">
-                                    <span class="resource-name">Anais Urlichs</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> DevOps Journey</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://nigelpoulton.com/" target="_blank">
-                                    <span class="resource-name">Nigel Poulton</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Container Expert</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.aosnote.com/" target="_blank">
-                                    <span class="resource-name">AOS Note</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> DevOps Notes</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="fab fa-youtube"></i>
-                            <h3>YouTube Channels</h3>
-                        </div>
-                        <ul class="resource-list">
-                            <li>
-                                <a href="https://www.youtube.com/@KodeKloud" target="_blank">
-                                    <span class="resource-name">KodeKloud</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 400K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@AbhishekVeeramalla" target="_blank">
-                                    <span class="resource-name">Abhishek Veeramalla</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 100K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@TechWorldwithNana" target="_blank">
-                                    <span class="resource-name">TechWorld with Nana</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 450K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@DevOpsToolkit" target="_blank">
-                                    <span class="resource-name">DevOps Toolkit</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 120K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@DevOpsDirective" target="_blank">
-                                    <span class="resource-name">DevOps Directive</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 40K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@devopsshack" target="_blank">
-                                    <span class="resource-name">DevOps Shack</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 15K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@cloudchamp" target="_blank">
-                                    <span class="resource-name">Cloud Champ</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 50K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@BretFisher" target="_blank">
-                                    <span class="resource-name">Bret Fisher</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 60K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@in28minutes" target="_blank">
-                                    <span class="resource-name">in28minutes</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 300K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@learnTechWithSandip" target="_blank">
-                                    <span class="resource-name">Learn Tech With Sandip</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 30K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@TechTutorialswithPiyush" target="_blank">
-                                    <span class="resource-name">Tech Tutorials with Piyush</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 25K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@rishabincloud" target="_blank">
-                                    <span class="resource-name">Rishab in Cloud</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 25K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@tutoriaLinux" target="_blank">
-                                    <span class="resource-name">tutoriaLinux</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 80K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@MorethanCertified" target="_blank">
-                                    <span class="resource-name">More than Certified</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 20K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@TrainWithShubham" target="_blank">
-                                    <span class="resource-name">Train With Shubham</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 100K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@zealvora" target="_blank">
-                                    <span class="resource-name">Zeal Vora</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 40K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@AnaisUrlichs" target="_blank">
-                                    <span class="resource-name">Anais Urlichs</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 10K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@NigelPoulton" target="_blank">
-                                    <span class="resource-name">Nigel Poulton</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 70K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@btkrausen" target="_blank">
-                                    <span class="resource-name">Bryan Krausen</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 30K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@AOSNote" target="_blank">
-                                    <span class="resource-name">AOS Note</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 15K subscribers</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="fab fa-linkedin"></i>
-                            <h3>LinkedIn Profiles</h3>
-                        </div>
-                        <ul class="resource-list">
-                            <li>
-                                <a href="https://www.linkedin.com/in/mmumshad/" target="_blank">
-                                    <span class="resource-name">Mumshad Mannambeth</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> KodeKloud</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/abhishek-veeramalla/" target="_blank">
-                                    <span class="resource-name">Abhishek Veeramalla</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Educator</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/nana-janashia/" target="_blank">
-                                    <span class="resource-name">Nana Janashia</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> TechWorld with Nana</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/viktorfarcic/" target="_blank">
-                                    <span class="resource-name">Viktor Farcic</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Toolkit</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/sid-palas/" target="_blank">
-                                    <span class="resource-name">Sid Palas</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Directive</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/adityajaiswal7/" target="_blank">
-                                    <span class="resource-name">Aditya Jaiswal</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Shack</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/nasiullha-chaudhari/" target="_blank">
-                                    <span class="resource-name">Nasiullha Chaudhari</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Cloud Champ</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/bretefisher/" target="_blank">
-                                    <span class="resource-name">Bret Fisher</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Docker Captain</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/rangakaranam/" target="_blank">
-                                    <span class="resource-name">Ranga Karanam</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> in28minutes</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/sandip-das-developer/" target="_blank">
-                                    <span class="resource-name">Sandip Das</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Engineer</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/piyush-sachdeva/" target="_blank">
-                                    <span class="resource-name">Piyush Sachdeva</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Tech Educator</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/rishabkumar7/" target="_blank">
-                                    <span class="resource-name">Rishab Kumar</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Community Builder</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/derekm1215/" target="_blank">
-                                    <span class="resource-name">Derek Morgan</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> tutoriaLinux</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/shubhamlondhe1996/" target="_blank">
-                                    <span class="resource-name">Shubham Londhe</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Train with Shubham</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/zealvora/" target="_blank">
-                                    <span class="resource-name">Zeal Vora</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Educator</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/urlichsanais/" target="_blank">
-                                    <span class="resource-name">Anais Urlichs</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Advocate</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/nigelpoulton/" target="_blank">
-                                    <span class="resource-name">Nigel Poulton</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Container Expert</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/btkrausen/" target="_blank">
-                                    <span class="resource-name">Bryan Krausen</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Hero</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/azeezs/" target="_blank">
-                                    <span class="resource-name">Azeez Salu</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> AOS Note</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-content" id="spanish-tab">
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="fab fa-youtube"></i>
-                            <h3>YouTube Channels</h3>
-                        </div>
-                        <ul class="resource-list">
-                            <li>
-                                <a href="https://www.youtube.com/@marcia_" target="_blank">
-                                    <span class="resource-name">Marcia Villalba</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 40K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@295devops" target="_blank">
-                                    <span class="resource-name">RoxsRoss</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 15K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@MaxCloud101" target="_blank">
-                                    <span class="resource-name">MaxCloud</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 20K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@DaveOps" target="_blank">
-                                    <span class="resource-name">DaveOps</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 10K subscribers</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@PeladoNerd" target="_blank">
-                                    <span class="resource-name">Pelado Nerd</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 200K subscribers</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="resource-card">
-                        <div class="resource-header">
-                            <i class="fab fa-linkedin"></i>
-                            <h3>LinkedIn Profiles</h3>
-                        </div>
-                        <ul class="resource-list">
-                            <li>
-                                <a href="https://www.linkedin.com/in/marciavillalba/" target="_blank">
-                                    <span class="resource-name">Marcia Villalba</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Hero</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/roxsross/" target="_blank">
-                                    <span class="resource-name">Rossana Suarez</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Engineer</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/maxcloud/" target="_blank">
-                                    <span class="resource-name">Max Zeballos</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Cloud Architect</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/davejfranco/" target="_blank">
-                                    <span class="resource-name">Dave Franco</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Consultant</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/pablofredrikson/" target="_blank">
-                                    <span class="resource-name">Pablo Fredrikson</span>
-                                    <span class="resource-meta"><i class="fas fa-briefcase"></i> Pelado Nerd</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="independent-tab">
-                <div class="resources-grid">
-                    <div class="resource-card wide-card">
-                        <div class="resource-header">
-                            <i class="fas fa-graduation-cap"></i>
-                            <h3>Independent Learning Resources</h3>
-                        </div>
-                        <ul class="resource-list two-column">
-                            <li>
-                                <a href="https://systemdesignschool.io/" target="_blank">
-                                    <span class="resource-name">System Design School</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> System Architecture</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.designgurus.io/" target="_blank">
-                                    <span class="resource-name">Design Gurus</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> System Design Interviews</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.100daysofcloud.com/" target="_blank">
-                                    <span class="resource-name">100 Days of Cloud</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Learning Challenge</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.90daysofdevops.com/" target="_blank">
-                                    <span class="resource-name">90 Days of DevOps</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Learning Challenge</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://12weeksworkshops.com/" target="_blank">
-                                    <span class="resource-name">12 Weeks Workshops</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Structured Learning</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.pluralsight.com/cloud-guru" target="_blank">
-                                    <span class="resource-name">A Cloud Guru</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 2M+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.udemy.com/" target="_blank">
-                                    <span class="resource-name">Udemy</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 50M+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://skillbuilder.aws/" target="_blank">
-                                    <span class="resource-name">AWS Skill Builder</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Official AWS Training</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://learn.microsoft.com/en-us/training/" target="_blank">
-                                    <span class="resource-name">Microsoft Learn</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Official Azure Training</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://cloud.google.com/learn?hl=en" target="_blank">
-                                    <span class="resource-name">Google Cloud Training</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Official GCP Training</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.whizlabs.com/" target="_blank">
-                                    <span class="resource-name">Whizlabs</span>
-                                    <span class="resource-meta"><i class="fas fa-certificate"></i> Practice Exams</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.coursera.org/" target="_blank">
-                                    <span class="resource-name">Coursera</span>
-                                    <span class="resource-meta"><i class="fas fa-users"></i> 100M+ students</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://training.linuxfoundation.org/" target="_blank">
-                                    <span class="resource-name">Linux Foundation Training</span>
-                                    <span class="resource-meta"><i class="fas fa-tag"></i> Open Source Education</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://killer.sh/" target="_blank">
-                                    <span class="resource-name">Killer.sh</span>
-                                    <span class="resource-meta"><i class="fas fa-certificate"></i> CKA/CKAD Simulator</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar__container">
+            <a href="index.html" class="navbar__brand">Alex Garcia</a>
+            <button class="navbar__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+                <span class="navbar__toggle-icon"></span>
+            </button>
+            <div class="navbar__menu" id="nav-menu" role="menubar">
+                <a href="index.html#about" data-i18n="nav.about">About</a>
+                <a href="index.html#experience" data-i18n="nav.experience">Experience</a>
+                <a href="index.html#certifications" data-i18n="nav.certifications">Certifications</a>
+                <a href="index.html#labs" data-i18n="nav.labs">Labs</a>
+                <a href="index.html#skills" data-i18n="nav.skills">Skills</a>
+                <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
+                <a href="learning-resources.html" data-i18n="nav.resources">Resources</a>
+                <a href="access-request.html" data-i18n="nav.accessRequest">Access Request</a>
+                <button class="navbar__theme-toggle" aria-label="Toggle theme" onclick="ThemeEngine.toggle()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="navbar__lang-selector">
+                    <button class="navbar__lang-btn" data-lang="en" onclick="LocaleEngine.setLocale('en')">EN</button>
+                    <button class="navbar__lang-btn" data-lang="es" onclick="LocaleEngine.setLocale('es')">ES</button>
+                    <button class="navbar__lang-btn" data-lang="pt" onclick="LocaleEngine.setLocale('pt')">PT</button>
                 </div>
             </div>
         </div>
-    </section>
+    </nav>
 
-    <footer>
+    <!-- Main Content -->
+    <main id="main-content">
+
+        <!-- Learning Resources Section -->
+        <section id="learning-resources" class="section animate-on-scroll">
+            <div class="container">
+                <h2 class="section__title" data-i18n="resources.title">Learning Resources</h2>
+                <p class="section-intro" data-i18n="resources.intro">Curated resources to accelerate your cloud, DevOps, and system design journey.</p>
+
+                <div class="resources-tabs">
+                    <button class="tab-btn active" data-tab="cloud" data-i18n="resources.cloudTab">Cloud Computing</button>
+                    <button class="tab-btn" data-tab="devops" data-i18n="resources.devopsTab">DevOps</button>
+                    <button class="tab-btn" data-tab="spanish" data-i18n="resources.spanishTab">Spanish Content</button>
+                    <button class="tab-btn" data-tab="independent" data-i18n="resources.independentTab">Independent Resources</button>
+                </div>
+
+                <!-- Cloud Computing Tab -->
+                <div class="tab-content active" id="cloud-tab">
+                    <div class="resources-grid">
+                        <div class="resource-card animate-on-scroll">
+                            <div class="resource-header">
+                                <i class="fas fa-globe"></i>
+                                <h3 data-i18n="resources.websitesHeader">Websites</h3>
+                            </div>
+                            <ul class="resource-list">
+                                <li><a href="https://digitalcloud.training/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Digital Cloud Training</span><span class="resource-meta"><i class="fas fa-users"></i> 500K+ students</span></a></li>
+                                <li><a href="https://rishabkumar.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Rishab Kumar</span><span class="resource-meta"><i class="fas fa-tag"></i> Cloud Career</span></a></li>
+                                <li><a href="https://www.techworld-with-nana.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">TechWorld with Nana</span><span class="resource-meta"><i class="fas fa-users"></i> 1M+ students</span></a></li>
+                                <li><a href="https://learn.cantrill.io/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Adrian Cantrill</span><span class="resource-meta"><i class="fas fa-award"></i> Deep AWS Content</span></a></li>
+                                <li><a href="https://courses.datacumulus.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">DataCumulus</span><span class="resource-meta"><i class="fas fa-certificate"></i> Certification Prep</span></a></li>
+                                <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Tutorials Dojo</span><span class="resource-meta"><i class="fas fa-users"></i> 250K+ students</span></a></li>
+                                <li><a href="https://www.cloudbites.ai/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Cloud Bites</span><span class="resource-meta"><i class="fas fa-tag"></i> Bite-sized Learning</span></a></li>
+                                <li><a href="https://www.madebygps.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Made by GPS</span><span class="resource-meta"><i class="fas fa-tag"></i> Career Guidance</span></a></li>
+                                <li><a href="https://www.exampro.co/" target="_blank" rel="noopener noreferrer"><span class="resource-name">ExamPro</span><span class="resource-meta"><i class="fas fa-certificate"></i> Practice Exams</span></a></li>
+                                <li><a href="https://savilltech.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Savill Tech</span><span class="resource-meta"><i class="fas fa-tag"></i> Azure Focus</span></a></li>
+                                <li><a href="https://beabetterdev.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Be A Better Dev</span><span class="resource-meta"><i class="fas fa-tag"></i> AWS Tutorials</span></a></li>
+                                <li><a href="https://analogiescloud.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Analogies Cloud</span><span class="resource-meta"><i class="fas fa-tag"></i> Simple Explanations</span></a></li>
+                                <li><a href="https://www.cloudwithraj.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Cloud with Raj</span><span class="resource-meta"><i class="fas fa-tag"></i> AWS Projects</span></a></li>
+                                <li><a href="https://bytebytego.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">ByteByteGo</span><span class="resource-meta"><i class="fas fa-users"></i> 800K+ followers</span></a></li>
+                                <li><a href="https://blog.levelupcoding.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Level Up Coding</span><span class="resource-meta"><i class="fas fa-tag"></i> Coding Tutorials</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="resource-card animate-on-scroll">
+                            <div class="resource-header">
+                                <i class="fab fa-youtube"></i>
+                                <h3 data-i18n="resources.youtubeHeader">YouTube Channels</h3>
+                            </div>
+                            <ul class="resource-list">
+                                <li><a href="https://www.youtube.com/@DigitalCloudTraining" target="_blank" rel="noopener noreferrer"><span class="resource-name">Digital Cloud Training</span><span class="resource-meta"><i class="fas fa-users"></i> 180K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@rishabincloud" target="_blank" rel="noopener noreferrer"><span class="resource-name">Rishab in Cloud</span><span class="resource-meta"><i class="fas fa-users"></i> 25K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@TechWorldwithNana" target="_blank" rel="noopener noreferrer"><span class="resource-name">TechWorld with Nana</span><span class="resource-meta"><i class="fas fa-users"></i> 450K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@LearnCantrill" target="_blank" rel="noopener noreferrer"><span class="resource-name">Learn Cantrill</span><span class="resource-meta"><i class="fas fa-users"></i> 40K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@StephaneMaarek" target="_blank" rel="noopener noreferrer"><span class="resource-name">Stephane Maarek</span><span class="resource-meta"><i class="fas fa-users"></i> 200K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@tutorialsdojo28" target="_blank" rel="noopener noreferrer"><span class="resource-name">Tutorials Dojo</span><span class="resource-meta"><i class="fas fa-users"></i> 60K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@TechwithLucy" target="_blank" rel="noopener noreferrer"><span class="resource-name">Tech with Lucy</span><span class="resource-meta"><i class="fas fa-users"></i> 30K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@MadeByGPS" target="_blank" rel="noopener noreferrer"><span class="resource-name">Made By GPS</span><span class="resource-meta"><i class="fas fa-users"></i> 15K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@ExamProChannel" target="_blank" rel="noopener noreferrer"><span class="resource-name">ExamPro</span><span class="resource-meta"><i class="fas fa-users"></i> 100K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@NTFAQGuy" target="_blank" rel="noopener noreferrer"><span class="resource-name">John Savill</span><span class="resource-meta"><i class="fas fa-users"></i> 150K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@ThoughtfulTechyCloud" target="_blank" rel="noopener noreferrer"><span class="resource-name">Thoughtful Techy Cloud</span><span class="resource-meta"><i class="fas fa-users"></i> 10K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@BeABetterDev" target="_blank" rel="noopener noreferrer"><span class="resource-name">Be A Better Dev</span><span class="resource-meta"><i class="fas fa-users"></i> 80K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@AnalogiesCloud" target="_blank" rel="noopener noreferrer"><span class="resource-name">Analogies Cloud</span><span class="resource-meta"><i class="fas fa-users"></i> 5K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@cloudwithraj" target="_blank" rel="noopener noreferrer"><span class="resource-name">Cloud with Raj</span><span class="resource-meta"><i class="fas fa-users"></i> 20K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@ByteByteGo" target="_blank" rel="noopener noreferrer"><span class="resource-name">ByteByteGo</span><span class="resource-meta"><i class="fas fa-users"></i> 500K subscribers</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="resource-card animate-on-scroll">
+                            <div class="resource-header">
+                                <i class="fab fa-linkedin"></i>
+                                <h3 data-i18n="resources.linkedinHeader">LinkedIn Profiles</h3>
+                            </div>
+                            <ul class="resource-list">
+                                <li><a href="https://linkedin.com/in/nealkdavis/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Neal K. Davis</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Digital Cloud Training</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/rishabkumar7/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Rishab Kumar</span><span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Community Builder</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/nana-janashia/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Nana Janashia</span><span class="resource-meta"><i class="fas fa-briefcase"></i> TechWorld with Nana</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/adriancantrill/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Adrian Cantrill</span><span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Trainer</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/stephanemaarek/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Stéphane Maarek</span><span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Hero</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/jonbonso/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Jon Bonso</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Tutorials Dojo</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/lucywang-/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Lucy Wang</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Tech with Lucy</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/madebygps/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Gwyneth Peña-Siguenza</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Microsoft MVP</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/andrew-wc-brown/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Andrew Brown</span><span class="resource-meta"><i class="fas fa-briefcase"></i> ExamPro</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/john-savill/" target="_blank" rel="noopener noreferrer"><span class="resource-name">John Savill</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Microsoft MVP</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/thoughtfultechy/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Greg Powell</span><span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Community Builder</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/daniel-galati-0aa4827a/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Daniel Galati</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Be A Better Dev</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/ash-tech/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Ashish Prajapati</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Analogies Cloud</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/cloudwithraj/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Rajdeep Saha</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Cloud with Raj</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/alexxubyte/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Alex Xu</span><span class="resource-meta"><i class="fas fa-briefcase"></i> ByteByteGo</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/nikkisiapno/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Nikki Siapno</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Level Up Coding</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DevOps Tab -->
+                <div class="tab-content" id="devops-tab">
+                    <div class="resources-grid">
+                        <div class="resource-card animate-on-scroll">
+                            <div class="resource-header">
+                                <i class="fas fa-globe"></i>
+                                <h3 data-i18n="resources.websitesHeader">Websites</h3>
+                            </div>
+                            <ul class="resource-list">
+                                <li><a href="https://kodekloud.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">KodeKloud</span><span class="resource-meta"><i class="fas fa-users"></i> 700K+ students</span></a></li>
+                                <li><a href="https://www.techworld-with-nana.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">TechWorld with Nana</span><span class="resource-meta"><i class="fas fa-users"></i> 1M+ students</span></a></li>
+                                <li><a href="https://devopstoolkit.live/" target="_blank" rel="noopener noreferrer"><span class="resource-name">DevOps Toolkit</span><span class="resource-meta"><i class="fas fa-tag"></i> Kubernetes Focus</span></a></li>
+                                <li><a href="https://devopsdirective.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">DevOps Directive</span><span class="resource-meta"><i class="fas fa-tag"></i> Practical Guides</span></a></li>
+                                <li><a href="https://www.devopsshack.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">DevOps Shack</span><span class="resource-meta"><i class="fas fa-tag"></i> DevOps Tutorials</span></a></li>
+                                <li><a href="https://www.bretfisher.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Bret Fisher</span><span class="resource-meta"><i class="fas fa-tag"></i> Docker Expert</span></a></li>
+                                <li><a href="https://www.in28minutes.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">in28minutes</span><span class="resource-meta"><i class="fas fa-users"></i> 500K+ students</span></a></li>
+                                <li><a href="https://sandipdas.medium.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Sandip Das</span><span class="resource-meta"><i class="fas fa-tag"></i> DevOps Articles</span></a></li>
+                                <li><a href="https://medium.com/@piyush.sachdeva055" target="_blank" rel="noopener noreferrer"><span class="resource-name">Piyush Sachdeva</span><span class="resource-meta"><i class="fas fa-tag"></i> Tech Tutorials</span></a></li>
+                                <li><a href="https://rishabkumar.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Rishab Kumar</span><span class="resource-meta"><i class="fas fa-tag"></i> Cloud Career</span></a></li>
+                                <li><a href="https://tutorialinux.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Tutorial Linux</span><span class="resource-meta"><i class="fas fa-tag"></i> Linux Tutorials</span></a></li>
+                                <li><a href="https://morethancertified.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">More Than Certified</span><span class="resource-meta"><i class="fas fa-tag"></i> Practical Skills</span></a></li>
+                                <li><a href="https://www.trainwithshubham.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Train with Shubham</span><span class="resource-meta"><i class="fas fa-users"></i> 100K+ students</span></a></li>
+                                <li><a href="https://anaisurl.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Anais Urlichs</span><span class="resource-meta"><i class="fas fa-tag"></i> DevOps Journey</span></a></li>
+                                <li><a href="https://nigelpoulton.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Nigel Poulton</span><span class="resource-meta"><i class="fas fa-tag"></i> Container Expert</span></a></li>
+                                <li><a href="https://www.aosnote.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">AOS Note</span><span class="resource-meta"><i class="fas fa-tag"></i> DevOps Notes</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="resource-card animate-on-scroll">
+                            <div class="resource-header">
+                                <i class="fab fa-youtube"></i>
+                                <h3 data-i18n="resources.youtubeHeader">YouTube Channels</h3>
+                            </div>
+                            <ul class="resource-list">
+                                <li><a href="https://www.youtube.com/@KodeKloud" target="_blank" rel="noopener noreferrer"><span class="resource-name">KodeKloud</span><span class="resource-meta"><i class="fas fa-users"></i> 400K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@AbhishekVeeramalla" target="_blank" rel="noopener noreferrer"><span class="resource-name">Abhishek Veeramalla</span><span class="resource-meta"><i class="fas fa-users"></i> 100K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@TechWorldwithNana" target="_blank" rel="noopener noreferrer"><span class="resource-name">TechWorld with Nana</span><span class="resource-meta"><i class="fas fa-users"></i> 450K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@DevOpsToolkit" target="_blank" rel="noopener noreferrer"><span class="resource-name">DevOps Toolkit</span><span class="resource-meta"><i class="fas fa-users"></i> 120K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@DevOpsDirective" target="_blank" rel="noopener noreferrer"><span class="resource-name">DevOps Directive</span><span class="resource-meta"><i class="fas fa-users"></i> 40K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@devopsshack" target="_blank" rel="noopener noreferrer"><span class="resource-name">DevOps Shack</span><span class="resource-meta"><i class="fas fa-users"></i> 15K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@cloudchamp" target="_blank" rel="noopener noreferrer"><span class="resource-name">Cloud Champ</span><span class="resource-meta"><i class="fas fa-users"></i> 50K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@BretFisher" target="_blank" rel="noopener noreferrer"><span class="resource-name">Bret Fisher</span><span class="resource-meta"><i class="fas fa-users"></i> 60K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@in28minutes" target="_blank" rel="noopener noreferrer"><span class="resource-name">in28minutes</span><span class="resource-meta"><i class="fas fa-users"></i> 300K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@learnTechWithSandip" target="_blank" rel="noopener noreferrer"><span class="resource-name">Learn Tech With Sandip</span><span class="resource-meta"><i class="fas fa-users"></i> 30K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@TechTutorialswithPiyush" target="_blank" rel="noopener noreferrer"><span class="resource-name">Tech Tutorials with Piyush</span><span class="resource-meta"><i class="fas fa-users"></i> 25K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@rishabincloud" target="_blank" rel="noopener noreferrer"><span class="resource-name">Rishab in Cloud</span><span class="resource-meta"><i class="fas fa-users"></i> 25K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@tutoriaLinux" target="_blank" rel="noopener noreferrer"><span class="resource-name">tutoriaLinux</span><span class="resource-meta"><i class="fas fa-users"></i> 80K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@MorethanCertified" target="_blank" rel="noopener noreferrer"><span class="resource-name">More than Certified</span><span class="resource-meta"><i class="fas fa-users"></i> 20K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@TrainWithShubham" target="_blank" rel="noopener noreferrer"><span class="resource-name">Train With Shubham</span><span class="resource-meta"><i class="fas fa-users"></i> 100K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@zealvora" target="_blank" rel="noopener noreferrer"><span class="resource-name">Zeal Vora</span><span class="resource-meta"><i class="fas fa-users"></i> 40K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@AnaisUrlichs" target="_blank" rel="noopener noreferrer"><span class="resource-name">Anais Urlichs</span><span class="resource-meta"><i class="fas fa-users"></i> 10K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@NigelPoulton" target="_blank" rel="noopener noreferrer"><span class="resource-name">Nigel Poulton</span><span class="resource-meta"><i class="fas fa-users"></i> 70K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@btkrausen" target="_blank" rel="noopener noreferrer"><span class="resource-name">Bryan Krausen</span><span class="resource-meta"><i class="fas fa-users"></i> 30K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@AOSNote" target="_blank" rel="noopener noreferrer"><span class="resource-name">AOS Note</span><span class="resource-meta"><i class="fas fa-users"></i> 15K subscribers</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="resource-card animate-on-scroll">
+                            <div class="resource-header">
+                                <i class="fab fa-linkedin"></i>
+                                <h3 data-i18n="resources.linkedinHeader">LinkedIn Profiles</h3>
+                            </div>
+                            <ul class="resource-list">
+                                <li><a href="https://www.linkedin.com/in/mmumshad/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Mumshad Mannambeth</span><span class="resource-meta"><i class="fas fa-briefcase"></i> KodeKloud</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/abhishek-veeramalla/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Abhishek Veeramalla</span><span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Educator</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/nana-janashia/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Nana Janashia</span><span class="resource-meta"><i class="fas fa-briefcase"></i> TechWorld with Nana</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/viktorfarcic/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Viktor Farcic</span><span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Toolkit</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/sid-palas/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Sid Palas</span><span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Directive</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/adityajaiswal7/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Aditya Jaiswal</span><span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Shack</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/nasiullha-chaudhari/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Nasiullha Chaudhari</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Cloud Champ</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/bretefisher/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Bret Fisher</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Docker Captain</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/rangakaranam/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Ranga Karanam</span><span class="resource-meta"><i class="fas fa-briefcase"></i> in28minutes</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/sandip-das-developer/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Sandip Das</span><span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Engineer</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/piyush-sachdeva/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Piyush Sachdeva</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Tech Educator</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/rishabkumar7/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Rishab Kumar</span><span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Community Builder</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/derekm1215/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Derek Morgan</span><span class="resource-meta"><i class="fas fa-briefcase"></i> tutoriaLinux</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/shubhamlondhe1996/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Shubham Londhe</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Train with Shubham</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/zealvora/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Zeal Vora</span><span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Educator</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/urlichsanais/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Anais Urlichs</span><span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Advocate</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/nigelpoulton/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Nigel Poulton</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Container Expert</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/btkrausen/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Bryan Krausen</span><span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Hero</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/azeezs/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Azeez Salu</span><span class="resource-meta"><i class="fas fa-briefcase"></i> AOS Note</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spanish Content Tab -->
+                <div class="tab-content" id="spanish-tab">
+                    <div class="resources-grid">
+                        <div class="resource-card animate-on-scroll">
+                            <div class="resource-header">
+                                <i class="fab fa-youtube"></i>
+                                <h3 data-i18n="resources.youtubeHeader">YouTube Channels</h3>
+                            </div>
+                            <ul class="resource-list">
+                                <li><a href="https://www.youtube.com/@marcia_" target="_blank" rel="noopener noreferrer"><span class="resource-name">Marcia Villalba</span><span class="resource-meta"><i class="fas fa-users"></i> 40K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@295devops" target="_blank" rel="noopener noreferrer"><span class="resource-name">RoxsRoss</span><span class="resource-meta"><i class="fas fa-users"></i> 15K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@MaxCloud101" target="_blank" rel="noopener noreferrer"><span class="resource-name">MaxCloud</span><span class="resource-meta"><i class="fas fa-users"></i> 20K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@DaveOps" target="_blank" rel="noopener noreferrer"><span class="resource-name">DaveOps</span><span class="resource-meta"><i class="fas fa-users"></i> 10K subscribers</span></a></li>
+                                <li><a href="https://www.youtube.com/@PeladoNerd" target="_blank" rel="noopener noreferrer"><span class="resource-name">Pelado Nerd</span><span class="resource-meta"><i class="fas fa-users"></i> 200K subscribers</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="resource-card animate-on-scroll">
+                            <div class="resource-header">
+                                <i class="fab fa-linkedin"></i>
+                                <h3 data-i18n="resources.linkedinHeader">LinkedIn Profiles</h3>
+                            </div>
+                            <ul class="resource-list">
+                                <li><a href="https://www.linkedin.com/in/marciavillalba/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Marcia Villalba</span><span class="resource-meta"><i class="fas fa-briefcase"></i> AWS Hero</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/roxsross/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Rossana Suarez</span><span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Engineer</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/maxcloud/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Max Zeballos</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Cloud Architect</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/davejfranco/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Dave Franco</span><span class="resource-meta"><i class="fas fa-briefcase"></i> DevOps Consultant</span></a></li>
+                                <li><a href="https://www.linkedin.com/in/pablofredrikson/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Pablo Fredrikson</span><span class="resource-meta"><i class="fas fa-briefcase"></i> Pelado Nerd</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Independent Resources Tab -->
+                <div class="tab-content" id="independent-tab">
+                    <div class="resources-grid">
+                        <div class="resource-card wide-card animate-on-scroll">
+                            <div class="resource-header">
+                                <i class="fas fa-graduation-cap"></i>
+                                <h3 data-i18n="resources.independentHeader">Independent Learning Resources</h3>
+                            </div>
+                            <ul class="resource-list two-column">
+                                <li><a href="https://systemdesignschool.io/" target="_blank" rel="noopener noreferrer"><span class="resource-name">System Design School</span><span class="resource-meta"><i class="fas fa-tag"></i> System Architecture</span></a></li>
+                                <li><a href="https://www.designgurus.io/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Design Gurus</span><span class="resource-meta"><i class="fas fa-tag"></i> System Design Interviews</span></a></li>
+                                <li><a href="https://www.100daysofcloud.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">100 Days of Cloud</span><span class="resource-meta"><i class="fas fa-tag"></i> Learning Challenge</span></a></li>
+                                <li><a href="https://www.90daysofdevops.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">90 Days of DevOps</span><span class="resource-meta"><i class="fas fa-tag"></i> Learning Challenge</span></a></li>
+                                <li><a href="https://12weeksworkshops.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">12 Weeks Workshops</span><span class="resource-meta"><i class="fas fa-tag"></i> Structured Learning</span></a></li>
+                                <li><a href="https://www.pluralsight.com/cloud-guru" target="_blank" rel="noopener noreferrer"><span class="resource-name">A Cloud Guru</span><span class="resource-meta"><i class="fas fa-users"></i> 2M+ students</span></a></li>
+                                <li><a href="https://www.udemy.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Udemy</span><span class="resource-meta"><i class="fas fa-users"></i> 50M+ students</span></a></li>
+                                <li><a href="https://skillbuilder.aws/" target="_blank" rel="noopener noreferrer"><span class="resource-name">AWS Skill Builder</span><span class="resource-meta"><i class="fas fa-tag"></i> Official AWS Training</span></a></li>
+                                <li><a href="https://learn.microsoft.com/en-us/training/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Microsoft Learn</span><span class="resource-meta"><i class="fas fa-tag"></i> Official Azure Training</span></a></li>
+                                <li><a href="https://cloud.google.com/learn?hl=en" target="_blank" rel="noopener noreferrer"><span class="resource-name">Google Cloud Training</span><span class="resource-meta"><i class="fas fa-tag"></i> Official GCP Training</span></a></li>
+                                <li><a href="https://www.whizlabs.com/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Whizlabs</span><span class="resource-meta"><i class="fas fa-certificate"></i> Practice Exams</span></a></li>
+                                <li><a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Coursera</span><span class="resource-meta"><i class="fas fa-users"></i> 100M+ students</span></a></li>
+                                <li><a href="https://training.linuxfoundation.org/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Linux Foundation Training</span><span class="resource-meta"><i class="fas fa-tag"></i> Open Source Education</span></a></li>
+                                <li><a href="https://killer.sh/" target="_blank" rel="noopener noreferrer"><span class="resource-name">Killer.sh</span><span class="resource-meta"><i class="fas fa-certificate"></i> CKA/CKAD Simulator</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Alex Garcia. All rights reserved.</p>
-            <p class="disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are <span class="highlight">my own</span> and do <span class="highlight">not represent</span> the opinions of my employer.</p>
-            <p class="carpe-diem" style="font-style: italic; margin-top: 20px; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.8;">Carpe Diem</p>
+            <p data-i18n="footer.copyright">&copy; 2025 Alex Garcia. All rights reserved.</p>
+            <p class="footer__disclaimer" data-i18n="footer.disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are <span class="highlight">my own</span> and do <span class="highlight">not represent</span> the opinions of my employer.</p>
+            <p style="font-style: italic; margin-top: var(--space-md); font-size: var(--font-size-xs); letter-spacing: 2px; opacity: 0.8;" data-i18n="footer.carpeDiem">Carpe Diem</p>
         </div>
     </footer>
 
+    <!-- Page-specific translations (must come BEFORE main.js) -->
     <script>
-        // Function to handle repository access check
-        function checkRepoAccess(event, repo) {
-            event.preventDefault();
-            
-            // In a real implementation, you would check if the user has access to the repository
-            // For now, we'll redirect to the access request page
-            window.location.href = `access-request.html?repo=${repo}`;
-            
-            return false;
-        }
-        
-        function setRepoParam(event, repo) {
-            // Set a cookie or localStorage item to remember the repo
-            localStorage.setItem('selectedRepo', repo);
-            
-            // Allow the default context menu to appear
-            return true;
-        }
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        const icon = themeToggle.querySelector('i');
-        
-        // Check for saved theme preference or use preferred color scheme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            body.classList.add('dark-mode');
-            icon.classList.replace('fa-moon', 'fa-sun');
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-        
-        // Tab switching functionality
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons and contents
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-                
-                // Add active class to clicked button
-                button.classList.add('active');
-                
-                // Show corresponding content
-                const tabId = button.getAttribute('data-tab');
-                document.getElementById(`${tabId}-tab`).classList.add('active');
-            });
-        });
-        
-        // Language switching functionality
-        const languageButtons = document.querySelectorAll('.language-btn');
-        let currentLang = localStorage.getItem('language') || 'en';
-        
-        // Set initial language
-        document.querySelector(`.language-btn[data-lang="${currentLang}"]`).classList.add('active');
-        
-        // Translations object
-        const translations = {
+        const PAGE_TRANSLATIONS = {
             en: {
-                title: "Learning Resources",
-                tagline: "DevOps Consultant | Cloud Architect | Professor",
-                intro: "Curated resources to accelerate your cloud, DevOps, and system design journey.",
-                cloudTab: "Cloud Computing",
-                devopsTab: "DevOps",
-                spanishTab: "Spanish Content",
-                independentTab: "Independent Resources",
-                websitesHeader: "Websites",
-                youtubeHeader: "YouTube Channels",
-                linkedinHeader: "LinkedIn Profiles",
-                independentHeader: "Independent Learning Resources",
-                viewResume: "View Resume",
-                backToHome: "Back to Home",
-                footer: "All rights reserved.",
-                disclaimer: "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer."
+                "skipToContent": "Skip to main content",
+                "nav.about": "About",
+                "nav.experience": "Experience",
+                "nav.certifications": "Certifications",
+                "nav.labs": "Labs",
+                "nav.skills": "Skills",
+                "nav.contact": "Contact",
+                "nav.resources": "Resources",
+                "nav.accessRequest": "Access Request",
+                "resources.title": "Learning Resources",
+                "resources.intro": "Curated resources to accelerate your cloud, DevOps, and system design journey.",
+                "resources.cloudTab": "Cloud Computing",
+                "resources.devopsTab": "DevOps",
+                "resources.spanishTab": "Spanish Content",
+                "resources.independentTab": "Independent Resources",
+                "resources.websitesHeader": "Websites",
+                "resources.youtubeHeader": "YouTube Channels",
+                "resources.linkedinHeader": "LinkedIn Profiles",
+                "resources.independentHeader": "Independent Learning Resources",
+                "footer.copyright": "© 2025 Alex Garcia. All rights reserved.",
+                "footer.disclaimer": "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.",
+                "footer.carpeDiem": "Carpe Diem"
             },
             es: {
-                title: "Recursos de Aprendizaje",
-                tagline: "Consultor DevOps | Arquitecto Cloud | Profesor",
-                intro: "Recursos seleccionados para acelerar tu viaje en cloud, DevOps y diseño de sistemas.",
-                cloudTab: "Cloud Computing",
-                devopsTab: "DevOps",
-                spanishTab: "Contenido en Español",
-                independentTab: "Recursos Independientes",
-                websitesHeader: "Sitios Web",
-                youtubeHeader: "Canales de YouTube",
-                linkedinHeader: "Perfiles de LinkedIn",
-                independentHeader: "Recursos de Aprendizaje Independientes",
-                viewResume: "Ver Currículum",
-                backToHome: "Volver al Inicio",
-                footer: "Todos los derechos reservados.",
-                disclaimer: "Descargo de responsabilidad: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador."
+                "skipToContent": "Saltar al contenido principal",
+                "nav.about": "Sobre Mí",
+                "nav.experience": "Experiencia",
+                "nav.certifications": "Certificaciones",
+                "nav.labs": "Laboratorios",
+                "nav.skills": "Habilidades",
+                "nav.contact": "Contacto",
+                "nav.resources": "Recursos",
+                "nav.accessRequest": "Solicitar Acceso",
+                "resources.title": "Recursos de Aprendizaje",
+                "resources.intro": "Recursos seleccionados para acelerar tu viaje en cloud, DevOps y diseño de sistemas.",
+                "resources.cloudTab": "Cloud Computing",
+                "resources.devopsTab": "DevOps",
+                "resources.spanishTab": "Contenido en Español",
+                "resources.independentTab": "Recursos Independientes",
+                "resources.websitesHeader": "Sitios Web",
+                "resources.youtubeHeader": "Canales de YouTube",
+                "resources.linkedinHeader": "Perfiles de LinkedIn",
+                "resources.independentHeader": "Recursos de Aprendizaje Independientes",
+                "footer.copyright": "© 2025 Alex Garcia. Todos los derechos reservados.",
+                "footer.disclaimer": "Aviso: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador.",
+                "footer.carpeDiem": "Carpe Diem"
             },
             pt: {
-                title: "Recursos de Aprendizagem",
-                tagline: "Consultor DevOps | Arquiteto Cloud | Professor",
-                intro: "Recursos selecionados para acelerar sua jornada em cloud, DevOps e design de sistemas.",
-                cloudTab: "Cloud Computing",
-                devopsTab: "DevOps",
-                spanishTab: "Conteúdo em Espanhol",
-                independentTab: "Recursos Independentes",
-                websitesHeader: "Sites",
-                youtubeHeader: "Canais do YouTube",
-                linkedinHeader: "Perfis do LinkedIn",
-                independentHeader: "Recursos de Aprendizagem Independentes",
-                viewResume: "Ver Currículo",
-                backToHome: "Voltar ao Início",
-                footer: "Todos os direitos reservados.",
-                disclaimer: "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador."
+                "skipToContent": "Pular para o conteúdo principal",
+                "nav.about": "Sobre Mim",
+                "nav.experience": "Experiência",
+                "nav.certifications": "Certificações",
+                "nav.labs": "Laboratórios",
+                "nav.skills": "Habilidades",
+                "nav.contact": "Contato",
+                "nav.resources": "Recursos",
+                "nav.accessRequest": "Solicitar Acesso",
+                "resources.title": "Recursos de Aprendizagem",
+                "resources.intro": "Recursos selecionados para acelerar sua jornada em cloud, DevOps e design de sistemas.",
+                "resources.cloudTab": "Cloud Computing",
+                "resources.devopsTab": "DevOps",
+                "resources.spanishTab": "Conteúdo em Espanhol",
+                "resources.independentTab": "Recursos Independentes",
+                "resources.websitesHeader": "Sites",
+                "resources.youtubeHeader": "Canais do YouTube",
+                "resources.linkedinHeader": "Perfis do LinkedIn",
+                "resources.independentHeader": "Recursos de Aprendizagem Independentes",
+                "footer.copyright": "© 2025 Alex Garcia. Todos os direitos reservados.",
+                "footer.disclaimer": "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador.",
+                "footer.carpeDiem": "Carpe Diem"
             }
         };
-        
-        // Function to translate the page
-        function translatePage(lang) {
-            document.title = `${translations[lang].title} - Alex Garcia`;
-            document.querySelector('h1').textContent = "Alex Garcia";
-            document.querySelector('.tagline').textContent = translations[lang].tagline;
-            document.querySelector('h2').textContent = translations[lang].title;
-            document.querySelector('.section-intro').textContent = translations[lang].intro;
-            
-            document.querySelector('.tab-btn[data-tab="cloud"]').textContent = translations[lang].cloudTab;
-            document.querySelector('.tab-btn[data-tab="devops"]').textContent = translations[lang].devopsTab;
-            document.querySelector('.tab-btn[data-tab="spanish"]').textContent = translations[lang].spanishTab;
-            document.querySelector('.tab-btn[data-tab="independent"]').textContent = translations[lang].independentTab;
-            
-            document.querySelectorAll('.resource-header h3').forEach(header => {
-                if (header.textContent === "Websites" || header.textContent === "Sitios Web" || header.textContent === "Sites") 
-                    header.textContent = translations[lang].websitesHeader;
-                if (header.textContent === "YouTube Channels" || header.textContent === "Canales de YouTube" || header.textContent === "Canais do YouTube") 
-                    header.textContent = translations[lang].youtubeHeader;
-                if (header.textContent === "LinkedIn Profiles" || header.textContent === "Perfiles de LinkedIn" || header.textContent === "Perfis do LinkedIn") 
-                    header.textContent = translations[lang].linkedinHeader;
-                if (header.textContent === "Independent Learning Resources" || header.textContent === "Recursos de Aprendizaje Independientes" || header.textContent === "Recursos de Aprendizagem Independentes") 
-                    header.textContent = translations[lang].independentHeader;
-            });
-            
-            document.querySelectorAll('.cta-button')[0].textContent = translations[lang].viewResume;
-            document.querySelectorAll('.cta-button')[1].textContent = translations[lang].backToHome;
-            
-            document.querySelector('footer p').textContent = `© 2025 Alex Garcia. ${translations[lang].footer}`;
-            document.querySelector('.disclaimer').innerHTML = translations[lang].disclaimer.replace('my own', '<span class="highlight">my own</span>').replace('not represent', '<span class="highlight">not represent</span>');
-            
-            // Save language preference
-            localStorage.setItem('language', lang);
-            currentLang = lang;
-            
-            // Update active language button
-            languageButtons.forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`.language-btn[data-lang="${lang}"]`).classList.add('active');
-        }
-        
-        // Language button click event
-        languageButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const lang = button.getAttribute('data-lang');
-                setActiveLanguage(lang);
-            });
-        });
-        
-        function setActiveLanguage(lang) {
-            languageButtons.forEach(btn => {
-                if (btn.getAttribute('data-lang') === lang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            translatePage(lang);
-            localStorage.setItem('language', lang);
-        }
-        
-        // Initialize with saved language preference
-        setActiveLanguage(currentLang);
     </script>
+    <script src="main.js" defer></script>
 </body>
 </html>

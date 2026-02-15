@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Cloud DevOps Labs</title>
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src https://cdnjs.cloudflare.com; img-src 'self' https://images.credly.com data:; connect-src https://api.github.com">
+
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Page Not Found - Cloud DevOps Labs">
+    <meta property="og:description" content="The page you're looking for doesn't exist or has been moved.">
+    <meta property="og:url" content="https://gamaware.github.io/cloud-devops-labs-index/404.html">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://gamaware.github.io/cloud-devops-labs-index/404.html">
+
+    <!-- Preconnect hints -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Font Awesome with SRI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3HjDXM6+AOJyxQ2TDhmYQBFR/GIZqiAp+QXtfS+I3GhZw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Skip Navigation Link -->
+    <a href="#main-content" class="skip-link" data-i18n="skipToContent">Skip to main content</a>
+
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar__container">
+            <a href="index.html" class="navbar__brand">Alex Garcia</a>
+            <button class="navbar__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+                <span class="navbar__toggle-icon"></span>
+            </button>
+            <div class="navbar__menu" id="nav-menu" role="menubar">
+                <a href="index.html#about" data-i18n="nav.about">About</a>
+                <a href="index.html#experience" data-i18n="nav.experience">Experience</a>
+                <a href="index.html#certifications" data-i18n="nav.certifications">Certifications</a>
+                <a href="index.html#labs" data-i18n="nav.labs">Labs</a>
+                <a href="index.html#skills" data-i18n="nav.skills">Skills</a>
+                <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
+                <a href="learning-resources.html" data-i18n="nav.resources">Resources</a>
+                <a href="access-request.html" data-i18n="nav.accessRequest">Access Request</a>
+                <button class="navbar__theme-toggle" aria-label="Toggle theme" onclick="ThemeEngine.toggle()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="navbar__lang-selector">
+                    <button class="navbar__lang-btn" data-lang="en" onclick="LocaleEngine.setLocale('en')">EN</button>
+                    <button class="navbar__lang-btn" data-lang="es" onclick="LocaleEngine.setLocale('es')">ES</button>
+                    <button class="navbar__lang-btn" data-lang="pt" onclick="LocaleEngine.setLocale('pt')">PT</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <section class="section error-page">
+            <div class="container">
+                <h1 class="error-page__code">404</h1>
+                <h2 class="error-page__title" data-i18n="error.title">Page Not Found</h2>
+                <p class="error-page__description" data-i18n="error.description">The page you're looking for doesn't exist or has been moved.</p>
+                <div class="error-page__actions">
+                    <a href="index.html" class="btn btn--primary" data-i18n="error.goHome">Go Home</a>
+                    <a href="index.html#labs" class="btn btn--secondary" data-i18n="error.exploreLabs">Explore Labs</a>
+                    <a href="learning-resources.html" class="btn btn--secondary" data-i18n="error.learningResources">Learning Resources</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-i18n="footer.copyright">&copy; 2025 Alex Garcia. All rights reserved.</p>
+            <p class="footer__disclaimer" data-i18n="footer.disclaimer">Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are <span class="highlight">my own</span> and do <span class="highlight">not represent</span> the opinions of my employer.</p>
+            <p style="font-style: italic; margin-top: var(--space-md); font-size: var(--font-size-xs); letter-spacing: 2px; opacity: 0.8;" data-i18n="footer.carpeDiem">Carpe Diem</p>
+        </div>
+    </footer>
+
+    <!-- Page-specific translations (must come BEFORE main.js) -->
+    <script>
+        const PAGE_TRANSLATIONS = {
+            en: {
+                "skipToContent": "Skip to main content",
+                "nav.about": "About",
+                "nav.experience": "Experience",
+                "nav.certifications": "Certifications",
+                "nav.labs": "Labs",
+                "nav.skills": "Skills",
+                "nav.contact": "Contact",
+                "nav.resources": "Resources",
+                "nav.accessRequest": "Access Request",
+                "error.title": "Page Not Found",
+                "error.description": "The page you're looking for doesn't exist or has been moved.",
+                "error.goHome": "Go Home",
+                "error.exploreLabs": "Explore Labs",
+                "error.learningResources": "Learning Resources",
+                "footer.copyright": "© 2025 Alex Garcia. All rights reserved.",
+                "footer.disclaimer": "Disclaimer: All views and opinions expressed on this website and in my GitHub repositories are my own and do not represent the opinions of my employer.",
+                "footer.carpeDiem": "Carpe Diem"
+            },
+            es: {
+                "skipToContent": "Saltar al contenido principal",
+                "nav.about": "Sobre Mí",
+                "nav.experience": "Experiencia",
+                "nav.certifications": "Certificaciones",
+                "nav.labs": "Laboratorios",
+                "nav.skills": "Habilidades",
+                "nav.contact": "Contacto",
+                "nav.resources": "Recursos",
+                "nav.accessRequest": "Solicitar Acceso",
+                "error.title": "Página No Encontrada",
+                "error.description": "La página que buscas no existe o ha sido movida.",
+                "error.goHome": "Ir al Inicio",
+                "error.exploreLabs": "Explorar Labs",
+                "error.learningResources": "Recursos de Aprendizaje",
+                "footer.copyright": "© 2025 Alex Garcia. Todos los derechos reservados.",
+                "footer.disclaimer": "Aviso: Todas las opiniones expresadas en este sitio web y en mis repositorios de GitHub son mías y no representan las opiniones de mi empleador.",
+                "footer.carpeDiem": "Carpe Diem"
+            },
+            pt: {
+                "skipToContent": "Pular para o conteúdo principal",
+                "nav.about": "Sobre Mim",
+                "nav.experience": "Experiência",
+                "nav.certifications": "Certificações",
+                "nav.labs": "Laboratórios",
+                "nav.skills": "Habilidades",
+                "nav.contact": "Contato",
+                "nav.resources": "Recursos",
+                "nav.accessRequest": "Solicitar Acesso",
+                "error.title": "Página Não Encontrada",
+                "error.description": "A página que você procura não existe ou foi movida.",
+                "error.goHome": "Ir para o Início",
+                "error.exploreLabs": "Explorar Labs",
+                "error.learningResources": "Recursos de Aprendizagem",
+                "footer.copyright": "© 2025 Alex Garcia. Todos os direitos reservados.",
+                "footer.disclaimer": "Aviso: Todas as opiniões expressas neste site e nos meus repositórios GitHub são minhas e não representam as opiniões do meu empregador.",
+                "footer.carpeDiem": "Carpe Diem"
+            }
+        };
+    </script>
+    <script src="main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "name": "Code Quality Review",
+  "description": "Analyzes modified source code files for potential improvements including code smells, design patterns, and best practices. Generates suggestions for improving readability, maintainability, and performance while preserving existing functionality.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.html",
+      "*.css",
+      "*.js",
+      "*.py",
+      "*.yml",
+      "*.yaml"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the edited file for potential code quality improvements. Analyze for:\n\n1. Code smells (duplicated logic, overly complex functions, magic numbers, dead code)\n2. Design pattern opportunities (better organization, separation of concerns)\n3. Best practices (semantic HTML, accessible markup, modern CSS/JS patterns)\n4. Readability (naming, comments, structure)\n5. Maintainability (DRY violations, tight coupling)\n6. Performance (unnecessary DOM queries, inefficient selectors, render-blocking patterns)\n\nProvide concise, actionable suggestions. Do not rewrite the entire file — just highlight specific areas and recommend targeted improvements. Preserve existing functionality."
+  }
+}
