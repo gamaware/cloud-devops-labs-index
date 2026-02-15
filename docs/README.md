@@ -38,7 +38,12 @@ The website consists of the following main components:
 cloud-devops-labs-index/
 ├── index.html              # Main website page
 ├── access-request.html     # Repository access request form
-├── styles.css              # CSS styles (currently not linked)
+├── learning-resources.html # Learning resources page
+├── 404.html                # Custom 404 error page
+├── styles.css              # Shared design system stylesheet (linked from all pages)
+├── main.js                 # Shared JavaScript module (theme, locale, navigation, animations)
+├── sitemap.xml             # SEO sitemap
+├── robots.txt              # Crawler directives
 ├── docs/                   # Documentation directory
 │   └── README.md           # This documentation file
 ├── .github/
@@ -70,10 +75,10 @@ The website is fully responsive and adapts to different screen sizes:
 
 ### Dark/Light Mode
 
-- Automatic detection of system preference for dark/light mode
-- Manual toggle option in the top-right corner
-- Custom color schemes for both modes with proper contrast
-- OneDark theme for dark mode
+- Automatic detection of system preference via `prefers-color-scheme`
+- Manual toggle with localStorage persistence
+- Theme applied via `data-theme` attribute on `<html>` using CSS custom properties
+- Light and dark palettes defined as design tokens in `styles.css`
 
 ### Multilingual Support
 
@@ -179,10 +184,7 @@ To add support for a new language:
 
 ### Updating Styles
 
-Currently, styles are defined inline in the HTML files. To improve maintainability:
+All styles are defined in the shared `styles.css` file using CSS custom properties (design tokens). To update styles:
 
-1. Move all styles to the `styles.css` file
-2. Link the stylesheet in both HTML files
-3. Remove inline styles from HTML
-
-This will make future styling updates more efficient and consistent.
+1. Edit the design tokens in `:root` (light theme) or `[data-theme="dark"]` (dark theme) in `styles.css`
+2. Changes automatically apply to all pages that link the shared stylesheet

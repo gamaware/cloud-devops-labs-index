@@ -37,43 +37,24 @@ graph TD
 
 ### Responsive Design Implementation
 
-The responsive design is implemented using:
+The responsive design is implemented using a mobile-first approach:
 
 1. **Fluid Layouts**: Using relative units and percentages
 2. **CSS Grid and Flexbox**: For flexible content arrangement
-3. **Media Queries**: Targeting different screen sizes
-   - `@media (max-width: 768px)`: Tablet and smaller devices
+3. **Design Tokens**: CSS custom properties in `styles.css` for consistent spacing, typography, and colors
+4. **Media Queries**: Targeting different screen sizes
    - `@media (max-width: 480px)`: Mobile devices
+   - `@media (max-width: 768px)`: Tablet and smaller devices
+   - `@media (max-width: 1024px)`: Small desktop
 
 ### Theme Switching Logic
 
-The theme switching functionality works as follows:
+The theme is applied via a `data-theme` attribute on the `<html>` element, which swaps CSS custom property values defined in `styles.css`. The `ThemeEngine` module in `main.js` handles detection, toggling, and persistence:
 
-1. **Initial Theme Detection**:
-   ```javascript
-   const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-   
-   if (localStorage.getItem('theme') === 'dark' || 
-       (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
-       document.body.classList.add('dark-mode');
-       themeIcon.classList.replace('fa-moon', 'fa-sun');
-   }
-   ```
-
-2. **Theme Toggle Handler**:
-   ```javascript
-   themeToggle.addEventListener('click', () => {
-       document.body.classList.toggle('dark-mode');
-       
-       if (document.body.classList.contains('dark-mode')) {
-           localStorage.setItem('theme', 'dark');
-           themeIcon.classList.replace('fa-moon', 'fa-sun');
-       } else {
-           localStorage.setItem('theme', 'light');
-           themeIcon.classList.replace('fa-sun', 'fa-moon');
-       }
-   });
-   ```
+1. **Initial Theme Detection**: Checks localStorage first, then falls back to `prefers-color-scheme` media query
+2. **Theme Application**: Sets `data-theme="dark"` or `data-theme="light"` on `<html>`, which activates the corresponding CSS custom property set
+3. **Toggle & Persistence**: Manual toggle saves preference to localStorage; OS changes are tracked via `matchMedia` change listener
+4. **No Flash**: Theme is applied before body renders since `data-theme` is set on `<html>`
 
 ### Language Switching Implementation
 
@@ -191,9 +172,8 @@ The GitHub Actions workflow includes security measures:
 
 ### Future Optimization Opportunities
 
-1. **CSS Optimization**: Move styles to external stylesheet
-2. **Image Optimization**: Further compress and optimize images
-3. **Caching Strategies**: Implement better caching for static resources
+1. **Image Optimization**: Further compress and optimize images
+2. **Caching Strategies**: Implement better caching for static resources
 
 ## Testing Procedures
 
